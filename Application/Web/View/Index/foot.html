@@ -1,0 +1,901 @@
+<!-- <input value="" id="Apicid" type="hidden" />
+<div class="box">
+    <div id="dialogBg"></div>
+    <div id="dialog" class="" >
+        <div class="dialogTop">
+            <a href="javascript:;" class="claseDialogBtn" id="claseDialogBtn"></a>
+        </div>
+		<div class="pop-box none zhendui_top{$tpl} widgs" id="buildBox" style="display: block;max-width:640px !important; margin:0 auto; ">
+			<div style="overflow:hidden;">
+				<nav class="pop-nav "> <a href="javascript:;" style="right:10;" class="back" id="claseDialogBtn_1"></a>
+					<h3>确认购买</h3>
+				</nav>
+				
+				<div class="" style="overflow: hidden;">
+					<label class="b-label">止盈(%)：</label>
+					<p class="num-list   clearfix" id="jcsh" style="margin-top:5px;width:50%;">
+						<span class="profit-left pay-left"></span>
+						<input type="text" value="不设" class="num-in" disabled="" id="profit">
+						<span class="profit-right pay-right"></span>
+					</p>
+				</div>
+				
+				<div class="" style="overflow: hidden;">
+					<label class="b-label">止损(%)：</label>
+					<p class="num-list   clearfix" id="jcsh" style="margin-top:5px;width:50%;">
+						<span class="loss-left pay-left"></span>
+						<input type="text" value="不设" class="num-in" disabled="" id="loss">
+						<span class="loss-right pay-right"></span> 
+					</p>
+				</div>
+			
+				<div class="" style="overflow: hidden;">
+					<label class="b-label">购买数量：</label>
+					<p class="num-list   clearfix" id="jcsh" style="margin-top:5px; width:50%;">
+						<span class="num-left pay-left"></span>
+						<input type="text" name="sls" value="1" class="num-in" id="sls" readonly />
+						<span class="num-right pay-right"></span> 
+					</p>
+					<p class="price clearfix" style="display:none">
+						<span>方向：</span><em class="fx"><span class="zhd" style="font-size:1.1em"></span></em>
+					</p>
+				</div>
+				
+				
+				<div class="b-line clearfix">
+					<label class="b-label">当前价格：</label>
+					<p class="price clearfix"> 
+						<em class="c-13" id="price"></em>
+						<em  id="dqcid" style="display:none"></em>
+
+					</p>
+				</div>
+				<div class="b-line clearfix">
+					<label class="b-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;品种：</label>
+					<div class="type-choose clearfix">
+						<div class="type-list clearfix">
+							<ul class="p-baiyin" style="margin-top: 0px;">
+								<li id="opname" class="xz6" data-l="2" data-bz="200" data-pid="6" data-sxf="30.0" data-juan="0"></li>
+							</ul>
+						</div>
+					</div>
+				</div>				
+				<div class="b-line clearfix">
+					<label class="b-label">所用费用：</label>
+					<p class="pay"><span id="opprice">0</span>元</p>
+					<input type="hidden" name="sxf" id="sxf" value="30.0">
+					<p class="b-info">手续费&nbsp;<span id="j-5">0</span>&nbsp;元&nbsp;</p> 
+				</div>
+				<div class="b-line clearfix">
+					<label class="b-label" style="text-align:right">体验券：</label>
+					<p class="c-c-l clearfix" style="margin:8px 5px 0 0;line-height:20px;">
+						<input type="checkbox" id="choose" value="">
+						<label for="choose" id="mychoose"></label>
+					</p>
+					<input type="hidden" name="juansl" value="0" id="juansl">
+					<p class="b-info"><i class="c11" id="c11">200</i>元 剩&nbsp;<span class="big" id="big">0</span>&nbsp;张 (<span style="font-size:0.8em">1张/次</span>)</p>
+				</div>
+				<div id="msgNum" style="background:#fcf8e3; width:94%; margin:0 auto; padding:10px 0;  text-indent:10px; color:#8a6d3b; border-radius:3px;display:none;">
+					购买数量大于最大允许购买数量
+				</div>
+
+				<input type="hidden" name="type" value="1" id="type" />
+				<input type="hidden" name="bz" value="2" id="bz"/>
+				<input type="hidden" name="sl" value="1" id="sl"/>
+				<input type="hidden" name="ordernumber" value=""/>
+				<input type="hidden" name="product" value="6" id="product">
+				<input type="hidden" name="jine" value="{$user.balance}" id="jine">
+				<input type="hidden" name="isJuan" value="" id="isJuan">
+				<input type="hidden" value="" id="yu">
+				<input type="hidden" class="pwd-btn conform" id="conform1" value="确 认">
+				<if condition="$isopen['zfopen'] eq 2">
+				<a href="{:U('User/recharge')}" class="pwd-btn chr failure none" id="conform2" style="font-size:1.4rem">余额不足，去充值</a>
+				<else/>
+				<a href="javascript:;" class="pwd-btn chr failure none code_tan" id="conform2" style="font-size:1.4rem">余额不足，去充值</a>
+				</if>
+			</div>
+		</div>
+	</div>
+	
+	<div id="dialogBg2"></div>
+	<div id="dialog2" class="" >
+		<div class="pop-box none widgs" id="buildBox2" style="display: block;max-width:640px;">
+            <nav class="pop-nav"> 
+				<h3>登陆密码设置</h3>
+            </nav>
+            <form id="jccg" class="build-form" method="post" action="{:U('Index/landpwd')}" autocomplete="off">
+            <div style="overflow: hidden;margin-top:1%;">
+				<label class="b-label">用户名称：</label>
+				<p class="num-list clearfix wid_ifo">
+					<input type="text" value="{$user.username}" class="num-in-lu" name="username" id="username"/>
+				</p>
+			</div>
+			
+			<div style="overflow: hidden;margin-top:1%;">
+				<label class="b-label">手机号码：</label>
+				<p class="num-list clearfix wid_ifo">
+					<input type="tel" value="" name="utel" class="num-in-lu" id="utel"/>
+				</p>
+			</div>
+			<div style="overflow: hidden;margin-top:1%;">
+				<label class="b-label">验&nbsp;证&nbsp; 码：</label>
+				<p class="num-list clearfix wid_ifo" style="width:30%;">
+					<input type="text" value="" name="yzm" class="num-in-lu" id="yzm"/>
+				</p>
+				<p class="price">
+					<span class="msgs" >获取</span>
+				</p>
+			</div>
+			<div style="overflow: hidden;margin-top:1%;">
+				<label class="b-label">登陆密码：</label>
+				<p class="num-list clearfix wid_ifo">
+					<input type="password" value="" name="upwd" class="num-in-lu" id="upwd"/>
+				</p>
+			</div>
+			<input type="hidden" value="" id="code" />
+			<input type="button" class="pwd-btn" onclick="baocun()" value="保存设置"/>
+			</form>
+        </div>
+	</div>
+</div> -->
+<div class="mask" style="display:none;"></div>
+<div class="tan" style="display:none;">
+	<div class="tan_top">关注二维码充值和提现</div>
+	<div class=""><img src="{$isopen['code']}" style="height:100%;width:100%;"/></div>
+</div>
+<script>
+	$(".code_tan").click(function(){
+		$(".mask").show();	
+		$(".tan").show();	
+	});
+	$(".mask").click(function(){
+		$(".mask").hide();	
+		$(".tan").hide();	
+	});
+</script>
+<style>
+.al_gs {left:auto;}
+</style>
+<script>
+	$(function(){
+        var width = $(window).width();
+        if(width>640){
+            $('.widgs').addClass('al_gs');
+        }else{
+            $('.widgs').removeClass('al_gs');
+        }
+    });
+</script>
+<script type="text/javascript">
+$(function  () {
+	//获取短信验证码
+	var validCode=true;
+	$(".msgs").click (function  () {
+		var phone = $("#utel").val();
+		var tel = /^1([38]\d|4[57]|5[0-35-9]|7[06-8]|8[89])\d{8}$/;
+		if(!tel.test($("#utel").val())){
+			alert("手机号输入有误");
+			return false;
+		}
+
+		$.ajax({  
+			type: "post",  
+			url: "{:U('Index/wap_reset_msg')}",
+			data:{'phone':phone},  
+			dataType:'json', 
+			success: function(data) {
+				if(data['status'] == '1'){
+					$('#code').attr('value',data['code']);
+				}else{
+					alert(data['code']);
+					return false;
+				}                
+				  
+			},  
+			error: function(data) {  
+				
+			}  
+		});
+
+		
+		var time=100;
+		var code=$(this);
+		if (validCode) {
+			validCode=false;
+			code.addClass("msgs1");
+			var t = setInterval(function  () {
+				time--;
+				code.html(time+"秒");
+				if (time==0) {
+					clearInterval(t);
+				code.html("重新获取");
+					validCode=true;
+				code.removeClass("msgs1");
+
+				}
+			},1000)
+		}
+	})
+});
+function baocun(){
+	var code   = $("#code").val();
+	var yzm    = $("#yzm").val();
+	var upwd   = $("#upwd").val();
+	var phone = $("#utel").val();
+	var tel = /^1([38]\d|4[57]|5[0-35-9]|7[06-8]|8[89])\d{8}$/;
+	if(!tel.test($("#utel").val())){
+		alert("手机号输入有误");
+		return false;
+	}
+	if(code !=''){
+		if(code!==yzm){
+			alert('验证码错误!'); 
+			return false; 
+		}
+	}else{
+		alert('请输入验证码!');
+		return false; 			
+	}
+	if(!upwd){
+		alert('登陆密码!');
+		return false; 
+	}
+	$("#jccg").submit();
+};
+</script>
+<script>
+	var phone = "{$user.utel}";
+	if(!phone){
+		$('#dialogBg2').show();
+		$('#dialog2').show();
+	}
+	var tpl = "{$tpl}";
+	if(tpl == 2 || tpl == 3){
+		setInterval('newsdata()', 2000);
+	}
+	$("#sls").click(function(){
+		$("#sls").removeAttr('readonly');
+		$("#sls").val('1');
+	});
+	
+	$('#sls').bind('input propertychange', function() { 
+		var bz  = $("#bz").val();
+		var num = $("#sls").val();
+		var sxf = $("#sxf").val();
+		$("#sl").val(num); 
+		$('#opprice').html(bz*num);
+		$('#j-5').html(sxf*num);
+	}); 
+
+	//购买
+	$(".mai").click(function(){
+		$('#dialogBg').show();
+		$('#dialog').show();	
+
+		but = $(this).html();
+		$('.zhd').html(but);
+		$("#profit,#loss").val('不设');
+		$("#sls").val(1);
+		var pid=$(this).data('type');
+		two_up(pid);
+		var jine="{$user.balance}";
+		//判断余额是否不足
+		var myfy=$('#opprice').html();
+		//判断剩余多少手
+		$.ajax({
+			type:'post',
+			url:"{:U('Detailed/judgment')}",
+			data:{"mypid":pid},
+			//async:false, 
+			success:function(data){
+				if (data == -1) {
+					$('#conform1').attr("type","hidden");
+					$('#conform2').css('display','none');
+				}else{
+					$("#yu").val(data);
+					var myfy=$('#opprice').html();
+					if(Number(jine) < Number(myfy)){
+						$('#conform1').attr("type","hidden");
+						$('#conform2').css('display','block');
+					}else{
+						$('#conform1').attr("type","button");
+						$('#conform2').css('display','none');
+					}
+				}
+			}
+		});
+	});
+	
+	function two_up(pid){
+		$.ajax({  
+			type: "post",  
+			url: "{:U('Index/selectid')}",
+			data:"pid="+pid,  
+			//async:false,  
+			success: function(data) { 
+				price(data['cid']);
+				$('#dqcid').html(data['cid']);
+				$('#opname').html(data['ptitle']); 
+				$('#opprice').html(data['uprice']);  
+				$('#j-5').html(data['feeprice']);
+				$('#c11').html(data['uprice']);  
+				$('#big').html(data['sum']);
+				//$('#pid').val(data['pid']); 
+				 
+				//算加减传的值
+				$('#bz').val(data['uprice']); 
+				$('#sxf').val(data['feeprice']); 
+				$('#juansl').val(data['sum']);
+				$('#type').val(data['pid']);                 
+				  
+			},  
+			error: function(data) {  
+				
+			}  
+		});
+	};
+
+	function price(c_id){
+		$.ajax({
+			type:'get',
+			dataType:'json',
+			url:"{:U('ajax_price')}",
+			data:{"cid":c_id},
+			//async:false, 
+			success:function(data){
+				$('#price').html(data.price);
+			}
+		});
+	}
+
+	$("#claseDialogBtn_1,#claseDialogBtn2").click(function() {
+		$('#dialog ').css('display','none');
+		$('#dialogBg ').css('display','none');
+	});
+	
+	var count ="{$count}";
+	var width_d=100/count;
+	var cid  = "{$catgood[0]['cid']}";
+	var code = "{$catgood[0]['title']}";
+    $(".width_c").css("width",width_d+'%');
+	$("#Apicid").val(cid);
+	on(cid);
+	get_url(1,code);
+	$(".fix_1 li").click(function() {
+		var cid=$(this).val();
+		var code=$(this).data('type');
+		$('.sw_active').removeClass('sw_active');
+		$('.width_c_'+cid).addClass('sw_active');
+		$("#Apicid").val(cid);
+		if(tpl == 2){
+			productList(cid);
+		}
+		on(cid);
+		get_url(1,code);
+	});
+	
+	if(tpl == 1 || tpl == 4){
+		var cid = $("#Apicid").val();
+		setInterval('on(cid)', 2000);
+	}
+	
+	function productList(cid){
+		var isopen = "{$isopen['isopen']}";
+		$.ajax({
+			url : '{:U("productList")}',
+			type: 'post',
+			data: 'cid='+cid,
+			dataType:'json',
+			success:function(json){
+				var str = '';
+				if(json){
+					for(i=0;i<json.length;i++){
+						str += '<div class="weipan_deal">';
+						str += '<div class="weipan_deal_s">';
+						str += '<span class="weipan_deal_z mai" data-type="'+json[i].pid+'">买涨</span>';
+						str += '<div class="weipan_deal_cent">';
+						str += '<p class="weipan_deal_cent_1">'+json[i].ptitle+' <span>波动盈亏：'+json[i].wave+'元</span></p>';
+						
+						str += '<p class="weipan_deal_cent_2">'+json[i].uprice+'元/手</p></div>';
+						str += '<span class="weipan_deal_d mai" data-type="'+json[i].pid+'">买跌</span>';
+						str += '</div>';
+						str += '</div>';
+					}
+					$("#lunbo").html(str);
+				}
+			}
+		})
+	}
+	
+	function on(cid){
+		if(tpl == 1 || tpl == 4){
+			var cid = $("#Apicid").val();
+		}
+		//取值
+		$.ajax({
+            type : 'get',
+            url  : '{:U("ajax_price")}',
+            data : {'cid':cid},
+            dataType : 'json',
+            success  : function(json){
+                $('.ajax_price').text(json.price);
+				if(json.arrow == 1){
+					$(".ajax_price").css('color','#058c01');
+					$('.ajax_price').css('background',"url(/Public/Home/images/down.png) no-repeat scroll right / 9px 22px");
+				}else{
+					$(".ajax_price").css('color','#fe0000');
+					$('.ajax_price').css('background',"url(/Public/Home/images/up.png) no-repeat scroll right / 9px 22px");
+				}
+				$(".diff").text(json.diff);
+				//$(".diffrate").text(json.diffRate);
+				$('#high').text(json.high);
+				$('#open').text(json.open);
+				$('#close').text(json.close);
+				$('#low').text(json.low);
+
+            }
+        });
+		
+	};
+
+	
+	$('.TimeMenu li a').click(function(){
+		var code = $('.fix_1 li.sw_active').attr('data-type');
+		if($('.TimeMenu li a').attr('data-type') != $(this).attr('data-type') || $(this).attr('data-type')=='area' ){
+			$('.TimeMenu li a').removeClass('changed');
+			$(this).addClass('changed');
+			get_url(1,code);
+		}else{
+			interval = $(this).attr('data-interval');
+			$('.TimeMenu li a').removeClass('changed');
+			$(this).addClass('changed');
+			get_url(1,code);
+			document.getElementById('chart').contentWindow.changeInterval(interval);
+		}
+	});
+
+	function get_url(is_iframe,code){
+		rows=45;
+		interval = $('.TimeMenu li a.changed').attr('data-interval');
+		type = $('.TimeMenu li a.changed').attr('data-type');
+		// type = $('.Linemenu li.cur').attr('data-type');
+		if( !type ){
+			type = 'candlestick';
+		}
+		var url = 'http://'+document.domain+'/index.php/Home/Index/x';
+		parameter ={'interval':interval,'type':type,'rows':rows,'code':code};
+
+		parameter_str=""
+		for ( var i in parameter){
+			parameter_str += '/'+i +'/'+parameter[i];
+		}
+		parameter_str = parameter_str.substr(1);
+		if(is_iframe==1){
+			$('.trend-chart').html('Loading...');
+			$('.trend-chart').html('<iframe id="chart" class="efc" style="width:96%;overflow: hidden; border:none;height:250px; margin-left:2%;"  scrolling="no" frameborder="0"  src="'+ url +'/'+  parameter_str +'"></iframe>');
+		}
+	}
+	  //建仓数字选择
+    function jcqr(sz){
+	    var bz    = $("#bz").val();
+	    var $jine = $("#jine").val();
+		var $sf   = $("#sxf").val();  		
+	    var juan  = $("#isJuan").val();
+		var ss    = $sf*sz;
+		if(juan == 1){
+		   return   false;
+		}
+	    $(".pay").html("<span id='opprice'>"+bz*sz+"</span>元");
+		$("#j-5").html(parseFloat(ss.toFixed(2)));
+		console.log(sz);
+		$("#sl").val(sz);
+		if($("#conform3").css("display")=="block"){
+			$("#conform2").hide();
+		}else{
+			if(accAdd(bz*sz,$sf*sz)>$jine){
+				$(".conform").attr("type","hidden");
+				$("#conform2").show();
+			}
+			else{
+				$(".conform").attr("type","submit");
+				$("#conform2").hide();
+		    }
+		}
+	}
+	 //消息的提示
+	function  msg(content){
+		$("#msg").show();
+		$(".msg").html(content);
+		setTimeout('$("#msg").fadeOut()',2000);
+	}
+	 //增加的方法
+	function  accAdd(arg1, arg2) {
+		var r1, r2, m, c;
+		try {
+			r1 = arg1.toString().split(".")[1].length;
+		}
+		catch (e) {
+			r1 = 0;
+		}
+		try {
+			r2 = arg2.toString().split(".")[1].length;
+		}
+		catch (e) {
+			r2 = 0;
+		}
+		c = Math.abs(r1 - r2);
+		m = Math.pow(10, Math.max(r1, r2));
+		if (c > 0) {
+			var cm = Math.pow(10, c);
+			if (r1 > r2) {
+				arg1 = Number(arg1.toString().replace(".", ""));
+				arg2 = Number(arg2.toString().replace(".", "")) * cm;
+			} else {
+				arg1 = Number(arg1.toString().replace(".", "")) * cm;
+				arg2 = Number(arg2.toString().replace(".", ""));
+			}
+		} else {
+			arg1 = Number(arg1.toString().replace(".", ""));
+			arg2 = Number(arg2.toString().replace(".", ""));
+		}
+		return (arg1 + arg2) / m;
+    }
+	
+	$(function(){
+		//建仓数量增
+        $('#jcsh  .num-right').click(function(){
+			var yu = $("#yu").val();
+            var $numValue = parseInt($(this).prev().val());
+		    var  isJuan   = $("#isJuan").val();
+			if(isJuan==1){
+			  return  false;
+			}
+			if($numValue < yu){
+				jcqr($numValue+1);
+				$(this).prev().val($numValue+1);
+            }
+		});
+		//建仓数量减
+        $('#jcsh  .num-left').click(function(){
+            var $numValue = parseInt($(this).next().val());
+			var  isJuan=$("#isJuan").val();
+			if(isJuan==1){
+			  return  false;
+			}
+            if($numValue > 1){
+			    jcqr($numValue-1);
+                $(this).next().val($numValue-1);
+            }
+        });
+		//建仓止盈加
+		$('#jcsh  .profit-right').click(function(){
+            var $numValue = $(this).prev().val();
+			if($numValue == "不设"){
+				$numValue = 0;
+			}else{
+				$numValue = parseInt($numValue);
+			}
+			if($numValue < 90){
+				$(this).prev().val($numValue+10);
+            }
+		});
+		
+		//建仓止盈减
+		$('#jcsh  .profit-left').click(function(){
+            var $numValue = $(this).next().val();
+			if($numValue == "不设"){
+				$numValue = 0;
+			}else{
+				$numValue = parseInt($numValue);
+			}
+            if($numValue > 10){
+                $(this).next().val($numValue-10);
+            }else{
+				$(this).next().val('不设');
+			}
+        });
+		
+		//建仓止损加
+		$('#jcsh  .loss-right').click(function(){
+            var $numValue = $(this).prev().val();
+			if($numValue == "不设"){
+				$numValue = 0;
+			}else{
+				$numValue = parseInt($numValue);
+			}
+			if($numValue < 80){
+				$(this).prev().val($numValue+10);
+            }
+		});
+		
+		//建仓止损减
+		$('#jcsh  .loss-left').click(function(){
+            var $numValue = $(this).next().val();
+			if($numValue == "不设"){
+				$numValue = 0;
+			}else{
+				$numValue = parseInt($numValue);
+			}
+            if($numValue > 10){
+                $(this).next().val($numValue-10);
+            }else{
+				$(this).next().val('不设');
+			}
+        });
+		
+    });
+	 /*
+	 *  优惠劵的选择
+	 */
+	$("#choose").click(function(){
+		var  juansl=$("#juansl").val();
+	    var  juan=$("#isJuan").val();
+	    var   bz=$("#bz").val();
+		//手续费
+		var  sf=$("#sxf").val();
+        //金额
+        var  $jine=$("#jine").val();		 
+		if(juansl == 0){
+	        return false;
+	    }
+		//使用优惠劵
+		if(juan==0){
+		    $("#isJuan").val(1);
+		    //$("#sls").val(1);
+		    $(".pay").html("<span>0</span>元");
+		    $("#j-5").html(0);
+		    //体验劵
+		    $(".big").html(juansl-1);
+	        //$("#juansl").val(juansl-1);
+			$(".conform").attr("type","submit");			  
+		    $(".failure").hide();
+			$("#sl").val(1);
+			$('#mychoose').css('background','#2c8ff4');
+		}else{
+			$("#sls").val(1);
+			$("#isJuan").val(0);
+			$("#sl").val(1);
+			$(".pay").html("<span>"+bz+"</span>元");
+			$("#j-5").html(sf);
+			$(".j-4").html(bz);
+			$('#mychoose').css('background','#fff');
+			//体验劵
+			$(".big").html(juansl);
+			if(parseInt(sf)+parseInt(bz)+1>$jine){
+				$(".conform").attr("type","hidden");
+			    $(".failure").show();		   			   
+			}
+		    else{
+			    $(".conform").attr("type","submit");
+			    $(".failure").hide();
+			}
+		}
+	});
+   
+</script>
+<script type="text/javascript">
+	setInterval('pcprice()', 1000);
+	function pcprice(){
+		var yinprice1=0;
+		var yinprice2=0;
+		var yinprice3=0;
+		var ykzf = $(".ykzf");
+		var yincangyoujia=parseFloat($('.yincangyoujia').html()).toFixed(2);
+		//console.log(yincangyoujia);
+		ykzf.each(function(){
+			var buyprice = parseFloat($(this).children(".buyprice").html()).toFixed(2);
+			//状态0是涨，1是跌
+			var ykzfostyle = $(this).children(".ykzfostyle").html();
+			//是否体验卷0不是，1是
+			var ykzfeid = $(this).children(".ykzfeid").html();
+			//数量
+			var onumber = $(this).children(".onumber").html();
+			//波动
+			var ykzfwave = $(this).children(".ykzfwave").html();
+			if(ykzfeid==0){
+				if (ykzfostyle==0) {
+					var newprice1 = (yincangyoujia-buyprice)*ykzfwave*onumber;
+				}else{
+					var newprice1 = (buyprice-yincangyoujia)*ykzfwave*onumber;
+				};
+				yinprice1 = newprice1+yinprice1;
+				var newprice3 =newprice1.toFixed(2);
+				//var newprice4 =(yinprice1.toFixed(1))/2;
+            }else{
+                var newprice3 =0;
+                // var newprice4 =0;
+            }
+			if(yincangyoujia=="NaN"){
+				$(this).children(".cash1").text("");
+			}else{
+				$(this).children(".cash1").html(newprice3);
+				if(newprice3>=0){
+					$(this).children(".cash1").css('color','#ed0000')
+				}else{
+					$(this).children(".cash1").css('color','#2fb44e')
+				}
+			}         
+			//$(this).children(".cash11").html(newprice4);
+		});
+		var ykzf1 = $(".ykzf1");
+		var ycbaiyinjia=parseFloat($('.ycbaiyinjia').html()).toFixed(2);
+		//console.log(ycbaiyinjia);
+		ykzf1.each(function(){
+			var buyprice1 = parseFloat($(this).children(".buyprice2").html()).toFixed(2);
+			//状态0是涨，1是跌
+			var ykzfostyle = $(this).children(".ykzfostyle").html();
+			//是否体验卷0不是，1是
+			var ykzfeid = $(this).children(".ykzfeid").html();
+			//数量
+			var onumber = $(this).children(".onumber").html();
+        	//波动
+			var ykzfwave = $(this).children(".ykzfwave").html();
+			if(ykzfeid==0){
+				if (ykzfostyle==0) {
+					var yinprice1 = (ycbaiyinjia-buyprice1)*ykzfwave*onumber;
+				}else{
+					var yinprice1 = (buyprice1-ycbaiyinjia)*ykzfwave*onumber;
+				};
+                yinprice2 = yinprice1+yinprice2;
+                var yinprice3 =yinprice1.toFixed(2);
+				//var yinprice4 =(yinprice2.toFixed(1))/2;
+			}else{
+                var yinprice3 =0;
+				//var yinprice4 =0;
+			}
+			if(ycbaiyinjia=="NaN"){
+				$(this).children(".cash2").text("");
+			}else{
+				$(this).children(".cash2").html(yinprice3);
+				if(yinprice3>=0){
+					$(this).children(".cash2").css('color','#ed0000')
+				}else{
+					$(this).children(".cash2").css('color','#2fb44e')
+				}
+			}
+			//$(this).children(".cash22").html(yinprice4);
+		});        
+		var ykzf2 = $(".ykzf2");
+		var yctojia=parseFloat($('.yctojia').html()).toFixed(2);
+		ykzf2.each(function(){
+			var buyprice2 = parseFloat($(this).children(".buyprice3").html()).toFixed(2);
+			//状态0是涨，1是跌
+			var ykzfostyle = $(this).children(".ykzfostyle").html();
+			//是否体验卷0不是，1是
+			var ykzfeid = $(this).children(".ykzfeid").html();
+			//数量
+			var onumber = $(this).children(".onumber").html();
+			//波动
+			var ykzfwave = $(this).children(".ykzfwave").html();
+			if(ykzfeid==0){
+				if (ykzfostyle==0) {
+                    var newpr3 = (yctojia-buyprice2)*ykzfwave*onumber;
+				}else{
+                    var newpr3 = (buyprice2-yctojia)*ykzfwave*onumber;
+				};
+                yinprice3=newpr3+yinprice3;
+                newpr4 = newpr3.toFixed(2);
+				//newpr5 = (yinprice3.toFixed(1))/2;
+			}else{
+                newpr4 = 0;
+				//newpr5 = 0;
+			}
+          
+			if(yctojia=="NaN"){
+				$(this).children(".cash3").text("");	
+			}else{
+				$(this).children(".cash3").html(newpr4);
+				if(newpr4>=0){
+					$(this).children(".cash3").css('color','#ed0000')
+				}else{
+					$(this).children(".cash3").css('color','#2fb44e')
+				}
+			}
+			//$(this).children(".cash33").html(newpr5);
+		});    
+		var picsum=Number(yinprice1+yinprice2+yinprice3).toFixed(2);
+		// picsum =picsum/2
+		$('.ploss').each(function(){
+			if($(this).text()==""){
+				$('.yk_con').html();
+			}else{
+				$('.yk_con').html(picsum);
+			}	
+		})
+    } 
+</script>
+<!--查看交易end  -->    
+<script type="text/javascript">
+	$(".conform").click(function(){
+		//获取要提交的参数
+		//数量
+		var mysum = $('#sl').val();
+		//判断是否达到最大手数
+		var yu    = $("#yu").val();
+		
+		if(parseInt(mysum) > parseInt(yu)){
+			$("#msgNum").show();
+			$("#msgNum").fadeOut(2000);
+			return false;
+		}
+		//所用费用
+		var myfy=$('#opprice').html();
+		//方向
+		var myfx=$('.zhd').html();
+		//手续费
+		var mysxf=$('#j-5').html();
+		//入仓价
+		var mygetpeice=$('#price').html();
+
+		if(mygetpeice==0 ||mygetpeice==null){  
+			alert('当前系统繁忙，请重试');
+			return false;
+		}
+		//体验券值
+		var mytyj = $('#isJuan').val();
+		//商品id
+		var mypid = $('#type').val();
+		
+		//止盈 
+		var endprofit = $('#profit').val();
+		if(endprofit == '不设'){
+			endprofit = 90;
+		}else{
+			endprofit = parseInt(endprofit);
+		}
+		//止损
+		var endloss = $('#loss').val();
+		if(endloss == '不设'){
+			endloss = 80;
+		}else{
+			endloss = parseInt(endloss);
+		}
+		
+		
+		if(mygetpeice!=''&& mypid!=''){ 
+		  //体验卷值
+			$.ajax({
+				type:'post',
+				url:"{:U('Home/Detailed/addorder')}",
+				data:{"mysum":mysum,"myfy":myfy,"myfx":myfx,"mysxf":mysxf,"mytyj":mytyj,"mypid":mypid,"mygetpeice":mygetpeice,'endprofit':endprofit,'endloss':endloss},
+				dataType : 'json',
+				success:function(data){
+					if (data==0) {
+						alert('购买失败');
+					}else{
+						//window.location.href="{:U('Detailed/orderid')}?orderid="+data+"&marker=first";
+						window.location.href="{:U('Index/dtrading')}";
+					}
+				}
+			});
+		}
+    }); 
+	
+	function newsdata(){
+		var str = '';
+		$(".proCode").each(function(){
+			str += $(this).val()+',';
+		})
+		
+		$.ajax({  
+			type : "post",  
+			url  : "{:U('Index/newsData')}",
+			data : {'code':str},	
+			dataType : 'json',
+			success: function(data) {
+				for(i=0;i<data.length;i++){
+					var code = data[i]['code'];
+					$('.'+code).text(data[i].price);
+					var arrow = data[i]['arrow'];
+					if(data[i].arrow == 1){
+						$("."+code).css('color','#058c01');
+						$('.'+code).css('background',"url(/Public/Home/images/down.png) no-repeat scroll right / 9px 22px");
+					}else{
+						$("."+code).css('color','#fe0000');
+						$('.'+code).css('background',"url(/Public/Home/images/up.png) no-repeat scroll right / 9px 22px");
+					}
+				}
+			}
+		})
+	}
+</script> 

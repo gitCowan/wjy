@@ -1,0 +1,80 @@
+
+<head>
+    <title>微易微盘 </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="__CSS__/base.css">
+	<link rel="stylesheet" href="__CSS__/stock.css" type="text/css">
+	<link rel="stylesheet" href="__CSS__/americaon.css" type="text/css">
+	<link rel="stylesheet" href="__CSS__/bankList.css" type="text/css">
+	<link rel="stylesheet" href="__CSS__/ticket.css" type="text/css">
+	<link rel="stylesheet" href="__CSS__/usatrans.css" type="text/css">
+	<link rel="stylesheet" href="__CSS__/login2.css" >	
+	<script src="__CSS__/jsp/jquery-1.9.1.min.js"></script>
+	<script src="__CSS__/jsp/highstock.src.js?v=<?php echo time();?>"></script>
+	<script src="__CSS__/jsp/highstock.theme.js"></script>
+	<script src="__CSS__/jsp/socket.io.js"></script>
+	<script src="__CSS__/jsp/moment.js"></script>
+	<script src="__CSS__/jsp/time-range.js"></script>
+	<script src="__CSS__/jsp/script.js"></script>	
+	<script type="text/javascript" src="__CSS__/jsp/init.js?v=<?php echo time();?>"></script>	
+</head>
+<style>
+body{background:#fff; overflow:hidden;}
+</style>
+ <div class="optional-details optional-industry-details" >
+		<div style="background:#fff; width:650px;    position: relative; z-index: 2; float:left;">
+			<!-- <span class="aside-bg"></span> -->
+			<div class="stock-own-name">
+			  
+				<a href="javascript:void(0);" class="fr font-blue cancle-stock-info" clstag="jr|keycount|gupiao_zsdetail|sqxq"></a>
+				<strong>沥青<i>Ag</i></strong>
+				<input id="att_count" value=" 5940 " type="hidden">
+			</div>
+			<ul class="stock-own-list clearfix">
+				<li class="fore1 font-red) " style="line-height:55px;">
+					<div class="number font-red">
+						<if condition="$isopen eq 0">
+							<em>休市</em>
+							<else/>
+							<em class="ajax_price" style="padding-right:20px;">10000</em>
+						</if>
+					</div>
+				</li>
+				<li class="fore2 clearfix fore1" style="line-height:23px; text-align:center; font-size:14px;">
+					<div style="width:100%; margin-top:3px;"><i class="font-red " ><font class="diff">2300</font></i></div>
+					<div style="width:100%;"> <i class="font-red " ><font class="diffrate">200</font></i></div>
+				</li> 
+				<li class="fore3 clearfix">
+					<div class="item">开盘<span class=" font-green "><em id="open">105.6</em></span></div>
+					<div class="item">最高<span class=" font-red "><em id="high">163.02</em></span></div>
+					<div class="item">昨收<span class=" font-black "><em id="close">562.3</em></span></div>
+					<div class="item">最低<span class=" font-green "><em id="low">853.3</em></span></div>
+				</li>
+			</ul>
+			<div class="stock-own-trade stock-home clearfix"> 
+				<div class="chart">
+					<div class="chart-title">
+						<ul class="chart-list clearfix TimeMenu">
+							<li class="">
+							   <a href="javascript:void(0)" class="curr" data-interval='1' data-type="area" class="dra_fs"> <span class="ui-button-blue title_type" mtype="0" clstag="jr|keycount|gupiao_zsdetail|fst">分时线</span></a>
+								<i class="line">|</i>
+							</li>
+							<li>
+							   <a href="javascript:void(0)" data-interval='10' data-type="candlestick" class="dra_fs"> <span class="ui-button-blue title_type" ktype="0" clstag="jr|keycount|gupiao_zsdetail|riK">10分钟</span></a>
+								<i class="line">|</i>
+							</li>
+							<li>
+							   <a href="javascript:void(0)" data-interval='30' data-type="candlestick" class="dra_fs"> <span class="ui-button-blue title_type" ktype="0" clstag="jr|keycount|gupiao_zsdetail|zhouK">30分钟</span></a>
+								<i class="line">|</i>
+							</li>
+							<li>
+								<a href="javascript:void(0)" data-interval='60' data-type="candlestick" class="dra_fs"><span class="ui-button-blue title_type" ktype="0" clstag="jr|keycount|gupiao_zsdetail|yueK">60分钟</span></a>
+								<i class="line">|</i>
+							</li>                                                         
+						</ul>
+					</div> 
+					<div id="container"></div>
+				</div>
+			</div>			
+		</div>
+	</div>

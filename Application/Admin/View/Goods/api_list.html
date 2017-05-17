@@ -1,0 +1,175 @@
+<include file="Public:header" />
+
+    <body class="forIE">
+        <div class="butterbar hide">
+            <span class="bar"></span>
+        </div>
+        <main class="main">
+             <include file="Public:menu" />
+        <div style="max-width: 1348px;" class="mainWrap">
+             <include file="Public:top" />
+<div style="display: block;" class="wrapper">
+
+<div class="panel" id="topheader">
+    <header>
+        <table>
+            <tbody>
+            <tr>
+                <th style="width:40%;"><h4 style="font-size:20px;color:#8fb300">大盘实时数据</h4></th>
+				<th style="width:60%;" class="col-md-12">
+				
+				<div class="col-md-12">
+					<a href="javascript:;" type="button" onclick="add()" class="btn btn-primary btn-sm">添加数据</a>
+				</div>
+				
+				</th>
+            </tr>
+            </tbody>
+        </table>
+    </header>
+</div>
+<style>
+	.mask{position: fixed;top: 0;left: 0;width: 100%;height: 100%;background: rgba(0, 0, 0, 0.7);display: none;z-index: 10000;cursor: pointer;}
+	.tan{position: fixed;left: 50%;top: 50%;margin-top: -152px;margin-left: -150px;background: #fff;width: 300px;z-index: 30000;border-radius: 5px;overflow: hidden;}
+	.tan_top{height:40px;line-height:40px;font-size:16px;font-weight:bold;text-align:center;width:90%;margin:0 5%;border-bottom:1px solid #999;}
+	.tan_cen p{text-align:center;margin:4% 2%;}
+	.tan_cen p input{height:30px;}
+	.tan_foot .wai{ background: red;border-radius: 5px;color: #fff;float: left;height: 30px;line-height: 30px;margin: 4% 10%;text-align: center;width: 30%; cursor: pointer;}
+	.tan_foot .no{background:green;}
+	.tan_foot .yes{background:red;}	
+	.tan_foot .no_w{background:green;}
+</style>
+<div class="panel">
+    
+    <div id="detailsTable" style="">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <!-- <th>分类</th> -->
+                    <th>时间</th>
+					<th>外盘价</th>
+                    <th>状态</th>
+					<th style="text-align:center">操作</th>
+                </tr>
+            </thead>
+           <tbody>
+		   <volist name="typelist" id="gl">
+			<tr>
+			<!-- <td>{$gl['name']}</td> -->
+			<td>{$gl.time|date='m-d H:i:s',###}</td> 
+			<td class="price_{$gl.id}">{$gl['price']}</td> 
+			<td>{$gl['diff']}/{$gl['diffRate']}</td> 			
+			<td style="text-align:center;">
+				<li style="border:0;float:left;margin-right:3px;">
+					<a href="javascript:;" type="button" onclick="edit('{$gl.id}','{$gl.price}')" class="btn btn-primary btn-sm">修改数据</a>
+				</li>
+			<!-- {:U('Goods/api_list',array('pid'=>$gl['pid']))} -->
+				<!-- <a href="{:U('Goods/gtdel',array('cid'=>$gl['cid']))}" onclick="if(confirm('确定要删除吗?')){return true;}else{return false;}" type="button" class="btn btn-danger">删除</a> --></td>
+			</tr>
+			</volist>
+			</tbody>
+        </table>
+       
+    </div>
+    <span class="moreUpAndDown" >{$page}</span>
+	<div class="mask"></div>
+	<div class="tan tan_edit" style="display:none;">
+		<div class="tan_top">修改外盘价</div>
+		<div class="tan_cen">
+			<p><span>修改前：</span>&nbsp;&nbsp;<input type="text" class="before" disabled value="" style="border:0" /></p>
+			<p><span>修改后：</span>&nbsp;&nbsp;<input type="text" class="after" value="" style="border:1px solid #ccc" /></p>
+		</div>
+		<div class="tan_foot">	
+			<div class="no wai">取消</div>
+			<div class="yes wai">确认</div>
+		</div>
+		<input type="hidden" value="" class="apiId" />
+	</div>
+	
+	<div class="tan tan_add" style="display:none;">
+		<div class="tan_top">添加外盘价</div>
+		<div class="tan_cen">
+			<p><span>外盘价：</span>&nbsp;&nbsp;<input type="text" class="price_w"  value="" style="border:1px solid #ccc" /></p>
+			<p><span>涨&nbsp;&nbsp;跌：</span>&nbsp;&nbsp;<input type="text" class="diff_w" value="" style="border:1px solid #ccc" /></p>
+			<p><span>涨&nbsp;&nbsp;幅：</span>&nbsp;&nbsp;<input type="text" class="diffrate_w" value="" style="border:1px solid #ccc" /></p>
+			<p><span>时&nbsp;&nbsp;间：</span>&nbsp;&nbsp;<input type="text" class="hour_w" value="" style="border:1px solid #ccc;width:40px;" />时<input type="text" class="minute_w" value="" style="border:1px solid #ccc;width:40px;" />分<input type="text" class="second_w" value="" style="border:1px solid #ccc;width:40px;" />秒</p>
+		</div>
+		<div class="tan_foot">	
+			<div class="no_w wai">取消</div>
+			<div class="yes_w wai">确认</div>
+		</div>
+		<input type="hidden" value="" class="apiId" />
+	</div>
+</div>
+</div>      
+</div>
+
+</main> 
+
+<script>
+	function edit(id,price){
+		$(".mask").show();
+		$(".tan_edit").show();
+		$(".before").val(price);
+		$(".apiId").val(id);
+	};
+	$(".no").click(function(){
+		$(".mask").hide();
+		$(".tan_edit").hide();
+	});
+	$(".yes").click(function(){
+		var price = $(".after").val();
+		var id    = $(".apiId").val();
+		$.ajax({
+			url : "{:U('Goods/editPrice')}",
+			type:'post',
+			data:{'price':price,'id':id},
+			dataType:'json',
+			success:function(json){
+				if(json == 1){
+					$(".price_"+id).html(price);
+				}else{
+					alert("修改失败");
+				}
+				$(".mask").hide();
+				$(".tan_edit").hide();
+			}
+		})
+	});
+	function add(){
+		$(".mask").show();
+		$(".tan_add").show();
+	};
+	$(".no_w").click(function(){
+		$(".mask").hide();
+		$(".tan_add").hide();
+	});
+	$(".yes_w").click(function(){
+		var title = $(".title_w").val();
+		var price = $(".price_w").val();
+		var diff  = $(".diff_w").val();
+		var diffRate = $(".diffrate_w").val();
+		var hour = $(".hour_w").val();
+		var minute = $(".minute_w").val();
+		var second = $(".second_w").val();
+		var cid = "{$_GET['cid']}";
+		$.ajax({
+			url : "{:U('Goods/addPrice')}",
+			type:'post',
+			data:{'price':price,'diff':diff,'hour':hour,'minute':minute,'second':second,'cid':cid,'diffRate':diffRate},
+			dataType:'json',
+			success:function(json){
+				if(json == 1){
+					alert("添加成功");
+				}else{
+					alert("添加失败");
+				}
+				window.location.reload();
+				$(".mask").hide();
+				$(".tan_add").hide();
+			}
+		})
+	});
+</script>
+</body>
+</html>

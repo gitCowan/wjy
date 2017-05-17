@@ -1,0 +1,15 @@
+<link rel="stylesheet" href="__PUBLIC__/css/module.css">
+<header id="main-header" class="header clearfix">
+				<div class="submenu"><a href="{:U('Index/index')}" class="toMember">首页</a>
+					<if condition="$_SESSION['username'] eq 'admin' ">
+					<a href="{:U('Super/esystem')}" class="toMember">基本设置</a>
+					<a href="{:U('Super/ftype')}" class="toMember">分销设置</a>
+					<a href="{:U('Super/config')}" class="toMember">第三方登录</a>
+					<a href="{:U('Super/pay')}" class="toMember">支付设置</a>
+					<a href="{:U('Super/sms')}" class="toMember">短信设置</a>
+					<a href="{:U('Super/backupdb')}" class="toMember">数据备份</a>
+					<a href="{:U('Super/slist')}" class="toMember">管理员</a></if>
+					<!--<a href="{:U('Appstore/version')}" class="toMember">升级</a>-->
+					<a href="{:U('User/signinout')}" class="toMember">退出系统</a>
+				</div>
+			</header>

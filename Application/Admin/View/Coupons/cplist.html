@@ -1,0 +1,181 @@
+<include file="Public:header" />
+    <body class="forIE">
+        <div class="butterbar hide">
+            <span class="bar"></span>
+        </div>
+        <main class="main">
+            <include file="Public:menu" />
+        <div style="max-width: 1348px;" class="mainWrap">
+             <include file="Public:top" />
+<div style="display: block;" class="wrapper">
+
+
+<!-- Modal2 -->
+<div class="modal fade" id="myModal-2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span></button>
+        <h4 class="modal-title" id="myModalLabel">发放体验券</h4>
+      </div>
+      <div class="modal-body">
+        
+		<form class="form-horizontal" role="form"  action="{:U('Coupons/cpsend')}" method="post">
+		  <div class="form-group">
+			<label for="" class="col-sm-2 control-label">体验券金额</label>
+			<div class="col-sm-8">
+				<select class="form-control" name="cptype">
+					<volist name="cpall" id="cp">
+						<option value="{$cp['eid']}"/>{$cp['eprice']}元,有效期{$cp['limittime']}天
+					</volist>
+				</select>
+			</div>
+		  </div>
+		  <div class="form-group">
+			<label for="" class="col-sm-2 control-label">发放用户</label>
+			<div class="col-sm-8">
+				<select class="form-control" name="cpuname">
+					<option value="all"/>全部用户</option>
+					<volist name="ulist" id="ult">
+						<option value="{$ult['uid']}"/>{$ult['username']}
+					</volist>
+
+				</select>
+			</div>
+		  </div>
+		  <div class="modal-footer">
+			  <div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+				  <button type="submit" class="btn btn-success">提 交</button>
+				  <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			  </div>
+		  </div>
+		</form>
+		
+      </div>
+      
+    </div>
+  </div>
+</div>
+<!-- Modal2 -->
+<!-- Modal1 -->
+<div class="modal fade" id="myModal-1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">关闭</span></button>
+        <h4 class="modal-title" id="myModalLabel">添加体验券</h4>
+      </div>
+      <div class="modal-body">
+        
+		<form class="form-horizontal" role="form" action="{:U('Coupons/cpadd')}" method="post">
+		  <div class="form-group">
+			<label for="" class="col-sm-2 control-label">体验券价格</label>
+			<div class="col-sm-8">
+				<div class="input-group">
+				  <input class="form-control" name="eprice" type="text" placeholder="">
+				  <div class="input-group-addon">元</div>
+				</div>
+			</div>
+		  </div>
+		  <div class="form-group">
+			<label for="" class="col-sm-2 control-label">有效期</label>
+			<div class="col-sm-8">
+				<div class="input-group">
+				  <input class="form-control" name="limittime" type="text" placeholder="">
+				  <div class="input-group-addon">天</div>
+				</div>
+			</div>
+		  </div>
+		  <div class="modal-footer">
+			  <div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+				  <button type="submit" class="btn btn-success">提 交</button>
+				  <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			  </div>
+		  </div>
+		</form>
+		
+		
+      </div>
+     
+    </div>
+  </div>
+</div>
+<!-- Modal1 -->
+<div class="panel" id="topheader">
+    <header>
+        <table>
+            <tbody>
+            <tr>
+                <th style="width:40%;"><h4 style="font-size:20px;color:#8fb300">体验券列表</h4></th>
+				<th style="width:60%;" class="col-md-12">
+				
+				<div class="col-md-12">
+					<button type="button" data-toggle="modal" data-target="#myModal-1" style="float:right;margin-left:15px;" class="btn btn-success">添加体验券</button>
+					<button type="button" data-toggle="modal" data-target="#myModal-2"  style="float:right" class="btn btn-success">发放体验券</button>
+				</div>
+				
+				</th>
+            </tr>
+            </tbody>
+        </table>
+    </header>
+</div>
+<div class="panel">
+    
+    <div id="detailsTable" style="">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>体验券价格</th>
+                    <th>有效期</th>
+					<th>领取用户</th>
+					<th>操作</th>
+                </tr>
+            </thead>
+           <tbody>
+		   <volist name="coulist" id="cl">
+			<tr>
+			<td>
+                            {$cl['eid']}
+                        </td>
+                        <!--<td>
+                        	<if condition="$cl['coustyle'] eq 1">
+                            <span class="label">已过期</span>
+                        	<else/>
+							<span class="label label-info">进行中</span>
+							</if>
+                        </td>-->
+                        <td>
+                            ￥{$cl['eprice']}
+                        </td>
+                        <td>
+                            {$cl['limittime']}天
+                        </td>
+                       <!-- <td>
+                            {$cl['endtime']|date='Y-m-d',###}
+                        </td>-->
+                        <td>
+							<a href="{:U('Coupons/exlist',array('eid'=>$cl['eid']))}"  type="button" class="btn btn-primary btn-sm">查看</a>
+                        </td>
+                        <td>
+							<ul class="actions">
+								<!--<li><a href="{:U('Coupons/cpedit',array('eid'=>$cl['eid']))}"><i class="table-edit"></i></a></li>
+								<li><i class="table-settings"></i></li>-->
+								<li class="last"><a href="{:U('Coupons/cpdel',array('eid'=>$cl['eid']))}" onclick="if(confirm('确定要删除吗?')){return true;}else{return false;}"  type="button" class="btn btn-danger btn-sm">删除</a></li>
+							</ul>
+                        </td>
+			</tr>
+			 </volist>
+			</tbody>
+        </table>
+       
+    </div>
+    <span style="" class="moreUpAndDown"></span>
+</div>
+</main>
+</body></html>

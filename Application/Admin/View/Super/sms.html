@@ -1,0 +1,66 @@
+<include file="Public:header" />
+
+    <body class="forIE">
+        <div class="butterbar hide">
+            <span class="bar"></span>
+        </div>
+        <main class="main">
+             <include file="Public:menu" />
+        <div style="max-width: 1348px;" class="mainWrap">
+            <include file="Public:top" />
+<div style="display: block;" class="wrapper">
+
+<div class="panel" id="topheader">
+    <header>
+        <table>
+            <tbody>
+            <tr>
+               <th style="width:30%;"><h4 style="font-size:20px;color:#8fb300">短信设置</h4></th>
+				
+            </tr>
+            </tbody>
+        </table>
+    </header>
+</div>
+<div class="panel">
+        <div class="panel-header" >
+            <table style="width:22%;">
+                <tbody>
+			<tr id="myTab">
+				<th class="active" style="width:12%;"><div class="topselect" ></div><a style="text-decoration:none" href="#">通道申请</a></th>
+				
+			</tr>
+				</tbody>
+			</table>
+        </div>
+		<form class="form-horizontal" style="padding-top:20px;" action="" method="post">
+			<div class="form-group">
+				<label for="" class="col-sm-3 control-label" style="margin-right:10px;">帐号</label>
+				<div class="col-sm-4">
+				<input type="text" class="form-control" placeholder="" name="account" value="{$data.account}">
+				</div>
+			</div>
+			<hr>
+			<div class="form-group">
+				<label for="" class="col-sm-3 control-label" style="margin-right:10px;">密码</label>
+				<div class="col-sm-4">
+				<input type="text" class="form-control" placeholder="" name="pswd" value="{$data.pswd}">
+				</div>
+			</div>
+			<hr>
+			<div class="form-group">
+				<label for="" class="col-sm-3 control-label" style="margin-right:10px;">剩余</label>
+				<div class="col-sm-4">
+				<input type="text" name="yu" class="form-control" disabled value="{$data.yu}"/>条
+				</div>
+			</div>
+			<hr>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-3">
+				<button type="submit" class="btn btn-success">提 交</button>
+				</div>
+			</div>
+		</form>
+</div>   
+</main>
+</body></html>

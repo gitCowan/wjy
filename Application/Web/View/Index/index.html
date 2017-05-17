@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>微易微盘 </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="__CSS__/base.css">
+	<link rel="stylesheet" href="__CSS__/stock.css" type="text/css">
+	<link rel="stylesheet" href="__CSS__/americaon.css" type="text/css">
+	<link rel="stylesheet" href="__CSS__/bankList.css" type="text/css">
+	<link rel="stylesheet" href="__CSS__/ticket.css" type="text/css">
+	<link rel="stylesheet" href="__CSS__/usatrans.css" type="text/css">
+	<link rel="stylesheet" href="__CSS__/login2.css" >	
+	<script src="__CSS__/jsp/jquery-1.9.1.min.js"></script>
+	<script src="__CSS__/jsp/highstock.src.js?v=<?php echo time();?>"></script>
+	<script src="__CSS__/jsp/highstock.theme.js"></script>
+	<script src="__CSS__/jsp/socket.io.js"></script>
+	<script src="__CSS__/jsp/moment.js"></script>
+	<script src="__CSS__/jsp/time-range.js"></script>
+	<script src="__CSS__/jsp/script.js"></script>	
+	<script type="text/javascript" src="__CSS__/jsp/init.js?v=<?php echo time();?>"></script>	
+</head>
+<body>
+	<div id="maskLayer"></div> 
+<div class="login" style="margin-top:50px;">    
+    <div class="header">
+        <div class="switch" id="switch">
+			<a class="switch_btn_focus" id="switch_qlogin" href="javascript:void(0);" tabindex="7">快速登录</a>
+			<a class="switch_btn" id="switch_login" href="javascript:void(0);" tabindex="8">快速注册</a>
+			<div class="switch_bottom" id="switch_bottom" style="position: absolute; width: 70px; left: 0px;"></div>
+        </div>
+    </div>    
+    <div class="web_qr_login" id="web_qr_login" style="display: block; height: 235px;">    
+		<!--登录-->
+		<div class="web_login" id="web_login"> 
+		   <div class="login-box">   
+		<div class="login_form">
+			<div><img src="{$code}"></div>
+	   </div>
+			</div>
+		</div>
+		<!--登录end-->
+	</div>
+  <!--注册-->
+    <div class="qlogin" id="qlogin" style="display: none;">
+		<div class="web_login">
+		<form name="form2" id="regUser" accept-charset="utf-8" action="{:U('User/login')}" method="post">
+			<ul class="reg_form" id="reg-ul">
+        		<div id="userCue" class="cue">快速注册请注意格式</div>
+                <li>
+                    <label for="user" class="input-tips2">用户名：</label>
+                    <div class="inputOuter2">
+                        <input id="user" name="user" maxlength="16" class="inputstyle2" type="text">
+                    </div>
+                </li>
+                <li>
+                <label for="passwd" class="input-tips2">密码：</label>
+                    <div class="inputOuter2">
+                        <input id="passwd" name="passwd" maxlength="16" class="inputstyle2" type="password">
+                    </div>
+                </li>
+                <li>
+                <label for="passwd2" class="input-tips2">确认密码：</label>
+                    <div class="inputOuter2">
+                        <input id="passwd2" name="" maxlength="16" class="inputstyle2" type="password">
+                    </div>
+                </li>
+                <li>
+                 <label for="qq" class="input-tips2">QQ：</label>
+                    <div class="inputOuter2">
+                        <input id="qq" name="qq" maxlength="10" class="inputstyle2" type="text">
+                    </div>
+                </li>
+                <li>
+                    <div class="inputArea">
+                        <input id="reg" style="margin-top:10px;margin-left:85px;" class="button_blue" value="同意协议并注册" type="button"> <a href="#" class="zcxy" target="_blank">注册协议</a>
+                    </div>
+                </li><div class="cl"></div>
+            </ul></form> 
+		</div>
+    </div>
+</div>
+<!-- 登陆窗口 -->
+<script src="__CSS__/jsp/login.js"></script>
+<script language="JavaScript" type="text/javascript">
+	var	login = <?php if(isset($login)){if($login == 0){echo 1;}else{echo 0;}}else{echo 0;} ?>;
+		if(login == 1){ //1为未登录
+			$('#maskLayer').show();
+			$('.login').show();
+			 window.setInterval(hello,3000);  //重复执行某个方法 
+		};		
+		function hello(){ 
+			$.ajax({
+				type: "POST",  
+				url:"{:U('Index/check')}",
+				dataType:'json',
+				//data:{'id':pid,'touser':touser,'title':title,'content':content,'pic':pic,'author':author,'secret':secret,'discuss':discuss},
+				success:function(json){
+					if(json==1){
+						<!-- $('#maskLayer').hide(); -->
+						<!-- $('.login').hide(); -->
+						 window.location.href="/index.php/Web/Index/index.html";   
+					}		
+				}
+			});
+		}  
+</script>
+
+<div class="w">
+  <!-- ok的弹框-->
+	<div class="panelbox " id="cancleDeputeBoxOk" style="z-index: 9999;display: none;">
+		<a href="javascript:void(0);" class="shut" onclick="hiddenCancleBox('cancleDeputeBoxOk');"></a>
+		<div class="trade-result">
+			<div class="con">
+				<h3 class="text"></h3><!-- 成功 -->
+				<i class="icon warn"></i>
+				<div class="extra"><br><!-- -->
+					<!--转入时间 -->
+				</div>
+			</div>
+			<div class="btn">
+				<input class="ui-button-blue" value="我知道了" onclick="hiddenCancleBox('cancleDeputeBoxOk')" type="button">
+			</div>
+		</div>
+	</div>
+	<!-- error的弹框 -->
+	<div class="panelbox " id="cancleDeputeBoxError" style="display: none;z-index: 9999;">
+		<a href="javascript:void(0);" class="shut" onclick="hiddenCancleBox('cancleDeputeBoxError');"></a>
+		<div class="trade-result">
+			<div class="con">
+				<h3 class="text " style="line-height: 42px;padding-left: 45px;"></h3><!-- 失败的标题 -->
+				<div class="extra font-red"></div>
+				<!--失败的文字描述 -->
+			</div>
+			<div class="btn">
+				<input class="ui-button-blue" value="我知道了" onclick="hiddenCancleBox('cancleDeputeBoxError')" type="button">
+			</div>
+		</div>
+	</div>
+	<!-- 一个通用的警示框 下面是一个按钮 “我知道了” -->
+	<div class="panelbox " id="alertMsgForAllWindows" style="display: none;z-index: 9999;">
+		<a href="javascript:void(0);" class="shut" onclick="hiddenCancleBoxForAll('alertMsgForAllWindows');"></a>
+		<div class="trade-result">
+			<div class="con">
+				<h3 class="text"><i class="icon warn"></i>
+					<span id="alertMsgForAllWindowsTitle"> </span> <!--提示的主题 -->
+				</h3>
+				<div class="extra font-red" id="alertMsgForAllWindowsContent" style="font-size: 16px;"></div>
+				<!--警示的文字描述 -->
+			</div>
+			<div class="btn">
+				<input class="ui-button-blue" value="我知道了" onclick="hiddenCancleBoxForAll('alertMsgForAllWindows')" type="button">
+			</div>
+		</div>
+	</div>
+
+	<div class="panelbox" id="cancleDeputeBoxAlert" style="display: none;z-index: 9999;">
+		<a class="shut" onclick="hiddenCancleBox('cancleDeputeBoxAlert')"></a>
+		<div class="trade-result">
+			<div class="con">
+				<h3 class="text"><i class="icon warn"></i>
+					<span id="okBtom"> </span> <!--提示的主题 -->
+				</h3>
+				<div class="extra" id="okMsgBuy"><!--提示的自己描述 -->
+				</div>
+			</div>
+			<div class="btn btn-two">
+				<input class="ui-button-blue submitBb" clstag="jr|keycount|gupiao_jiaoyi|cd_qdcd" id="submitCancleStock" value="确定撤单" onclick="submitCancleStock.call(this);" type="button"><!-- 确定文字-->
+				<input class="border-button-gray" value="取消" onclick="hiddenCancleBox('cancleDeputeBoxAlert');" style="" type="button">
+			</div>
+		</div>
+	</div>
+	<!--whole star-->
+    <section>
+        <div class="whole w">	
+			<input style="display: none;" value="false" id="checkIsJdLoginForTrade" type="text">
+			<div class="user clearfix">
+				<div class="p-img">
+					<span class="bg"></span>
+					<if condition="$user['portrait'] eq null">
+						<img class="smallAvator" src="__CSS__/no-img_mid_.jpg" alt="" width="52" height="52">
+					<else/>
+						<img class="smallAvator" src="{$user.portrait}" alt="" width="52" height="52">
+					</if>
+				</div>
+				<div class="p-info">				
+					<div class="asset" id="usbigshow">
+						<if condition="$user neq null">
+							<span>{$user.username}</span>
+							<span>{$user.balance}</span>
+						<else/>							
+						</if>
+					</div>
+					<div class="">
+						账户余额：1205221
+					</div>
+					<div class="search-think" style="display: none;box-shadow: 0 0 5px #ccc;width: 240px;">
+						<ul style="padding-top:10px;" id="listUl">
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div id="breakLayer" class="panelbox" style="top:2246px;left:50%;display: none;z-index: 1001">
+				<a href="javascript:void(0)" id="breakClose" class="shut"></a>
+				<div class="trade-result">
+					<div class="con">
+						<h3 class="text"><i class="icon warn"></i>您的账号因登录超时，已被迫登出。</h3>
+						<div class="extra">请重新登录。
+						</div>
+					</div>
+					<div class="btn btn-two">
+						<input class="ui-button-blue" id="breakBtn" value="确定" type="button">
+					</div>
+				</div>
+			</div>
+	<!--whole end-->
+		<div class="trend-wraps" id="scrollDiv">
+			<div style="float:right; width:200px; height:65px; line-height:50px; margin-top:15px; text-align:right;">
+				<span class="discunt" style="padding:10px 15px; background:#007ae7; color:#fff; border-radius:3px;">体验券</span>
+				<span class="paus" style="padding:10px 15px;; background:#ff7809; color:#fff; border-radius:3px; margin-left:10px;">充值</span>
+				<a onClick="if (confirm('你确认要退出吗？'))location.href='{:U('Index/tuichu',array('id'=>$list[user_id]))}'" ><span style="padding:10px 15px;; background:#ea544a; color:#fff; border-radius:3px; margin-left:10px;">退出</span></a>
+			</div>             
+		</div>
+           
+        </div>
+    </section>
+    <!--whole end-->
+<div class="stock">
+	<nav>
+		<div class="nav currs fsa">		
+			<volist name="catgood" id="v_class" key="k">
+				<a href="javascript:void(0); " onclick="test({$k});" class="fore{$k}" target="parent"  clstag="jr|keycount|gupiao_tongyong|dh_zixun">{$v_class.cname}</a>
+			</volist>
+			<a href="{:U('Index/deal')}"  onclick="tests();" id="jiaoyi" target="parent" class="fore4" clstag="jr|keycount|gupiao_tongyong|dh_app">交易</a>
+			
+			<script>				
+				$('.fore1').addClass("curr");
+				function test(id){  //点击菜单转换数据
+					$('.currs a').removeClass("curr");
+					$('.fore'+id).addClass("curr");					
+				}
+				function tests(){  //点击菜单转换数据
+					$('.currs a').removeClass("curr");
+					$('#jiaoyi').addClass("curr");					
+				}
+				
+			</script>
+			
+			<a href="#" class="fore5 erwim" clstag="jr|keycount|gupiao_tongyong|dh_app">微信</a>
+			<a href="#" class="fore6 erwim" clstag="jr|keycount|gupiao_tongyong|dh_app">APP</a>
+		</div>
+	</nav>
+	<div class="pop_box"></div>
+	<div class="login1" style="margin-top:50px;display:none;z-index: 9999; position:fixed; background:#fff; margin-left:20%;">		
+		<div class="header" >
+			<div class="switch" id="switch" style="width:270px; text-align:right; margin-right:30px; height:35px;">
+				<div id="quxiao" style="float:right; width:100%;text-align:center; font-size:16px;">扫码关注<span style="float:right;">X</span></div>
+			</div>
+		</div>    
+		<div class="web_qr_login" id="web_qr_login" style="display: block; height: 235px;">    
+			<div class="web_login" id="web_login"> 
+			   <div class="login-box">   
+					<div class="login_form" style="width:175px;">
+						<div><img src="{$code}"></div>
+					</div>
+				</div>
+			</div>
+	  </div>
+	</div>
+	<div class="login2" >
+		<div class="switch" id="switch" style="width:420px; text-align:right;  height:35px; line-height:35px;">
+			<div id="quxiao1" style="float:right; width:100%;text-align:center; font-size:16px;">账户<span style="float:right;">X</span></div>
+		</div>
+		<div class="pay_i">
+			<p>账户ID：{$suer['username']} 余额：<span>{$result['balance']}</span><i>元</i></p>			
+		</div>
+		<ul class="PAY_con"> 
+			<li class="PAY_con_1 vip_cz jiug{$tpl}">100</li>
+			<li class="PAY_con_1 jiug{$tpl}">300</li>
+			<li class="PAY_con_1 jiug{$tpl}">500</li>
+			<li class="PAY_con_1 jiug{$tpl}">1000</li>
+			<li class="PAY_con_1 jiug{$tpl}">3000</li>
+			<li class="PAY_con_1 jiug{$tpl}">5000</li>
+			<li class="PAY_con_1 jiug{$tpl}">10000</li>
+			<li class="PAY_con_1 jiug{$tpl}">30000</li>
+			<li class="PAY_con_1 jiug{$tpl}">其它金额</li>
+		</ul>
+		<form id="moneyCharge1" class="" method="post" action="{:U('User/recharge')}">
+			<p class="c-line clearfix zh_f{$tpl}" >
+				<label class="fl">充值</label>
+				<em>元</em>
+				<input type="text" class="c-input" readonly id="smoney" maxlength="6" placeholder="10" value="100" name="tfee1">
+			</p>
+			<ul class="PAY_con" style="height:30px;"> 
+				<li class="PAY_con_bank <if condition='$i eq 1' >vip_cz</if> jiug{$tpl}" id="{$pay.type}" onclick="bank('{$pay.type}')">微信支付</li>
+			</ul>
+			 <input id="type" type="hidden"  name="type" value="Wxpay">
+            <input id="order_id" type="hidden"  name="order_id" value="{$balc.bpno}">
+			<div class="xieyi">
+				<input type="checkbox" name="up_xieyi" id="up_xieyi"/>
+				<p style="margin-top:.4rem;">我已阅读并同意<span style="color:#1fb3b6;">《服务协议及隐私条款》</span></p>
+			</div>
+            <input type="submit" class="f-sub" value="立即充值">
+        </form>
+	</div>
+	<div class="login3">
+		<div class="switch" id="switch" style="width:380px; text-align:right; margin-right:30px; height:35px; line-height:35px;">
+			<div id="quxiao2" style="float:right; width:100%; text-align:center; font-size:16px;">优惠券<span style="float:right;">X</span></div>
+		</div>
+		<div>
+			 <ul class="ticket-list ">
+				<li class="q_list">
+					<img src="__CSS__/ticket-big.png" class="t-icon">
+					<span class="t-left">100元</span>
+					<em class="t-right">有限期至2017-10-9</em>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="login4" style="width:400px; left:35%; background:#fff; display:none; position:fixed;">
+		<div class="switch" id="switch" style="width:380px; text-align:right; margin-right:30px; height:35px; line-height:35px;">
+			<p id="quxiao3" style="float:right; width:100%;">X</p>
+		</div>
+		<div class="ticket-con">
+			<div class="con-title"> <span>{$expid.eprice}元体验券</span> <em>有效期至{$expid.endtime|date='Y-m-d',###}</em> </div>
+			<div class="con-info ">
+				<p>获得途径：{$expid.getway}</p>
+				<p>获得时间：{$expid.exgtime|date='Y-m-d',###}</p>
+			</div>
+			<div class="con-detail ">
+				<p>使用说明：</p>
+				<p>1、体验券必须在有效时间内使用；</p>
+				<p>2、体验券只能在建仓交易时使用；</p>
+				<p>3、使用体验券建单时，无需支付手续费；</p>
+				<p>4、使用体验券建单时，订单手数必须和使用体验券的数量一致；</p>
+				<p>5、已使用体验券的订单平仓时，盈利，则盈利部分归用户，亏损，则用户无任何损失。</p>
+			</div>
+		</div>
+	</div>
+<script>
+	$(".erwim").click(function(){
+		$('#maskLayer').show();
+		$('.login1').show(); 
+	});
+	$("#quxiao").click(function(){
+		$('#maskLayer').hide();
+		$('.login1').hide(); 
+	});
+</script>
+<script>
+	$(".paus").click(function(){
+		$('#maskLayer').show();
+		$('.login2').show(); 
+	});
+	$("#quxiao1").click(function(){
+		$('#maskLayer').hide();
+		$('.login2').hide(); 
+	});
+</script>
+<script>
+	$(".discunt").click(function(){
+		$('#maskLayer').show();
+		$('.login3').show(); 
+	});
+	$("#quxiao2").click(function(){
+		$('#maskLayer').hide();
+		$('.login3').hide(); 
+	});
+	$(".q_list").click(function(){
+		$('#maskLayer').show();
+		$('.login4').show(); 
+	});
+	$("#quxiao3").click(function(){
+		$('#maskLayer').hide();
+		$('.login4').hide(); 
+	});
+</script>
+<script>
+/* 充值 */
+	$('.PAY_con_1').click(function(){
+        $('.PAY_con_1').removeClass('vip_cz');
+        $(this).addClass('vip_cz');
+		var money = $(this).html();
+		if(money == '其它金额'){			
+			$("#smoney").val('');
+			//$('.sale_after').html('0');
+			$("#smoney").removeAttr('readonly');
+			$("#smoney").focus();			
+			$(document).on('#smoney input propertychange', function() {  
+				var money = $('#smoney').val();
+				var rng  = /^[1-9]\d*$/;;
+				if(!rng.test(money)){
+					alert('请输入正整数');
+					var money = $('#smoney').val('');
+					$('#smoney').val('');
+					return false;
+				}
+			});			
+		}else{
+			$("#smoney").val(money);		
+		}
+    });
+	/* 支付方式  */
+	function bank(pay){
+		$('.PAY_con_bank').removeClass('vip_cz');
+        $('#'+pay).addClass('vip_cz');
+		$('#type').attr('value',pay);
+	}
+
+</script>
+<div class="ownoptional-wrap information">
+<iframe src="{:U('Index/welcome')}" width="680"  name="parent" height="700" style="float:left; overflow:hidden;"></iframe> 
+
+<script>
+	var interval = '1';
+	
+	var chart_type = 'area';
+	
+	var rows = '45';
+	var code = 'BUIT';
+	//var code = 'conc';
+	var width='100%';
+	var height='auto';
+	var host = 'http://'+document.domain+'/';
+	//var code = 'cl1000xh';
+	//var rows = '45';
+	//var chart_type = 'area'; //area,candlestick
+	//var interval = '5';//1,5,30,1h,4h,1d,1w,1m
+	var socket_url = host+'index.php/Home/Jiekou/ajaxKchart';
+	//var container = '#container';
+	var url_h      = host+'index.php/Home/Jiekou/ajaxKchart';
+	var url_d 	   = host+'index.php/Home/Jiekou/ajaxKchart';
+
+	var chart_model = 1;
+	
+	
+</script>
+
+
+<aside>
+    <div class="slide fr" id="show1" style="margin-top: 20px; padding:0; margin-right:20px; border:1px solid #ddd; height:220px;">
+        <!-- <ul class="slide-tab-title clearfix">
+            <li class="curr">热门行业</li>
+        </ul> -->
+		<div class="slide-ka-ri" style="padding:0;margin:5px 0;">
+			<ul class="slide-col-le">
+				<li onclick="opens(1);" style="background:#de3c39 url(__CSS__/shang.png) no-repeat 50% 22%; background-size:16px; line-height:81px">看涨</li>
+				<div>17.652</div>
+				<li onclick="opens(2);" style="background:#63be32 url(__CSS__/xia.png) no-repeat 50% 73%; background-size:16px; line-height:38px;">看跌</li>
+			</ul>
+			<ul class="slide-col-ri">
+				<li>
+					<div>收益比率</div>
+					<p style="color:#0046a3;">80%</p>
+				</li>
+				<li>
+					<div>潜在收益（￥）</div>
+					<p style="color:#9d1917;">180</p>
+				</li>
+				<li>
+					<div>合约金（￥）</div>
+					<p style="color:#9d1917;">200</p>
+				</li>
+			</ul>
+		</div>  
+    </div>
+	<div id="show2" style="display:none;">
+		<div class="" >
+			<div class="yun_open_po">
+				<p class="yun_jian">建仓看涨</p>
+				<div class="yun_c">
+					<label>合约定金：</label>
+					<ul class="heyue">
+						<li class="xzhe xzhe_0" onclick="xzhe(1,0,20)">20</li>
+						<li class="xzhe xzhe_1" onclick="xzhe(1,1,50)">50</li>
+						<li class="xzhe xzhe_2" onclick="xzhe(1,2,100)">100</li>
+					</ul>
+				</div>
+				<div class="yun_c">
+					<label>数量：</label>
+					<ul id="jcsh">
+						<span class="pa_le pay_num num-left pay-left"></span>
+						<input type="text" name="sls" value="1" class="pay_in" id="sls" readonly />
+						<span class="pa_ri pay_num num-right pay-right"></span> 
+					</ul>
+				</div>
+				<div class="yun_c"> 
+					<label>止盈/止损点：</label>
+					<ul class="dian">
+						<li class="xzhe xzhe_0" onclick="xzhe(1,0,20)">50</li>
+						<li class="xzhe xzhe_1" onclick="xzhe(1,1,50)">100</li>
+						<li class="xzhe xzhe_2" onclick="xzhe(1,2,100)">200</li>
+					</ul>
+				</div>
+				<!-- <div class="yun_c"> 
+					<label>预期收益：</label>
+					<ul class="yuqi"></ul>
+				</div> -->
+				<div class="yun_c" style="">
+					<label>所用费用：</label>
+					<ul>
+						<li class="pay" style=""><span id="opprice">0</span></li>
+						<li style="border:none; width:60%;background:none;">体验券：
+						<i class="c-c-l clearfix" style="float: left;display: inline;margin:2px 5px;line-height:20px;">
+							<input type="checkbox" id="choose" value="">
+							<label for="choose" id="mychoose"></label>
+						</i>
+						<input type="hidden" name="juansl" value="0" id="juansl">
+						<i class="c11" id="c11">0</i>元 剩&nbsp;<span class="big" id="big">0</span>&nbsp;张(<span style="font-size:0.8em">1张/次</span>)</li>
+					</ul>
+				</div>
+				
+				<!-- <div class="yun_c">
+					<label>手续费：</label>
+					<input type="hidden" name="sxf" id="sxf" value="30.0">
+					<p class="b-info">&nbsp;<span id="j-5">0.00</span>&nbsp;元&nbsp;</p> 
+				</div> -->
+				
+				<div id="msgNum" style="background:#fcf8e3; width:94%; margin:0 auto; padding:10px 0; text-indent:10px; color:#8a6d3b; border-radius:3px;display:none;"></div>
+				<div class="yun_c yun_tj">
+					<div class="yun_tj_1 quxiao"  onclick="closes();" >取消</div>
+					<div class="yun_tj_1 yun_tj_2 conform">确定</div>
+				</div>
+				<p class="tishi">收盘时对于未成交订单将自动平仓，合约定金全额返还</p>
+				<p class="tishi">交易时间：周一到周五8:00-次日4:00 每日4:30-7:00休市结算</p>
+				<input type="hidden" name="type" value="" id="type" />
+				<input type="hidden" name="bz" value="2" id="bz"/>
+				<input type="hidden" name="sl" value="1" id="sl"/>
+				<input type="hidden" name="ordernumber" value=""/>
+				<input type="hidden" name="product" value="6" id="product">
+				<input type="hidden" name="jine" value="{$user.balance}" id="jine">
+				<input type="hidden" name="isJuan" value="" id="isJuan">
+				<input type="hidden" value="" id="yu">
+				<input type="hidden" value="" id="heyue">
+				<input type="hidden" value="" id="yuqi">
+				<input type="hidden" value="" id="dian">
+				<input type="hidden" value="" id="method">
+			</div>
+		</div>
+		
+		
+		
+	</div>
+	<script>
+		function opens(id){
+		if(id == 2){
+			$('.yun_jian').css("background-color",'#1eb83f'); 
+			$('.yun_tj_2').css("background-color",'#1eb83f'); 
+			$('.yun_jian').text('建仓看跌'); 
+		}else{
+			$('.yun_jian').css("background-color",'#e63234'); 
+			$('.yun_tj_2').css("background-color",'#e63234'); 
+			$('.yun_jian').text('建仓看涨'); 
+		}
+			$('#show1').hide();
+			$('#show2').show();
+		}
+		function closes(){
+			$('#show1').show();
+			$('#show2').hide();
+		}
+	</script>
+</aside>
+
+</div>
+
+<style type="text/css">
+    .chart-details .highcharts-range-selector-buttons{
+        display: none;
+    }
+</style>
+                 </div>
+            </div>
+                       
+<style>
+    .noShowChat{display: none}
+</style>
+
+
+
+
+
+
+<!-- <include file="Index/foot"/>  -->
+<!-- <include file="Base/foot"/> -->
+</body></html>

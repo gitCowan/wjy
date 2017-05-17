@@ -1,0 +1,114 @@
+<include file="Public:header" />
+    <body class="forIE">
+        <div class="butterbar hide">
+            <span class="bar"></span>
+        </div>
+        <main class="main">
+             <include file="Public:menu" />
+        <div style="max-width: 1348px;" class="mainWrap">
+             <include file="Public:top" />
+<div style="display: block;" class="wrapper">
+
+<div class="panel" id="topheader">
+    <header>
+        <table>
+            <tbody>
+            <tr>
+                <th style="width:30%;"><h4 style="font-size:20px;color:#8fb300">产品列表</h4></th>
+				<th style="width:70%;" class="col-md-12">
+				<div class="col-md-8">
+				<form method="post" action="{:U('Goods/glist')}">
+					<div class="form-group" style="margin-bottom:0;text-align:right;">
+						<div class="input-group">
+						  <input class="form-control" type="text" name="keyword" placeholder="请输入商品名称">
+						  <div class="input-group-addon">
+						  <button type="submit" style="border:0;background-color:#eee;">
+						  <span class="glyphicon glyphicon-search"></span> 搜索
+						  </button>
+						  
+						  
+						  </div>
+						</div>
+					</div>
+				</form>
+				</div>
+				<div class="col-md-4">
+					<a href="{:U('Goods/gadd')}" type="button" style="float:right;margin-left
+					:15px;"  class="btn btn-success">添加商品</a>
+					<!-- <a href="{:U('Goods/gtypeadd')}" type="button" style="float:right" class="btn btn-warning">添加分类</a> -->
+				</div>
+				
+				</th>
+            </tr>
+            </tbody>
+        </table>
+    </header>
+</div>
+<div class="panel">
+    
+    <div id="detailsTable" style="">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>商品名称</th>
+                    <th>价格</th>
+                    <th>浮动盈亏</th>
+                    <th>手续费</th>
+                    <th>总手数</th>
+                    <th>外盘价</th>
+                    <th>分类</th>
+					<th style="text-align:center">操作</th>
+                </tr>
+            </thead>
+           <tbody>
+		   <volist name="goodlist" id="gl">
+			<tr>
+			
+			<td><a href="{:U('Goods/gedit',array('pid'=>$gl['pid']))}" >{$gl['ptitle']}</a></td> 
+			<td> <font color="#f00" size="2">{$gl['uprice']}元</font></td> 
+			<td>{$gl['wave']}</td>  
+			<td>{$gl['feeprice']}</td>  
+			<td>{$gl['num']}</td>  
+			<td ><em class="{$gl['title']}">{$gl['price']}</em>
+			</td> 
+			<td>{$gl['cname']}</td> 		
+			<td style="text-align:center"><li style="border:0;float:left;margin-right:3px;"><a href="{:U('Goods/gedit',array('pid'=>$gl['pid']))}" type="button" class="btn btn-primary btn-sm">编辑</a></li>
+			<li class="last"><a href="{:U('Goods/gdel',array('pid'=>$gl['pid']))}" onclick="if(confirm('确定要删除吗?')){return true;}else{return false;}" type="button" class="btn btn-danger btn-sm">删除</a></td>
+			</tr>
+			</volist>
+			</tbody>
+        </table>
+       
+    </div>
+    <span class="moreUpAndDown" >{$page}</span>
+</div>
+</main>
+<script type="text/javascript">  
+	butt();
+	setInterval('butt()', 2000);
+	function butt(){  
+		//获取油的价格到页面
+		$.ajax({  
+			type: "post",  
+			url: "{:U('Goods/zuixin_price')}",  
+			dataType:'json',
+			success: function(data) { 
+				//最新油价
+				if(data){
+					for(i=0;i<data.length;i++){
+						var str = $("."+data[i].title);
+						str.html(data[i].price);
+						if(data[i].arrow == 1){
+							str.attr("class",""+data[i].title+" drop glyphicon glyphicon-arrow-down ys");
+						}else{
+							str.attr("class",""+data[i].title+" drop glyphicon glyphicon-arrow-up yss");
+						}
+					}
+				}
+				             
+			},  
+		}); 
+		
+	}
+</script>
+</body></html>

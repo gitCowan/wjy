@@ -1,0 +1,124 @@
+<include file="Public:header" />
+    <body class="forIE">
+        <div class="butterbar hide">
+            <span class="bar"></span>
+        </div>
+        <main class="main">
+             <include file="Public:menu" />
+        <div style="max-width: 1348px;" class="mainWrap">
+            <include file="Public:top" />
+<div style="display: block;" class="wrapper">
+
+
+<div class="panel" id="topheader">
+    <header>
+        <table>
+            <tbody>
+            <tr>
+                <th style="width:30%;"><h4 style="font-size:20px;color:#8fb300">基本信息</h4></th>
+				
+            </tbody>
+        </table>
+    </header>
+</div>
+<div class="panel">
+	<form class="form-horizontal" role="form" style="padding-top:20px;" action="{:U(Menber/wxinfo)}" method="post">
+	<input type="hidden" name="wcid" value="{$wx['wcid']}"/>
+		<div class="form-group">
+			<label for="" class="col-sm-3 control-label">公众号名称：</label>
+			<div class="col-sm-6">
+			<input type="text" class="form-control" id="" placeholder="" name="wxname" value="{$wx['wxname']}">
+			</div>
+		</div>
+		<hr>
+		 <div class="form-group">
+			<label for="" class="col-sm-3 control-label">微信原始账号：</label>
+			<div class="col-sm-6">
+			<input type="text" class="form-control" id="" placeholder="" name="wxlogin" value="{$wx['wxlogin']}">
+			</div>
+		</div>
+		<hr>
+		<div class="form-group">
+			<label for="" class="col-sm-3 control-label">URL(服务器地址)：</label>
+			<div class="col-sm-6">
+			<input type="text" class="form-control" id="" placeholder="" name="wxurl" value="{$wx['wxurl']}">
+			</div>
+		</div>
+		<hr>
+		<div class="form-group">
+			<label for="" class="col-sm-3 control-label">Token(令牌)：</label>
+			<div class="col-sm-6">
+			<input type="text" class="form-control" id="" placeholder="" name="token" value="Weiyi">
+			</div>
+		</div>
+		<hr>
+		<div class="form-group">
+			<label for="" class="col-sm-3 control-label">AppID：</label>
+			<div class="col-sm-6">
+			<input type="text" class="form-control" id="" placeholder="" name="appid" value="{$wx['appid']}">
+			</div>
+		</div>
+		<hr>
+		<div class="form-group">
+			<label for="" class="col-sm-3 control-label">AppSecret：</label>
+			<div class="col-sm-6">
+			<input type="text" class="form-control" id="" placeholder="" name="appsecret" value="{$wx['appsecret']}">
+			</div>
+		</div>
+		<hr>
+		<div class="form-group">
+			<label for="" class="col-sm-3 control-label">EncodingAESKey：</label>
+			<div class="col-sm-6">
+			<input type="text" class="form-control" id="" placeholder="" name="encodingaeskey" value="{$wx['encodingaeskey']}">
+			</div>
+		</div>
+		<hr>
+		<div class="form-group">
+			<label for="" class="col-sm-3 control-label">Partnerid：</label>
+			<div class="col-sm-6">
+			<input type="text" class="form-control" id="" placeholder="" name="parterid" value="{$wx['parterid']}">
+			</div>
+		</div>
+		<hr>
+		<div class="form-group">
+			<label for="" class="col-sm-3 control-label">PartnerKey：</label>
+			<div class="col-sm-6">
+			<input type="text" class="form-control" id="" placeholder="" name="parterkey" value="{$wx['parterkey']}">
+			</div>
+		</div>
+		<hr>
+		<div class="form-group">
+			<label for="" class="col-sm-3 control-label">分享标题：</label>
+			<div class="col-sm-6">
+			<input type="text" class="form-control" id="" placeholder="" name="title" value="{$wx['title']}">
+			</div>
+		</div>
+		<hr>
+		
+		<div class="form-group">
+			<label for="" class="col-sm-3 control-label">分享标题：</label>
+			<div class="col-sm-6">
+			<input type="text" class="form-control" id="" placeholder="" name="pic" value="{$wx['pic']}">
+			</div>
+		</div>
+		<hr>
+		<hr>
+		<div class="form-group">
+			<label for="" class="col-sm-3 control-label">关注回复：</label>
+			<div class="col-sm-6">
+			<textarea class="form-control" rows="3" name="content" >{$wx['content']}</textarea>
+			</div>
+		</div>
+		<hr>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+			<button type="submit" class="btn btn-success"><if condition="$wx['wcid'] eq ''">添加<else/>修改</if></button>
+			</div>
+		</div>
+	</form>
+   
+    </div>
+    
+</div>
+</main>
+</body></html>

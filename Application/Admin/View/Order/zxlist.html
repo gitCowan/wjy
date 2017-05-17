@@ -1,0 +1,598 @@
+<include file="Public:header" />
+    <body class="forIE">
+        <div class="butterbar hide">
+            <span class="bar"></span>
+        </div>
+        <main class="main">
+            <include file="Public:menu" />
+        <div style="max-width: 1348px;" class="mainWrap">
+             <include file="Public:top" />
+<div style="display: block;" class="wrapper">
+
+<div class="panel" id="topheader">
+    <header>
+        <table>
+            <tbody>
+            <tr>
+				<th style="width:40%;"><h4 style="font-size:20px;color:#8fb300">最新订单</h4></th>
+				<th style="width:60%;" class="col-md-12">
+			
+				<div class="col-md-12">
+				</div>
+				
+				</th>
+            </tr>
+            </tbody>
+        </table>
+    </header>
+</div>
+
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+			<div class="col-md-12" style="padding-top:15px;box-shadow:0px 2px 4px #ccc;margin-bottom:20px;background-color:#fff;">
+				<form class="form-horizontal" role="form"  action="{:U('Order/zxlist')}" method="post">
+						<div class="col-sm-3">
+							
+							<div class="form-group">
+								<label for="" class="col-sm-4 control-label">商品分类</label>
+								<div class="col-sm-8">
+									<select id="ostyle" class="form-control" name="ostyle">
+											<option value="">默认不选</option>
+											<option value="1">油</option>
+											<option value="2">白银</option>
+											<option value="3">铜</option>
+										</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="" class="col-sm-4 control-label">交易金额</label>
+								<div class="col-sm-8" id="ploss"  name="ploss">
+									<select id="ploss" class="form-control" name="ploss">
+                    				<option value="">默认不选</option>
+	                                <volist name="goods" id="vo">
+	                                	<option value="{$vo['uprice']}">{$vo['uprice']}元</option>
+	                                </volist>
+                    			</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							
+							<div class="form-group">
+								<label for="" class="col-sm-4 control-label">平仓时间</label>
+								<div class="col-sm-8">
+									
+									<select id="ostaus" class="form-control" name="ostaus">
+                    				<option value="">默认不选</option>
+	                                <option value="60">1分钟</option>
+	                                <option value="300">5分钟</option>
+	                                <option value="1500">15分钟</option>
+                    			</select>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+								<input type="submit" class="btn btn-success" value="开始查找">
+								</div>
+							</div>
+						</div>
+					
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="panel">
+    
+    <div id="detailsTable" style="">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>订单编号</th>
+                    <th>用户</th>
+                    <th>建仓时间</th>
+                    <th>平仓时间</th>
+                    <th>产品信息</th>
+                    <th>数量</th>
+                    <th>状态</th>
+					<th>类型</th>
+					<th>买价</th>
+					<th>卖价</th>
+					<th>账户余额</th>
+					<th>手续费</th>
+					<th>盈亏</th>
+                </tr>
+            </thead>
+           <tbody>
+		   <volist name="orders" id="vo">
+			<tr>
+			<td>
+				{$vo.orderno}
+			</td>
+			<td>
+				<a href="{:U('User/updateuser',array('uid'=>$vo['uid']))}" class="name">{$vo.username}</a>
+			</td>
+			<td>
+				
+					{$vo.buytime|date='Y-m-d H:i:s',###}
+			</td>
+			 <td>
+					{$vo.selltime|date='Y-m-d H:i:s',###}
+
+			</td>
+			<td>
+				<a href="{:U('Goods/gedit',array('pid'=>$vo['pid']))}">{$vo.ptitle}</a>
+			</td>
+			<td>
+				{$vo.onumber}手
+			</td>
+			<td>
+				<if condition='$vo.ostaus eq 1'>
+				<!--<span class="label label-info">平仓</span>-->
+				平仓
+				<else/>
+				<!--<span class="label">建仓</span>-->
+				建仓
+				</if>
+			</td>
+			<td>
+				<if condition='$vo.ostyle eq 1'>
+				<!--<span class="label label-success">买跌</span>-->
+				<font color="#2fb44e">买跌</font>
+				<else/>
+				<!--<span class="label label-cc">买涨</span>-->
+				<font color="#ed0000">买涨</font>
+				</if>                            	
+			</td>
+			<td>
+				<font color="#f00" size="3">{$vo.buyprice}</font>
+			</td>
+			<td class="sellprice">
+				<if condition='$vo.ostaus eq 1'>
+					<if condition='$vo["buyprice"] gt $vo["sellprice"]'>
+						<font color="#ed0000" size="3">{$vo.sellprice}</font>
+					<else/>
+						<font color="#2fb44e" size="3">{$vo.sellprice}</font>
+					</if>
+				<else/>
+					<!--<span class="label">建仓中</span>-->
+					<span <if condition='$vo.cid eq 1'>class="you drop"<elseif condition='$vo.cid eq 2'/>class="baiyin drop"<else/>class="tong drop"</if>></span>
+				</if>
+			</td>
+			<td>
+				<font color="#f00" size="3">{$vo.commission}</font>
+			</td>
+			<!--<td>
+				<if condition='$vo.ostaus eq 1'>
+				<font color="#f00" size="3">{$vo.commission}</font>
+				<else/>
+				<span class="label">建仓中</span>
+				</if>
+			</td>-->
+			<td>
+				<font color="#f00" size="3">{$vo['fee']}</font>
+			</td>
+			<td>
+				<if condition='$vo.ostaus eq 1'>
+					<if condition="$vo['ploss'] egt 0">
+						<font color="#ed0000" size="4">{$vo.ploss}</font>	
+					<else/>
+						<font color="#2fb44e" size="3">{$vo.ploss}</font>
+					</if>
+				<else/>
+				<!--<span class="label">建仓中</span>-->
+				<span class="ploss"></span>
+				</if>
+			</td>
+		<!-- 	<td>
+				<a href="{:U('Order/ocontent',array('oid'=>$vo['oid']))}">查看</a>
+			</td> -->
+			<input type="hidden" value="{$vo['wave']}" name="wave" />
+			<input type="hidden" value="{$vo['onumber']}" name="onumber" />
+			<input type="hidden" value="{$vo['buyprice']}" name="buyprice" />
+			<input type="hidden" value="{$vo['cid']}" name="cid" />
+			<input type="hidden" value="{$vo['ostyle']}" name="ostyle" />
+			</tr>
+			</volist>
+			</tbody>
+        </table>
+       
+    </div>
+    <span style="" class="moreUpAndDown">上一页</span>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		var eqli = $("#dashboard-menu").children().eq(3);
+		eqli.attr('class','active');
+		$("#dashboard-menu .active .submenu").css("display","block");
+		
+		/** 
+		 * 时间对象的格式化; 
+		 */  
+		Date.prototype.format = function(format) {  
+		    /* 
+		     * eg:format="yyyy-MM-dd hh:mm:ss"; 
+		     */  
+		    var o = {  
+		        "M+" : this.getMonth() + 1, // month  
+		        "d+" : this.getDate(), // day  
+		        "h+" : this.getHours(), // hour  
+		        "m+" : this.getMinutes(), // minute  
+		        "s+" : this.getSeconds(), // second  
+		        "q+" : Math.floor((this.getMonth() + 3) / 3), // quarter  
+		        "S" : this.getMilliseconds()  
+		        // millisecond  
+		    }  
+		  
+		    if (/(y+)/.test(format)) {  
+		        format = format.replace(RegExp.$1, (this.getFullYear() + "").substr(4  
+		                        - RegExp.$1.length));  
+		    }  
+		  
+		    for (var k in o) {  
+		        if (new RegExp("(" + k + ")").test(format)) {  
+		            format = format.replace(RegExp.$1, RegExp.$1.length == 1  
+		                            ? o[k]  
+		                            : ("00" + o[k]).substr(("" + o[k]).length));  
+		        }  
+		    }  
+		    return format;  
+		}
+		
+		var now = new Date().format("MM/dd/yyyy");
+		$(".input-large").attr("value",now);
+	});
+	//搜索结果，ajax返回搜索框搜索结果
+	$('#search_begin').click(function(){
+		//获取文本框值
+		var orderno = $("#orderno").val(),
+			username = $("#username").val(),
+			buytime = $("#buytime").val(),
+		    ostyle = $("#ostyle  option:selected").val(),
+			ploss = $("#ploss  option:selected").val(),
+			ostaus = $("#ostaus option:selected").val();
+
+		alert(orderno+username+buytime+ostyle+ploss+ostaus);
+		/*
+		$.ajax({
+			type: "post",
+			//url: "{:U('Order/zxlist')}",
+			data:{"ostyle":ostyle,"ploss":ploss,"ostaus":ostaus},
+			success: function(data){
+				//console.log(data);
+				if(data=="null"){
+	            	//$("#loading").hide();
+	            	$("#ajaxback").html('<tr class="first"><td colspan="14">没有找到结果，请重新输入！请检查输入的格式是否正确！</tr></td>');
+	            }else{
+	            	//$("#loading").hide();
+	            	$olist = "";
+		            $.each(data,function(no,items){
+		            	if(items.ostaus==0){
+		            		$olist += '<tr class="first create">';	
+		            	}else{
+		            		$olist += '<tr class="first">';
+		            	}
+		            	$olist += '<td>'+items.oid+'</td>';
+		            	$olist += '<td><a href="{:U(\'User/updateuser\')}?uid='+items.uid+'">'+items.username+'</a></td>';
+		            	if(items.ostaus==1){
+		            		$olist += '<td>'+items.selltime+'</td>';
+		            	}else{
+		            		$olist += '<td>'+items.buytime+'</td>';
+		            	}
+		            	$olist += '<td><a href="{:U(\'Goods/gedit\')}?pid='+items.pid+'">'+items.ptitle+'</a></td>';
+		            	$olist += '<td>'+items.onumber+'手</td><td>';
+		            	if(items.ostaus==1){
+		            		$olist += '平仓';
+		            	}else{
+		            		$olist += '建仓';
+		            	}
+		            	$olist += '</td><td>';
+		            	if(items.ostyle==1){
+		            		$olist += '<font color="#2fb44e">买跌</font>';
+		            	}else{
+		            		$olist += '<font color="#ed0000">买涨</font>';
+		            	}
+		            	$olist += '</td>';
+		            	$olist += '<td><font color="#f00" size="3">￥'+items.buyprice+'<font></td>';
+		            	$olist += '<td class="sellprice">';
+		            	if(items.ostaus==1){
+		            		if(items.buyprice>items.sellprice){
+		            			$olist += '<font color="#ed0000" size="3">'+items.sellprice+'</font>';	
+		            		}else{
+		            			$olist += '<font color="#2fb44e" size="3">'+items.sellprice+'</font>';
+		            		}
+		            	}else{
+		            		if(items.cid==1){
+		            			$olist += '<span class="you drop"></span>';
+		            		}else if(items.cid==2){
+		            			$olist += '<span class="baiyin drop"></span>';
+		            		}else{
+		            			$olist += '<span class="tong drop"></span>';
+		            		}
+		            	}
+		            	$olist += '</td><td>';
+		            	$olist += '<font color="#f00" size="3">'+items.commission+'<font>';	            	
+		            	$olist += '</td>';
+		            	$olist += '<td><font color="#f00" size="3">'+items.fee+'<font></td>';
+		            	$olist += '<td>';
+		            	if(items.ostaus==1){
+		            		if(items.ploss>=0){
+		            			$olist += '<font color="#ed0000" size="4">'+items.ploss+'<font>';	
+		            		}else{
+		            			$olist += '<font color="#2fb44e" size="4">'+items.ploss+'<font>';
+		            		}
+		            	}else{
+		            		$olist += '<span class="ploss"></span>';
+		            	}
+		            	$olist += '</td>';
+		            	$olist += '<td><a href="{:U(\'Order/ocontent\')}?oid='+items.oid+'">查看</a></td>';
+		            	$olist += '<input type="hidden" value="'+items.wave+'" name="wave" />';
+		            	$olist += '<input type="hidden" value="'+items.onumber+'" name="onumber" />';
+		            	$olist += '<input type="hidden" value="'+items.buyprice+'" name="buyprice" />';
+		            	$olist += '<input type="hidden" value="'+items.cid+'" name="cid" />';
+		            	$olist += '<input type="hidden" value="'+items.ostyle+'" name="ostyle" />';
+		            	$olist += '</tr>';
+		            })
+		            $("#ajaxback").html($olist);
+		            butt();
+	            }
+			},
+			error: function(data){
+				console.log(data);
+			}
+		});*/
+	})
+	
+	
+	
+	
+	$('#top_search').keyup(top_serch);
+	$('#sxsearch').click(top_serch);
+	function top_serch(){
+		//获取点击参数
+		var urlkey = $(this).attr("urlkey");
+		//获取文本框值
+		var keywords = $("#top_search").val(),
+		    sxkey = $("#sxkey  option:selected").val(),
+			formula = $("#formula  option:selected").val(),
+			sxvalue = $("#sxvalue").val();
+		//重新定义提交url
+		var newurl = "";
+		if(urlkey == "search"){
+			newurl = "{:U('Order/olist?step=search')}"
+		}
+		if(urlkey == "sxsearch"){
+			newurl = "{:U('Order/olist?step=sxsearch')}"
+		}
+		$.ajax({
+        type: "post",  
+        url: newurl,    
+        data:{"keywords":keywords,"sxkey":sxkey,"formula":formula,"sxvalue":sxvalue},
+//      beforeSend:function(XMLHttpRequest){ 
+//            //alert('远程调用开始...'); 
+//            $("#loading").show(); 
+//      },
+        success: function(data) {
+        	//$("#ajaxback").html(data);
+            if(data=="null"){
+            	//$("#loading").hide();
+            	$("#ajaxback").html('<tr class="first"><td colspan="13">没有找到结果，请重新输入！请检查输入的格式是否正确！</tr></td>');
+            }else{
+            	//$("#loading").hide();
+            	$olist = "";
+	            $.each(data,function(no,items){
+	            	if(items.ostaus==0){
+	            		$olist += '<tr class="first create">';	
+	            	}else{
+	            		$olist += '<tr class="first">';
+	            	}
+	            	$olist += '<td>'+items.oid+'</td>';
+	            	$olist += '<td><a href="{:U(\'User/updateuser\')}?uid='+items.uid+'">'+items.username+'</a></td>';
+	            	if(items.ostaus==1){
+	            		$olist += '<td>'+items.selltime+'</td>';
+	            	}else{
+	            		$olist += '<td>'+items.buytime+'</td>';
+	            	}
+	            	$olist += '<td><a href="{:U(\'Goods/gedit\')}?pid='+items.pid+'">'+items.ptitle+'</a></td>';
+	            	$olist += '<td>'+items.onumber+'手</td><td>';
+	            	if(items.ostaus==1){
+	            		$olist += '平仓';
+	            	}else{
+	            		$olist += '建仓';
+	            	}
+	            	$olist += '</td><td>';
+	            	if(items.ostyle==1){
+	            		$olist += '<font color="#2fb44e">买跌</font>';
+	            	}else{
+	            		$olist += '<font color="#ed0000">买涨</font>';
+	            	}
+	            	$olist += '</td>';
+	            	$olist += '<td><font color="#f00" size="3">￥'+items.buyprice+'<font></td>';
+	            	$olist += '<td class="sellprice">';
+	            	if(items.ostaus==1){
+	            		if(items.buyprice>items.sellprice){
+	            			$olist += '<font color="#ed0000" size="3">'+items.sellprice+'</font>';	
+	            		}else{
+	            			$olist += '<font color="#2fb44e" size="3">'+items.sellprice+'</font>';
+	            		}
+	            	}else{
+	            		if(items.cid==1){
+	            			$olist += '<span class="you drop"></span>';
+	            		}else if(items.cid==2){
+	            			$olist += '<span class="baiyin drop"></span>';
+	            		}else{
+	            			$olist += '<span class="tong drop"></span>';
+	            		}
+	            	}
+	            	$olist += '</td><td>';
+	            	$olist += '<font color="#f00" size="3">'+items.commission+'<font>';	            	
+	            	$olist += '</td>';
+	            	$olist += '<td><font color="#f00" size="3">'+items.fee+'<font></td>';
+	            	$olist += '<td>';
+	            	if(items.ostaus==1){
+	            		if(items.ploss>=0){
+	            			$olist += '<font color="#ed0000" size="4">'+items.ploss+'<font>';	
+	            		}else{
+	            			$olist += '<font color="#2fb44e" size="4">'+items.ploss+'<font>';
+	            		}
+	            	}else{
+	            		$olist += '<span class="ploss"></span>';
+	            	}
+	            	$olist += '</td>';
+	            	$olist += '<td><a href="{:U(\'Order/ocontent\')}?oid='+items.oid+'">查看</a></td>';
+	            	$olist += '<input type="hidden" value="'+items.wave+'" name="wave" />';
+	            	$olist += '<input type="hidden" value="'+items.onumber+'" name="onumber" />';
+	            	$olist += '<input type="hidden" value="'+items.buyprice+'" name="buyprice" />';
+	            	$olist += '<input type="hidden" value="'+items.cid+'" name="cid" />';
+	            	$olist += '<input type="hidden" value="'+items.ostyle+'" name="ostyle" />';
+	            	$olist += '</tr>';
+	            })
+	            $("#ajaxback").html($olist);
+	            butt();
+            }
+            
+            //console.log(data);
+        },  
+        error: function(data) {  
+            console.log(data);
+        }
+      }); 
+	}
+	
+$("#sxkey").bind("change",function(){
+	var sxkey = $(this).val();
+	switch(sxkey){
+		case "orderno":
+			$("#sxvalue").attr("placeholder","格式：不允许汉字");
+			break;
+		case "username":
+			$("#sxvalue").attr("placeholder","格式：雁过留痕");
+			break;
+		case "buytime":
+			$("#sxvalue").attr("placeholder","格式：1970-10-01");
+			break;
+		case "ostyle":
+			$("#sxvalue").attr("placeholder","格式：买涨/买跌");
+			break;
+		case "ploss":
+			$("#sxvalue").attr("placeholder","格式：数字格式");
+			break;
+		case "ostaus":
+			$("#sxvalue").attr("placeholder","格式：建仓/平仓");
+			break;
+		default:
+			$("#sxvalue").text("输入内容");
+	}
+	
+})
+</script>
+<script type="text/javascript">  
+	butt();
+	setInterval('butt()', 1000);
+	function butt(){  
+		//获取油的价格到页面
+		var yprice = $('#yprice').val();
+		var byprice = $('#byprice').val();
+		var toprice = $('#toprice').val();
+		$.ajax({  
+			type: "post",  
+			url: "{:U('Goods/price')}",         
+			success: function(data) { 
+				//最新油价
+				$('.you').html(data[0]);
+				$('#yprice').val(data[0]);
+				if(data[0]<yprice){
+					$('.you').attr("class","you drop");
+				}else if(data[0]==yprice){}else{
+					$('.you').attr("class","you rise");
+				}              
+			},  
+		}); 
+		//获取白银的价格到页面  
+		$.ajax({  
+			type: "post",  
+			url: "{:U('Goods/byprice')}",         
+			success: function(data) {
+				//最新白银价
+				$('.baiyin').text(data[0]); 
+				$('#byprice').val(data[0]);
+				if(data[0]<byprice){
+					$('.baiyin').attr("class","baiyin drop");
+				}else if(data[0]==byprice){}else{
+					$('.baiyin').attr("class","baiyin rise");
+				}                
+			},  
+		});
+		//获取铜的价格到页面  
+		$.ajax({  
+			type: "post",  
+			url: "{:U('Goods/toprice')}",         
+			success: function(data) {
+				//最新白银价
+				$('.tong').text(data[0]);
+				$('#toprice').val(data[0]);
+				if(data[0]<toprice){
+					$('.tong').attr("class","tong drop");
+				}else if(data[0]==toprice){}else{
+					$('.tong').attr("class","tong rise");
+				}   
+			},  
+		});
+	}
+</script>
+<script type="text/javascript">
+	setInterval('getPloss()', 1000);
+	function getPloss(){
+		$('.create').each(function(){
+			var buyprice = $(this).find('input[name=buyprice]').val(),
+				sellprice = $(this).find('.sellprice span').html(),
+				wave = $(this).find('input[name=wave]').val(),
+				onumber = $(this).find('input[name=onumber]').val(),
+				cid = $(this).find('input[name=cid]').val(),
+				ostyle = $(this).find('input[name=ostyle]').val(),
+				ploss = 0,
+				findPloss = $(this).find('.ploss');
+			if(ostyle==0){
+				if(cid==1){
+					ploss = (sellprice-buyprice)*wave*onumber;
+				}else{
+					ploss = (sellprice-buyprice)*wave*onumber;
+				}
+			}else{
+				if(cid==1){
+					ploss = (buyprice-sellprice)*wave*onumber;
+				}else{
+					ploss = (buyprice-sellprice)*wave*onumber;
+				}
+			}
+			if(ploss<0){
+				findPloss.attr("class","ploss drop");
+				findPloss.css('color','#2fb44e')
+			}else{
+				findPloss.attr("class","ploss rise");
+				findPloss.css('color','#ed0000')
+			}
+			if(findPloss.html()=="NaN"){
+				findPloss.html("");
+			}else{
+				findPloss.html(parseFloat(ploss).toFixed(2));	
+			}
+//			}else if(findPloss.html()==""){
+//				findPloss.html("");
+//			}else{
+//				findPloss.html(parseFloat(ploss).toFixed(2));
+//			}
+			
+		})
+	}
+</script>
+</body></html>

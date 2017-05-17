@@ -1,0 +1,57 @@
+<include file="Public:header" />
+    <body class="forIE">
+        <div class="butterbar hide">
+            <span class="bar"></span>
+        </div>
+        <main class="main">
+             <include file="Public:menu" />
+        <div style="max-width: 1348px;" class="mainWrap">
+             <include file="Public:top" />
+<div style="display: block;" class="wrapper">
+
+
+<div class="panel" id="topheader">
+    <header>
+        <table>
+            <tbody>
+            <tr>
+                <th style="width:30%;"><h4 style="font-size:20px;color:#8fb300">添加等级</h4></th>
+            </tr>
+            </tbody>
+        </table>
+    </header>
+</div>
+<div class="panel">
+	<form class="form-horizontal" role="form" style="padding-top:20px;" action="{:U('Super/ftypeadd')}" method="post">
+		<input type="hidden" class="form-control" value="{$_GET['id']}" name="pid"/>
+		<div class="form-group">
+			<label for="" class="col-sm-3 control-label" style="padding-right:20px;">等级名称</label>
+			<div class="col-sm-6">
+			<input type="text" class="form-control" value="{$conf.name}" name="name">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="" class="col-sm-3 control-label" style="padding-right:20px;">分销比例</label>
+			<div class="col-sm-4">
+				<div class="input-group">
+				  <input class="form-control" placeholder="请填写0.001-1之间的值" value="{$conf.tc}" name="tc">
+				  <div class="input-group-addon">%</div>
+				</div>
+			</div>
+			<label for="" class="col-sm-5 control-label" style="text-align:left">
+			注意：佣金=分销比例*总手续费*（1-平台比例）
+			</label>
+		</div>
+		<hr>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+			<button type="submit" class="btn btn-success">提 交</button>
+			</div>
+		</div>
+	</form>
+  
+	<span style="" class="moreUpAndDown"></span>
+</div>
+</main>
+
+</body></html>

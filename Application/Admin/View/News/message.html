@@ -1,0 +1,67 @@
+<?php
+    if(C('LAYOUT_ON')) {
+        echo '{__NOLAYOUT__}';
+    }
+?>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>跳转提示</title>
+	<link rel="stylesheet" href="__PUBLIC__/css/bootstrap.min.css">
+	<link rel="stylesheet" href="__PUBLIC__/css/base.css">
+	<script src="__PUBLIC__/js/jquery-2.1.1.min.js"></script>
+	<script src="__PUBLIC__/Js/bootstrap.min.js"></script> 
+	
+</head>
+    <body class="forIE">
+        
+        <div  class="container">
+			<div class="row" style="margin-left:80px;margin-right:80px;">
+					<div class="panel" style="background-color:#E6E6E6;margin-top:10%;height:400px;line-height:400px;">
+						<div class="col-md-12">
+							<div class="col-md-4" style="text-align:right">
+								<img src="__PUBLIC__/images/logos.png" width="240px" height="240px;" style="vertical-align:middle;">
+							</div>
+							<div class="col-md-8" style="margin-top:10%;">
+								<div class="col-md-12" style="height:65px;line-height:65px;color:#FF7800;font-size:3rem;font-weight:300">	 		  
+									
+									
+									<present name="message">
+									<div style="width:60%;border-bottom:1px dotted #ccc;"><?php echo($message); ?></div>
+									<else/>
+									<div style="width:60%;border-bottom:1px dotted #ccc;"><?php echo($error); ?></div>
+									</present>
+									
+								</div>
+								<div class="col-md-12" style="margin-top:10px;height:30px;line-height:30px;color:#999;font-size:1.4rem;font-weight:300"><div style="width:60%;">温馨提示：</div>
+								</div>
+								<div class="col-md-12" style="height:30px;line-height:30px;color:#999;font-size:1.4rem;font-weight:300"><div style="width:60%;">页面自动 <a id="href" href="<?php echo($jumpUrl); ?>">跳转</a> 等待时间： <b id="wait"><?php echo($waitSecond); ?>秒</div>
+								</div>
+								<div class="col-md-12" style="text-align:center;height:65px;line-height:65px;color:#999;font-size:2rem;font-weight:600">
+								<div style="text-align:center;width:60%;">
+								<a href="<?php echo($jumpUrl); ?>" id="href" type="button" class="btn btn-success" style="width:40%;">加速跳转<a>
+								</div>
+								</div>
+							</div>
+						</div>
+					</div>
+			</div>           
+        </div>        
+<script type="text/javascript">
+(function(){
+var wait = document.getElementById('wait'),href = document.getElementById('href').href;
+var interval = setInterval(function(){
+	var time = --wait.innerHTML;
+	if(time <= 0) {
+		location.href = href;
+		clearInterval(interval);
+	};
+}, 1000);
+})();
+</script>
+</body> 
+</html>

@@ -1,0 +1,3 @@
+<?php
+//000000000600a:22:{s:2:"id";s:1:"1";s:6:"isopen";s:1:"1";s:7:"webname";s:12:"恒金商城";s:8:"onelevel";s:3:"0.2";s:8:"twolevel";s:3:"0.1";s:6:"Pscale";s:1:"0";s:9:"begintime";N;s:7:"endtime";N;s:6:"notice";s:9:"大家好";s:8:"isnotice";s:1:"0";s:5:"title";s:4:"5555";s:3:"pic";s:3:"555";s:3:"tpl";s:1:"2";s:3:"day";s:3:"300";s:4:"hour";s:2:"24";s:6:"minute";s:1:"0";s:7:"storage";s:4:"0.00";s:4:"code";s:0:"";s:6:"zfopen";s:1:"2";s:4:"kpan";s:1:"7";s:4:"gpan";s:1:"4";s:7:"endloss";s:2:"80";}
+?>

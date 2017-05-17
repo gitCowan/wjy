@@ -1,0 +1,64 @@
+<include file="Public:header" />
+    <body class="forIE">
+        <div class="butterbar hide">
+            <span class="bar"></span>
+        </div>
+        <main class="main">
+             <include file="Public:menu" />
+        <div style="max-width: 1348px;" class="mainWrap">
+             <include file="Public:top" />
+<div style="display: block;" class="wrapper">
+
+<div class="panel" id="topheader">
+    <header>
+        <table>
+            <tbody>
+            <tr>
+                <th style="width:40%;"><h4 style="font-size:20px;color:#8fb300">分销设置</h4></th>
+				<th style="width:60%;" class="col-md-12">
+				
+				<div class="col-md-12">
+					<a href="{:U('Super/ftypeadd')}" type="button" style="float:right" class="btn btn-success">添加等级</a>
+				</div>
+				
+				</th>
+            </tr>
+            </tbody>
+        </table>
+    </header>
+</div>
+<div class="panel">
+    
+    <div id="detailsTable" style="">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>等级名称</th>
+					<th>比例</th>
+					<th>操作</th>
+                </tr>
+            </thead>
+           <tbody>
+		   <volist name="typelist" id="gl" key="k">
+			<tr>
+			<td>{$k}</td>
+			<td>{$gl['name']}</td> 
+			<td>{$gl['tc']}</td> 		
+			<td style="text-align:center">
+				<li style="border:0;float:left;margin-right:3px;"><a href="{:U('Super/ftypeadd',array('id'=>$gl['id']))}" type="button" class="btn btn-primary btn-sm">编辑</a></li>
+			<li class="last">
+			</td>
+			</tr>
+			</volist>
+			</tbody>
+        </table>
+       
+    </div>
+    <span style="" class="moreUpAndDown"></span>
+</div>
+</div>
+            
+        </div>
+        </main> 
+</body></html>

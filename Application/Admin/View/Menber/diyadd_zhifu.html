@@ -1,0 +1,78 @@
+<include file="Public:header" />
+    <body class="forIE">
+        <div class="butterbar hide">
+            <span class="bar"></span>
+        </div>
+        <main class="main">
+             <include file="Public:menu" />
+        <div style="max-width: 1348px;" class="mainWrap">
+             <include file="Public:top" />
+<div style="display: block;" class="wrapper">
+
+<div class="panel" id="topheader">
+    <header>
+        <table>
+            <tbody>
+            <tr>
+                <th style="width:30%;"><h4 style="font-size:20px;color:#8fb300">添加/修改菜单</h4></th>
+				
+            </tr>
+            </tbody>
+        </table>
+    </header>
+</div>
+<div class="panel">
+	<form class="form-horizontal" role="form" style="padding-top:20px;" action="" method="post">
+		<div class="form-group"> 
+			<label for="" class="col-sm-3 control-label" style="padding-right:20px;">菜单名称</label>
+			<div class="col-sm-6">
+			<input type="text" class="form-control" id="" placeholder="" name="title" value="{$diy['title']}">
+			</div>
+		</div>
+		<hr>
+		<div class="form-group">
+			<label for="" class="col-sm-3 control-label" style="padding-right:20px;">所属分类</label>
+			<div class="col-sm-6">
+				<select class="form-control" name="pid">
+				<option selected="" value="0">主菜单</option>
+					<volist name="class" id="cg">
+						<option selected="" value="{$cg['id']}">{$cg['title']}</option>
+					</volist>
+				</select>
+			</div>
+		  </div>
+		<hr>
+		 <div class="form-group">
+			<label for="" class="col-sm-3 control-label" style="padding-right:20px;">关键词</label>
+			<div class="col-sm-6">
+				  <input class="form-control" name="keyword" type="text" placeholder="" value="{$diy['keyword']}">
+			</div>
+		  </div>
+		<hr>
+		 <div class="form-group">
+			<label for="" class="col-sm-3 control-label" style="padding-right:20px;">URL</label>
+			<div class="col-sm-6">
+				  <input class="form-control" name="url" type="text" placeholder="" value="{$diy['url']}">
+
+			</div>
+		  </div>
+		<hr>
+		<div class="form-group">
+			<label for="" class="col-sm-3 control-label" style="padding-right:20px;">顺序</label>
+			<div class="col-sm-6">
+				  <input class="form-control" name="sort" type="text" placeholder="" value="{$diy['sort']}">
+			</div>
+		  </div>
+		<hr>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+			<button type="submit" class="btn btn-success">提 交</button>
+			</div>
+		</div>
+	</form>
+  
+	<span style="" class="moreUpAndDown"></span>
+</div>
+</main>
+
+</body></html>

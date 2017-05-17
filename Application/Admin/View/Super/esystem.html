@@ -1,0 +1,146 @@
+<include file="Public:header" />
+    <body class="forIE">
+        <div class="butterbar hide">
+            <span class="bar"></span>
+        </div>
+        <main class="main">
+             <include file="Public:menu" />
+        <div style="max-width: 1348px;" class="mainWrap">
+             <include file="Public:top" />
+<div style="display: block;" class="wrapper">
+
+
+<div class="panel" id="topheader">
+    <header>
+        <table>
+            <tbody>
+            <tr>
+                <th style="width:30%;"><h4 style="font-size:20px;color:#8fb300">平台设置</h4></th>
+				
+            </tbody>
+        </table>
+    </header>
+</div>
+<div class="panel">
+	<form class="form-horizontal" role="form" enctype="multipart/form-data" style="padding-top:20px;" action="{:U(Menber/wxinfo)}" method="post">
+	<!-- <input type="hidden" name="wcid" value="{$wx['wcid']}"/> -->
+		<div class="form-group">
+			<label for="" class="col-sm-3 control-label" style="padding-right:20px;">平台设置</label>
+			<div class="col-sm-4">
+				<label class="checkbox-inline">
+				  <input type="radio" name="isopen" id="isopen" value="1" <if condition="$conf.isopen eq '1'"> checked</if>> 开启
+				</label>
+				<label class="checkbox-inline">
+				  <input type="radio" name="isopen" id="isopen" value="2" <if condition="$conf.isopen eq '2'"> checked</if>> 关闭
+				</label>
+			</div>
+			<label for="" class="col-sm-5 control-label" style="text-align:left">
+			<if condition="$conf['isopen'] eq '1'">平台已开启，需要关闭平台请谨慎操作<else/>
+				平台已经关闭，请尽快开启，以免流失客户   </if>
+			</label>
+		</div>
+		
+		<hr>
+		 <div class="form-group">
+			<label for="" class="col-sm-3 control-label" style="padding-right:20px;">网站名称</label>
+			<div class="col-sm-4">
+			<input type="text" class="form-control" id="" placeholder="" value="{$conf.webname}" name="webname">
+			</div>
+		</div>
+		<hr>
+		<div class="form-group">
+			<label for="" class="col-sm-3 control-label" style="padding-right:20px;">模板选择</label>
+			<div class="col-sm-6">
+				<select  name="tpl">
+					<option value="1" <if condition="$conf.tpl eq '1'">selected</if> >清爽</option>
+					<option value="2" <if condition="$conf.tpl eq '2'">selected</if>>黑色</option>
+					<option value="3" <if condition="$conf.tpl eq '3'">selected</if> >白色</option>
+					<option value="4" <if condition="$conf.tpl eq '4'">selected</if>>黄色</option>
+				</select>
+			</div>
+		  </div>
+		<hr>
+		<div class="form-group">
+			<label for="" class="col-sm-3 control-label" style="padding-right:20px;">代理比例</label>
+			<div class="col-sm-4">
+				<div class="input-group">
+				  <input class="form-control" placeholder="平台代理比例（请填写0.001-1之间的值）" value="{$conf.Pscale}" name="Pscale">
+				  <div class="input-group-addon">%</div>
+				</div>
+			</div>
+		</div> 
+		<hr>
+		<div class="form-group">
+			<label for="" class="col-sm-3 control-label" style="padding-right:20px;">储仓费</label>
+			<div class="col-sm-4">
+				<div class="input-group">
+					<input class="form-control" value="{$conf.storage}" name="storage"/>
+					<div class="input-group-addon">手/元</div>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="form-group">
+			<label for="" class="col-sm-3 control-label" style="padding-right:20px;">周一到周五开盘时间</label>
+			<div class="col-sm-1">
+				<div class="input-group">
+					<input class="form-control" placeholder="8" value="{$conf.kpan}" name="kpan"/>
+					<div class="input-group-addon">整时</div>
+				</div>
+			</div>
+			<label for="" class="col-sm-2 control-label" style="padding-right:20px;">关盘时间</label>
+			<div class="col-sm-1">
+				<div class="input-group">
+					<input class="form-control" placeholder="4" value="{$conf.gpan}" name="gpan"/>
+					<div class="input-group-addon">整时</div>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="form-group">
+			<label for="" class="col-sm-3 control-label" style="padding-right:20px;">强制平仓时间</label>
+			<div class="col-sm-4">
+				<div class="input-group">
+					<input class="form-control" value="{$conf.day}" name="day"/>
+					<div class="input-group-addon">天</div>
+					<input class="form-control" value="{$conf.hour}" name="hour"/>
+					<div class="input-group-addon">时</div>
+					<input class="form-control" value="{$conf.minute}" name="minute"/>
+					<div class="input-group-addon">分</div>
+				</div>
+			</div>
+		</div>
+		<hr>
+		<div class="form-group">
+			<label for="" class="col-sm-3 control-label" style="padding-right:20px;">止损比例</label>
+			<div class="col-sm-4">
+				<input type="text" class="form-control"  value="{$conf.endloss}" name="endloss">
+			</div>
+		</div>
+		<!--<hr>-->
+		<!--<div class="form-group">-->
+			<!--<label for="" class="col-sm-3 control-label" style="padding-right:20px;">止赢比例</label>-->
+			<!--<div class="col-sm-4">-->
+				<!--<input type="text" class="form-control"  value="{$conf.winloss}" name="winloss">-->
+			<!--</div>-->
+		<!--</div>-->
+		<hr>
+		<div class="form-group">
+			<label for="" class="col-sm-3 control-label" style="padding-right:20px;">网站公告</label>
+			<div class="col-sm-4">
+			<textarea class="form-control" rows="3" rows="4" name="notice" id="notice">{$conf.notice}</textarea>
+			</div>
+		</div>
+		<hr>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+			<button type="submit" class="btn btn-success"><if condition="$wx['wcid'] eq ''">添加<else/>修改</if></button>
+			</div>
+		</div>
+	</form>
+   
+    </div>
+    
+</div>
+</main>
+</body></html>

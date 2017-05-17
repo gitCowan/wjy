@@ -1,0 +1,68 @@
+<include file="Public:header" />
+    <body class="forIE">
+        <div class="butterbar hide">
+            <span class="bar"></span>
+        </div>
+        <main class="main">
+             <include file="Public:menu" />
+        <div style="max-width: 1348px;" class="mainWrap">
+             <include file="Public:top" />
+<div style="display: block;" class="wrapper">
+
+
+
+<div class="panel" id="topheader">
+    <header>
+        <table>
+            <tbody>
+            <tr>
+                <th style="width:40%;"><h4 style="font-size:20px;color:#8fb300">自定义菜单</h4></th>
+				<th style="width:60%;" class="col-md-12">
+				
+					<div class="col-md-12">
+					<a href="{:U('Menber/diyadd')}" type="button" style="float:right;margin-left
+					:15px;"  class="btn btn-success">添加菜单</a>
+					 <a href="{:U('Menber/diy_send')}" type="button" style="float:right" class="btn btn-warning">生成菜单</a> 
+				</div>
+				
+				</th>
+            </tr>
+            </tbody>
+        </table>
+    </header>
+</div>
+<div class="panel">
+    
+    <div id="detailsTable" style="">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>顺序</th>
+                    <th>菜单名称</th>
+                    <th>关键词</th>
+					<th>外链</th>
+					<th style="text-align:center">操作</th>
+                </tr>
+            </thead>
+           <tbody>
+		   <volist name="class" id="diy">
+			<tr>
+			<td>{$diy['sort']}</td>
+			<td <if condition="$diy['pid'] neq 0 " >style="padding-left:40px;"</if> ><if condition="$diy['pid'] neq 0 " >[子菜单]</if>{$diy['title']}</td> 
+			<td>{$diy['keyword']}</td> 	
+			<td>{$diy['url']}</td> 			
+			<td style="text-align:center;"><a href="{:U('Menber/diyadd',array('pid'=>$diy['id']))}" type="button" class="btn btn-primary">修改</a>
+				<a href="{:U('Menber/diy_del',array('id'=>$diy['id']))}" onclick="if(confirm('确定要删除吗?')){return true;}else{return false;}" type="button" class="btn btn-danger">删除</a></td>
+			</tr>
+			</volist>
+			</tbody>
+        </table>
+       
+    </div>
+    <span style="" class="moreUpAndDown"></span>
+</div>
+</div>
+            
+        </div>
+        </main> 
+</body></html>

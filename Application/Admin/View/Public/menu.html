@@ -1,0 +1,112 @@
+<menu id="menu">
+	<div class="logoWrap">
+		<a class="logo toIndex" href="">123123123</a>
+	</div>
+	<div class="innerWrap">
+	 
+		<dl>
+
+			<dt>新闻</dt>
+			<dd>
+				<ul>
+					
+					<li class="" id="typelist"><a class="nativeSdk" href="{:U('Admin/News/typelist')}"><span class="glyphicon glyphicon-list"></span>栏目管理</a></li> 
+					<li class="" id="newslist"><a class="mcmapi" title="" href="{:U('Admin/News/newslist')}"><span class="glyphicon glyphicon-book"></span>文章管理</a></li>
+				</ul>
+			</dd>
+			<if condition="$_SESSION['username'] eq 'admin' ">
+			<dt>产品管理</dt>
+			<dd>
+				<ul>
+					<li class="" id="glist"><a class="nativeSdk" href="{:U('Admin/Goods/glist')}"><span class="glyphicon glyphicon-barcode"></span>产品列表</a></li> 
+					<li class="" id="gtype"><a class="mcmapi" title="" href="{:U('Admin/Goods/gtype')}"><span class="glyphicon glyphicon-align-left"></span>分类列表</a></li>
+				</ul>
+			</dd>
+				</if>
+			<dt>订单管理</dt>
+			<dd>
+				<ul>
+					<li class="" id="olist"><a class="mcmbase" title="订单列表" href="{:U('Admin/Order/olist')}"><span class="glyphicon glyphicon-bookmark"></span>订单列表</a></li>
+					<li class="" id="tlist"><a class="mcmdata" title="交易流水" href="{:U('Admin/Order/tlist')}"><span class="glyphicon glyphicon-list-alt"></span>交易流水</a></li>
+					<li class="" id="yclist"><a class="mcmdatabase" title="异常订单" href="{:U('Admin/Order/yclist')}"><span class="glyphicon glyphicon-certificate"></span>异常订单</a></li>
+				</ul>
+			</dd>
+		
+			<dt>客户管理</dt>
+			<dd>
+				<ul>
+					<li id="mlist"><a class="version" href="{:U('Menber/mlist')}" title="客户列表"><span class="glyphicon glyphicon-user"></span>客户列表</a></li>
+					<li class="" id="recharge"><a class="restore" href="{:U('User/recharge')}"  title="充值和提现"><span class="glyphicon glyphicon-briefcase"></span>充值和提现</a></li>
+					
+					
+				</ul>
+			</dd>
+			<if condition="$_SESSION['username'] eq 'admin' ">
+			<dt>代理商</dt>
+			<dd>
+				<ul>
+					<li class="" id="ulist"><a class="push" href="{:U('User/ulist')}" title="代理商"><span class="glyphicon glyphicon-credit-card"></span>代理商列表</a></li>
+					<li class="" id="agentlist"><a class="push" href="{:U('User/agentlist')}" title="代理商申请"><span class="glyphicon glyphicon-credit-card"></span>代理商申请</a></li>
+				</ul>
+			</dd>
+			 <dt>会员管理</dt>
+			<dd>
+				<ul>
+					<li id="madd"><a class="version" href="{:U('Menber/madd')}" title="添加会员"><span></span>添加会员</a></li>
+					<!--<li class="" id="mlist"><a class="restore" href="{:U('Menber/mlist')}"  title="会员列表"><span></span>会员列表</a></li>-->
+				</ul>
+			</dd>
+			
+			<dt>体验券</dt>
+			<dd>
+				<ul>
+					<!-- <li><a class="version" href="{:U('Coupons/cpadd')}" title="添加会员"><span></span>添加体验券</a></li> -->
+					<li class="" id="cplist"><a class="restore" href="{:U('Coupons/cplist',array('style'=>'list'))}"  title="会员列表"><span class="glyphicon glyphicon-usd"></span>体验券列表</a></li><!-- <li class=""><a class="restore" href="{:U('Coupons/cpsend')}"  title="发放体验券"><span></span>发放体验券</a></li> -->
+					
+				</ul>
+			</dd>
+			<dt>系统管理员</dt>
+			<dd>
+				<ul>
+					<li id="sadd"><a class="version" href="{:U('Super/sadd')}" title="添加管理员"><span class="glyphicon glyphicon-cloud"></span>添加管理员</a></li>
+					<li class="" id="slist"><a class="restore" href="{:U('Super/slist')}"  title="管理员列表"><span class="glyphicon glyphicon-th-list"></span>管理员列表</a></li>
+					
+				</ul>
+			</dd>
+			<dt>微信管理</dt>
+			<dd>
+				<ul>
+					<li id="wxinfo"><a class="version" href="{:U('Menber/wxinfo')}" title="微信基本信息"><span class="glyphicon glyphicon-comment"></span>微信基本信息</a></li>
+					
+					<!-- <li class="" id="wxlist"><a class="restore" href="{:U('Menber/wxlist')}"  title="微信用户列表"><span class="glyphicon glyphicon-phone"></span>微信用户列表</a></li> -->
+					 <li class="" id="diymen"><a class="restore" href="{:U('Menber/diymen')}"  title="自定义菜单"><span class="glyphicon glyphicon-th"></span>自定义菜单</a></li>
+				</ul>
+			</dd>
+			</if>
+			<!--<dt>微信支付管理</dt>
+			<dd>
+				<ul>
+					<li id="wxinfo_zhifu"><a class="version" href="{:U('Menber/wxinfo_zhifu')}" title="微信基本信息"><span class="glyphicon glyphicon-comment"></span>微信支付基本信息</a></li>
+					 <li class="" id="diymen_zhifu"><a class="restore" href="{:U('Menber/diymen_zhifu')}"  title="自定义菜单"><span class="glyphicon glyphicon-th"></span>支付自定义菜单</a></li>
+				</ul>
+			</dd>-->
+
+			<!-- <dt>系统设置</dt>
+			<dd>
+				<ul>
+					<li><a class="version" href="http://www.apicloud.com/version" title="基本设置"><span></span>基本设置</a></li>
+					<li class=""><a class="restore" href="http://www.apicloud.com/restore"  title="数据备份"><span></span>数据备份</a></li>
+					 <li class=""><a class="restore" href="http://www.apicloud.com/restore"  title="退出系统"><span></span>退出系统</a></li>
+				</ul>
+			</dd> -->
+		
+			
+		</dl>
+	</div>
+	
+	<script>
+		var a="{$Think.ACTION_NAME}";
+		$('#'+a).addClass('active');
+		$('#'+a+' a').css('color','#8fb300');
+   </script>
+</menu>

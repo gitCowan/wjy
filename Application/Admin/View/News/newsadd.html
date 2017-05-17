@@ -1,0 +1,125 @@
+<include file="Public:header" />
+    <body class="forIE">
+        <div class="butterbar hide">
+            <span class="bar"></span>
+        </div>
+        <main class="main">
+             <include file="Public:menu" />
+        <div style="max-width: 1348px;" class="mainWrap">
+             <include file="Public:top" />
+<div style="display: block;" class="wrapper">
+<link href="__PUBLIC__/css/bootstrap-datetimepicker.css" rel="stylesheet" media="screen">
+
+<div class="panel" id="topheader">
+    <header>
+        <table>
+            <tbody>
+            <tr>
+                <th style="width:30%;"><h4 style="font-size:20px;color:#8fb300">添加文章</h4></th>
+				
+            </tr>
+            </tbody>
+        </table>
+    </header>
+</div>
+<div class="panel">
+	<form class="form-horizontal" role="form" enctype="multipart/form-data" style="padding-top:20px;" action="{:U('News/newsadd')}" method="post">
+		<div class="form-group">
+			<label for="" class="col-sm-3 control-label" style="padding-right:20px;">文章标题</label>
+			<div class="col-sm-6">
+			<input type="text" class="form-control" id="" placeholder="" name="ntitle" value="{$editnew.ntitle}">
+			</div>
+		</div>
+		<hr>
+		<div class="form-group">
+			<label for="" class="col-sm-3 control-label" style="padding-right:20px;">文章栏目</label>
+			<div class="col-sm-6">
+				<select style="width: 100%;" name="ncategory">
+									<volist name="nclist" id="nl">
+									<option value="{$nl['fid']}" <if condition="$nl['fid'] eq $editnew['fid']"> selected=""</if>>{$nl['fclass']}</option>
+									</volist>
+							</select>
+			</div>
+		  </div>
+		<hr>
+		<div class="form-group">
+			<label for="" class="col-sm-3 control-label" style="padding-right:20px;">缩略图</label>
+			<div class="col-sm-9">
+				<div class="col-sm-6" style="padding-left:0">
+				<input class="form-control" type="text" name="ncover" value="{$editnew.ncover}" />
+				</div>
+				<div class="col-sm-6">
+				<a href="javascript:;" class="pic-upload">
+				<input class="form-control" style="border:0" name="input-file" type="file" value="" />
+				</a>
+				</div>
+			</div>
+		</div>
+		<hr>
+		
+		<div class="form-group">
+			<label for="" class="col-sm-3 control-label" style="padding-right:20px;">文章内容</label>
+			<div class="col-sm-6">
+				<textarea id="wysi" class="form-control" rows="20" name="ncontent">{$editnew.ncontent}</textarea>
+				<!-- <div class="BJ_bj">
+					<textarea type="text" name="content" id="editor"  style="min-height:160px" ></textarea>
+				</div> -->
+			</div>
+		</div>
+		 
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+			<button type="submit" class="btn btn-success">提 交</button>
+			</div>
+		</div>
+	</form>
+  
+	<span style="" class="moreUpAndDown"></span>
+</div>
+</main><!-- 
+<script>
+var ue = UE.getEditor('editor', {
+	toolbars: [
+		[
+			'preview', //预览
+			'bold', //加粗
+			'indent', //首行缩进
+			'italic', //斜体
+			'underline', //下划线
+			'strikethrough', //删除线
+			'horizontal', //分隔线
+			'removeformat', //清除格式
+			'unlink', //取消链接
+			'insertrow', //前插入行
+			'cleardoc', //清空文档
+			'forecolor', //字体颜色
+			'backcolor', //背景色
+			
+			'fontsize', //字号
+			'paragraph', //段落格式
+			//'simpleupload', //单图上传
+			'insertimage',//多图上传
+			'link', //超链接
+			'justifyleft', //居左对齐
+			'justifyright', //居右对齐
+			'justifycenter', //居中对齐
+			'justifyjustify', //两端对齐
+			'imagenone', //默认
+			'imageleft', //左浮动
+			'imageright', //右浮动
+			'imagecenter', //居中
+			'edittip ', //编辑提示
+			'inserttable', //插入表格
+			'deletetable', //删除表格
+			'mergecells', //合并多个单元格
+			'mergeright', //右合并单元格
+			'mergedown', //下合并单元格
+			'deleterow', //删除行
+			'deletecol', //删除列
+		]
+	],
+    autoHeightEnabled: true,
+    
+});
+</script> -->
+</body></html>

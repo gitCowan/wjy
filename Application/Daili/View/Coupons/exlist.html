@@ -1,0 +1,114 @@
+<include file="Public:header" />
+    <body class="forIE">
+        <div class="butterbar hide">
+            <span class="bar"></span>
+        </div>
+        <main class="main">
+             <include file="Public:menu" />
+        <div style="max-width: 1348px;" class="mainWrap">
+             <include file="Public:top" />
+<div style="display: block;" class="wrapper">
+
+
+
+<div class="panel" id="topheader">
+    <header>
+        <table>
+            <tbody>
+            <tr>
+                <th style="width:30%;"><h4 style="font-size:20px;color:#8fb300">优惠券领取列表</h4></th>
+				<!-- <th style="width:70%;" class="col-md-12">
+				<div class="col-md-8">
+				
+					<div class="form-group" style="margin-bottom:0;text-align:right;">
+						<div class="input-group">
+						  <input class="form-control" type="text" placeholder="请输入商品名称">
+						  <div class="input-group-addon">搜索</div>
+						</div>
+					</div>
+				
+				</div>
+				<div class="col-md-4">
+					<button type="button" class="btn btn-success">添加商品</button>
+					<button type="button" class="btn btn-warning">商品分类</button>
+				</div>
+				
+				</th> -->
+            </tr>
+            </tbody>
+        </table>
+    </header>
+</div>
+<div class="panel">
+    
+    <div id="detailsTable" style="">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                            
+							<th class="span3 sortable">
+                                <span class="line"></span>ID
+                            </th>
+                            <th class="span3 sortable">
+                                <span class="line"></span>用户
+                            </th>
+                            <th class="span4 sortable">
+                                <span class="line"></span>优惠卷价格
+                            </th>
+							<th class="span3 sortable">
+                                <span class="line"></span>领取时间
+                            </th>
+							<th class="span3 sortable">
+                                <span class="line"></span>结束时间
+                            </th>
+                            <th class="span3 sortable">
+                                <span class="line"></span>是否可用
+                            </th>
+							<th class="span2 sortable">
+                                <span class="line"></span>操作
+                            </th>
+                        </tr>
+            </thead>
+           <tbody>
+		    <volist name="exlist" id="el">
+			<tr>
+			
+			<td>
+                            {$el['exid']}
+                        </td>
+                        <td>
+                        	<a href="{:U('User/updateuser',array('uid'=>$el['uid']))}" class="name">{$el['username']}</a>
+                        </td>
+                        <td>
+                            ￥{$el['eprice']}
+                        </td>
+                        <td>
+                            {$el['exgtime']|date='Y-m-d',###}
+                        </td>
+                        <td>
+                            {$el['endtime']|date='Y-m-d',###}
+                        </td>
+                        <td>
+                        	<if condition="$cl['getstyle'] eq 0">
+                            <span class="label label-info">未使用</span>
+							<elseif condition="$cl['getstyle'] eq 1" />
+                            <span class="label">已使用</span>
+							</if>
+                        </td>
+                        <td>
+							<ul class="actions">
+								<!--<li><a href="{:U('Coupons/cpedit',array('eid'=>$cl['eid']))}"><i class="table-edit"></i></a></li>
+								<li><i class="table-settings"></i></li>-->
+								<li class="last"><a href="{:U('Coupons/exdel',array('exid'=>$el['exid']))}" onclick="if(confirm('确定要删除吗?')){return true;}else{return false;}" type="button" class="btn btn-danger btn-sm">删除</a></li>
+							</ul>
+                        </td>
+			</tr>
+			</volist>
+			</tbody>
+        </table>
+       
+    </div>
+    <span style="" class="moreUpAndDown">上一页</span>
+</div>
+</main>
+</body></html>

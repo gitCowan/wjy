@@ -1,0 +1,75 @@
+<style>
+.foot1{background:#fff; border-top:1px solid #f1f1f1;}
+.foot2{background:#202020; border-top:1px solid #111;}
+.foot3{background:#fff; border-top:1px solid #f1f1f1;}
+.foot4{background:#fff; border-top:1px solid #f1f1f1;}
+.max_foot1{background:#fff;}
+.max_foot2{background:#202020;}
+.max_foot3{background:#fff;}
+.max_foot4{background:#fff;}
+.ico_foot {width:100%;height:33px;line-height:40px; font-size:25px;}
+.fmng1{color:#999 !important;}
+.fmng2{color:#fff !important;}
+.fmng3{color:#cf0000 !important;}
+.fmng4{color:#999;}
+.ico_dais3{background:#cf0000;color:#fff;}
+
+</style>
+<footer style="max-width:640px;margin:0 auto;" class="max_foot{$tpl}">
+	<div style="height:58px;"></div>
+	<div style="max-width:640px;position:fixed;bottom:0;z-index:5;width:100%;height:58px;line-height:58px;" class="foot{$tpl}">
+		<ul>
+			<a href="{:U('Index/index')}" style="text-decoration:none;">
+			<li style="width:25%;text-align:center;float:left" class="ico_dai{$tpl} fmng{$tpl}">
+				<div  class="ico_foot ">
+					<!-- <img src="__PUBLIC__/Home/images/home.png"> -->
+					<i class="icon-home" style="font-size:22px;"></i>
+				</div>
+				<div style="width:100%;height:25px;line-height:25px;">
+					首 页
+				</div>
+			</li>
+			</a>
+			<a href="{:U('Index/dtrading')}" style="text-decoration:none;">
+			<li style="width:25%;text-align:center;float:left" class="ico_dai{$tpl} fmng{$tpl}">
+				<div  class="ico_foot ">
+					<!-- <img src="__PUBLIC__/Home/images/money.png"> -->
+					<i class="icon-pay"></i>
+				</div>
+				<div style="width:100%;height:25px;line-height:25px;">
+					交 易
+				</div>
+			</li>
+			</a>
+			<a href="{:U('News/newslist')}" style="text-decoration:none;">
+			<li style="width:25%;text-align:center;float:left" class="ico_dai{$tpl}  fmng{$tpl}">
+				<div  class="ico_foot">
+					<!-- <img src="__PUBLIC__/Home/images/news.png"> -->
+					<i class="icon-acunt"></i>
+				</div>
+				<div style="width:100%;height:25px;line-height:25px;">
+					公 告
+				</div>
+			</li>
+			</a>
+			<a href="{:U('User/memberinfo')}" style="text-decoration:none;">
+				<li style="width:25%;text-align:center;float:left" class="ico_dai{$tpl} fmng{$tpl}">
+					<div  class="ico_foot ">
+						<!-- <img src="__PUBLIC__/Home/images/user.png"> -->
+						<i class="icon-vip"></i>
+					</div>
+					<div style="width:100%;height:25px;line-height:25px;">
+						会 员
+					</div>
+				</li>
+			</a>
+			
+		</ul>
+	</div>
+	<!-- <script>
+	$('.ico_dai').click(function(){
+        $('.ico_dai').removeClass('ico_dais');  // 其他的就移除“on”的样式 
+        $(this).addClass('ico_dais')   // 点击的时候加上 “on”的样式 
+    })
+	</script> -->
+</footer>

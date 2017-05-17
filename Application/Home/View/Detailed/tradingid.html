@@ -1,0 +1,108 @@
+<extend name="Base/common"/>
+<block name="content">
+<link rel="stylesheet" href="__CSS__/global.css">
+<link rel="stylesheet" href="__CSS__/index.css">
+<link rel="stylesheet" href="__CSS__/weipan.css"/>
+<link rel="stylesheet" href="__CSS__/ico_foot.css"/>
+<link rel="stylesheet" href="__CSS__/trainfo.css"/>
+<script id="G--xyscore-load" type="text/javascript" charset="utf-8" async="" src="__JS__/xyscore_main.js"></script>
+<style>
+.tarn2 {border-bottom:1px solid #111;}
+.new_inde2 p {background:#111; color:#dedede;}
+.trs2 {color:#999;}
+</style>
+<div class="wrap">
+  <div class="index new_inde{$tpl}" style="min-height: 750px; height: 750px; ">
+    <header class="list-head new_id{$tpl}">
+      <nav class="list-nav clearfix"> <a href="javascript:history.go(-1)" class="list-back"></a>
+        <h3 class="list-title">订单详情</h3>
+      </nav>
+    </header>
+    <div class="news-list2 clearfix bf{$tpl}" style="color:#999;">
+		<div class="trainfo trs{$tpl}">
+			<div class="trainfo_top{$tpl} ">
+				<p>订单详情</p>
+				<div class="trainfo_cen tarn{$tpl}">
+					<dl>
+						<dt>订单号：</dt>
+						<dd>{$order.orderno}</dd>
+					</dl>
+					<dl>
+						<dt>产品：</dt>
+						<dd>{$order.ptitle}</dd>
+					</dl>
+					<dl>
+						<dt>建仓时间：</dt>
+						<dd>{$order.buytime|date='Y-m-d H:i:s',###}</dd>
+					</dl>
+					
+				</div>		
+				<div class="trainfo_cen tarn{$tpl}">
+					<div class="trainfo_cen_left">
+						<dl>
+							<dt class="trainfo_cen_1">方向：</dt>
+							<dd class="trainfo_cen_2" style="font-size:18px;">
+								<if condition="$order.ostyle eq 1">
+									<span class="l_l2">跌</span>
+									<else/>
+									<span class="l_l" style="color: #ed0000;">涨</span>
+								</if>
+							</dd>				
+						</dl>
+						<dl>
+							<dt class="trainfo_cen_1">入仓数量：</dt>
+							<dd class="trainfo_cen_2">{$order.onumber} </dd>
+						</dl>	
+						<dl>
+							<dt class="trainfo_cen_1">违约金：</dt>
+							<dd class="trainfo_cen_2" style="color:#cf0000; font-size:20px !important;">{$order.fee}</dd>
+						</dl>	
+						<dl>
+							<dt class="trainfo_cen_1">止盈：</dt>
+							<dd class="trainfo_cen_2"><?php if($order['endprofit'] == 1){echo '不设';}else{echo $order['endprofit'].'%';}?></dd>
+						</dl>
+						
+					</div>
+					<div class="trainfo_cen_right">
+						<dl>
+							<dt class="trainfo_cen_1">建仓金额：</dt>
+							<dd class="trainfo_cen_2" id="youjia" style="padding:0;">{$order['jc']}</dd>	
+						</dl>
+						<dl>
+							<dt class="trainfo_cen_1">入仓价格：</dt>
+							<dd class="trainfo_cen_2" style="color:#1EBB30">{$order['buyprice']}</dd>	
+						</dl>				
+						<dl>
+							<dt class="trainfo_cen_1">平仓价格：</dt>
+							<dd class="trainfo_cen_2" style="color:#FF7C80">{$order.sellprice}</dd>
+						</dl>
+						<dl>
+							<dt class="trainfo_cen_1">止损：</dt>
+							<dd class="trainfo_cen_2">{$order.endloss}%&nbsp;&nbsp;</dd>
+						</dl>
+					</div>			
+				</div>
+				<div class="trainfo_cen tarn{$tpl}" style="border:none;">
+					<dl>
+						<dt>平仓时间：</dt>
+						<dd>{$order.selltime|date='Y-m-d H:i:s',###}</dd>
+					</dl>
+					<dl>
+						<dt>汇率浮动：</dt>
+						<dd>{$order['ykzj']|round=2}</dd>
+					</dl>
+					<dl>
+						<dt>本单盈余：</dt>
+						<dd>{$order['bdyy']|round=2}({$order['bfb']|round=2}%)</dd>
+					</dl>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+<include file="Base/foot"/>
+<script src="__JS__/jquery-2.1.1.min.js"></script>
+<script src="__JS__/script.js"></script>
+<script type="text/javascript" charset="utf-8" src="__JS__/sea.js" async=""></script>
+</block>

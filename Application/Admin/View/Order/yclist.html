@@ -1,0 +1,262 @@
+<include file="Public:header" />
+    <body class="forIE">
+        <div class="butterbar hide">
+            <span class="bar"></span>
+        </div>
+        <main class="main">
+            <include file="Public:menu" />
+        <div style="max-width: 1348px;" class="mainWrap">
+             <include file="Public:top" />
+<div style="display: block;" class="wrapper">
+
+<div class="panel" id="topheader">
+    <header>
+        <table>
+            <tbody>
+            <tr>
+				<th style="width:40%;"><h4 style="font-size:20px;color:#8fb300">订单风控</h4></th>
+				<th style="width:60%;" class="col-md-12">
+			
+				<div class="col-md-12">
+				</div>
+				
+				</th>
+            </tr>
+            </tbody>
+        </table>
+    </header>
+</div>
+
+
+
+<div class="row" style="margin:0;">
+    <div class="col-md-12">
+        <div class="panel">
+			<div class="col-md-12" style="padding-top:15px;box-shadow:0px 2px 4px #ccc;margin-bottom:20px;background-color:#fff;">
+				<form class="form-horizontal" role="form"  action="{:U('Order/yclist')}" method="post">
+					<div class="col-sm-3">
+						<div class="form-group">
+							<label for="" class="col-sm-4 control-label">商品分类</label>
+							<div class="col-sm-8 fns">
+								<select id="ostyle" class="form-control" name="ostyle" >
+									<option value="">默认不选</option>
+									<volist name="goods" id="goods">
+										<option value="{$goods.pid}">{$goods.ptitle}</option>
+									</volist>	
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="form-group" style="width:80%; margin:0;">
+							<label for="" class="col-sm-4 control-label" style="width:50%;">距客户设置止盈比</label>
+							<div class="col-sm-3 fns" style="width:35%;">
+								<select id="endprofit" class="form-control" name="endprofit" style=" width:100%;">
+									<option value="10">10</option>
+									<option value="8">8</option>
+									<option value="5">5</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="form-group" style="width:80%; margin:0;">
+							<label for="" class="col-sm-4 control-label" style="width:50%;">距客户设置止损比</label>
+							<div class="col-sm-3 fns" style="width:35%;">
+								<select id="endloss" class="form-control" name="endloss" style="width:100%;">
+									<option value="10">10</option>
+									<option value="8">8</option>
+									<option value="5">5</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-3">
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+							<input type="submit" class="btn btn-success" value="开始查找">
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<style>
+.fns select { width:85%;} 
+</style>
+
+<div class="panel">
+    
+    <div id="detailsTable" style="">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>订单编号</th>
+                    <th>用户</th>
+                    <th>建仓时间</th>
+                    <!-- <th>平仓时间</th> -->
+                    <th>产品信息</th>
+                    <th>数量</th>
+                    <th>状态</th>
+					<th>类型</th>
+					<th>买价</th>
+					<th>卖价</th>
+					<th>账户余额</th>
+					<th>手续费</th>
+					<th>盈亏</th>
+					
+					<th>操作</th>
+                </tr>
+            </thead>
+           <tbody>
+		   <volist name="orders" id="vo">
+			<tr class="create">
+			<td>
+				{$vo.orderno}
+			</td>
+			<td>
+				<a href="{:U('User/updateuser',array('uid'=>$vo['uid']))}" class="name">{$vo.username}</a>
+			</td>
+			<td>
+				{$vo.buytime|date='Y-m-d H:i:s',###}
+			</td>
+			
+			<td>
+				<a href="{:U('Goods/gedit',array('pid'=>$vo['pid']))}">{$vo.ptitle}</a>
+			</td>
+			<td>
+				{$vo.onumber}手
+			</td>
+			<td>
+				<if condition='$vo.ostaus eq 1'>
+				平仓
+				<else/>
+				建仓
+				</if>
+			</td>
+			<td>
+				<if condition='$vo.ostyle eq 1'>
+				<font color="#2fb44e">买跌</font>
+				<else/>
+				<font color="#ed0000">买涨</font>
+				</if>                            	
+			</td>
+			<td>
+				<font color="#f00" size="3">{$vo.buyprice}</font>
+			</td>
+			<td class="sellprice">
+				<if condition='$vo.ostaus eq 1'>
+					<if condition='$vo["buyprice"] gt $vo["sellprice"]'>
+						<font color="#ed0000" size="2">{$vo.sellprice}</font>
+					<else/>
+						<font color="#2fb44e" size="2">{$vo.sellprice}</font>
+					</if>
+				<else/>
+					<span class="mai_{$vo.cid}"></span>
+				</if>
+			</td>
+			<td>
+				<font color="#f00" size="3">{$vo.commission}</font>
+			</td>
+			<td>
+				<font color="#f00" size="3">{$vo['fee']}</font>
+			</td>
+			<td>
+				<if condition='$vo.ostaus eq 1'>
+					<if condition="$vo['ploss'] egt 0">
+						<font color="#ed0000" size="4">{$vo.ploss}</font>	
+					<else/>
+						<font color="#2fb44e" size="3">{$vo.ploss}</font>
+					</if>
+				<else/>
+				<span class="ploss"></span>
+				(<span class="ykbfb">0</span>%)
+				</if>
+			</td>
+			
+			<td>
+				<a href="{:U('Admin/Order/ycpc',array('oid'=>$vo['oid']))}">平仓</a>
+			</td>
+			<input type="hidden" value="{$vo['wave']}" name="wave" />
+			<input type="hidden" value="{$vo['onumber']}" name="onumber" />
+			<input type="hidden" value="{$vo['buyprice']}" name="buyprice" id="buyprice"/>
+			<input type="hidden" value="{$vo['cid']}" name="cid" />
+			<input type="hidden" value="{$vo['ostyle']}" name="ostyle" />
+			<input type="hidden" value="{$vo['uprice']}" name="uprice" />
+			</tr>
+			</volist>
+			</tbody>
+        </table>
+       
+    </div>
+    <span style="" class="moreUpAndDown">{$page}</span>
+</div>
+<script type="text/javascript">  
+	butt();
+	getPloss();
+	setInterval('butt()', 1000);
+	setInterval('getPloss()', 1000);
+	function butt(){  
+		$.ajax({  
+			type: "post",  
+			url: "{:U('Goods/zuixin_price')}",
+			dataType:'json',
+			success: function(data) { 
+				//最新价
+				if(data){
+					for(i=0;i<data.length;i++){
+						$(".mai_"+data[i].cid).html(data[i].price);
+						if(data[i].arrow == 1){
+							$(".mai_"+data[i].cid).attr("class","mai_"+data[i].cid+" drop glyphicon glyphicon-arrow-down ys");
+						}else{
+							$(".mai_"+data[i].cid).attr("class","mai_"+data[i].cid+" drop glyphicon glyphicon-arrow-up yss");
+						}
+					}
+				}             
+			},  
+		});
+	};
+	
+	function getPloss(){
+		$('.create').each(function(){
+			var buyprice = $(this).find('input[name=buyprice]').val(),
+				sellprice = $(this).find('.sellprice span').html(),
+				wave = $(this).find('input[name=wave]').val(),
+				onumber = $(this).find('input[name=onumber]').val(),
+				cid = $(this).find('input[name=cid]').val(),
+				ostyle = $(this).find('input[name=ostyle]').val(),
+				uprice = $(this).find('input[name=uprice]').val(),
+				ploss = 0,
+				bdyy = 0,
+				findPloss = $(this).find('.ploss'),
+				findykbfb = $(this).find('.ykbfb');
+				
+			if(sellprice){
+				if(ostyle==0){
+					ploss = (sellprice-buyprice)*wave*onumber;
+				}else{
+					ploss = (buyprice-sellprice)*wave*onumber;
+				}
+				var jc = uprice*onumber;
+				bdyy = (ploss/jc)*100;
+				if(ploss<0){
+					findPloss.attr("class","ploss drop");
+					findPloss.css('color','#2fb44e')
+				}else{
+					findPloss.attr("class","ploss rise");
+					findPloss.css('color','#ed0000')
+				}
+				if(findPloss.html()=="NaN"){
+					findPloss.html("");
+					findykbfb.html("");
+				}else{
+					findPloss.html(parseFloat(ploss).toFixed(2));	
+					findykbfb.html(parseFloat(bdyy).toFixed(2));	
+				}
+			}
+		})
+	};
+</script>
+</body></html>

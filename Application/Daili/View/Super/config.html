@@ -1,0 +1,150 @@
+<include file="Public:header" />
+
+    <body class="forIE">
+        <div class="butterbar hide">
+            <span class="bar"></span>
+        </div>
+        <main class="main">
+             <include file="Public:menu" />
+        <div style="max-width: 1348px;" class="mainWrap">
+            <include file="Public:top" />
+<div style="display: block;" class="wrapper">
+
+<div class="panel" id="topheader">
+    <header>
+        <table>
+            <tbody>
+            <tr>
+                <th style="width:30%;"><h4 style="font-size:20px;color:#8fb300">第三方登陆</h4></th>
+				<!-- <th style="width:70%;" class="col-md-12">
+				<div class="col-md-8">
+				
+					<div class="form-group" style="margin-bottom:0;text-align:right;">
+						<div class="input-group">
+						  <input class="form-control" type="text" placeholder="请输入商品名称">
+						  <div class="input-group-addon">搜索</div>
+						</div>
+					</div>
+				
+				</div>
+				<div class="col-md-4">
+					<button type="button" class="btn btn-success">添加商品</button>
+					<button type="button" class="btn btn-warning">商品分类</button>
+				</div>
+				
+				</th> -->
+            </tr>
+            </tbody>
+        </table>
+    </header>
+</div>
+<div class="panel">
+        <div class="panel-header">
+            <table>
+                <tbody>
+			<tr id="myTab">
+				<th class="active" id="tab1"><div class="topselect"></div><a style="text-decoration:none" href="javascript:void(0)">腾讯qq</a></th>
+				<th id="tab2"><div class="topselect"></div><a style="text-decoration:none"  href="javascript:void(0)">新浪微博</a></th>
+				<th id="tab3"><div class="topselect"></div><a style="text-decoration:none"  href="javascript:void(0)">360</a></th>
+				<th id="tab4"><div class="topselect"></div><a style="text-decoration:none"  href="javascript:void(0)">淘宝网</a></th>
+				<th id="tab5"><div class="topselect"></div><a style="text-decoration:none"  href="javascript:void(0)">百度</a></th>
+			</tr>
+				</tbody>
+			</table>
+        </div>
+		<form class="form-horizontal" style="padding-top:20px;" action="" method="post">
+			<div class="form-group">
+				<label for="" class="col-sm-3 control-label" style="margin-right:10px;">APP_KEY</label>
+				<div class="col-sm-4">
+				<input type="text" class="form-control" id="key" placeholder="" name="APP_KEY" value="{$data.APP_KEY}">
+				</div>
+			</div>
+			<hr>
+			<div class="form-group">
+				<label for="" class="col-sm-3 control-label" style="margin-right:10px;">APP_SECRET</label>
+				<div class="col-sm-4">
+				<input type="tel" class="form-control" id="secret" placeholder="" name="APP_SECRET" value="{$data.APP_SECRET}">
+				</div>
+			</div>
+			<hr>
+			<input type="hidden" name="type" id="type1" value="qq">
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-3">
+				<button type="submit" class="btn btn-success">提 交</button>
+				</div>
+			</div>
+		</form>
+</div>   
+</main>
+<script> 
+	$(function(){
+		$("#tab2").click(function() {
+			$('#tab1').removeClass('active');
+			$('#tab3').removeClass('active');
+			$('#tab4').removeClass('active');
+			$('#tab5').removeClass('active');
+			$(this).addClass('active');
+			$('#type1').attr('value','sina');
+			config('sina');
+		});
+		$("#tab1").click(function() {
+			$('#tab2').removeClass('active');
+			$('#tab3').removeClass('active');
+			$('#tab4').removeClass('active');
+			$('#tab5').removeClass('active');
+			$(this).addClass('active');
+			$('#type1').attr('value','qq');
+			config('qq');
+		});
+		$("#tab3").click(function() {
+			$('#tab1').removeClass('active');
+			$('#tab2').removeClass('active');
+			$('#tab4').removeClass('active');
+			$('#tab5').removeClass('active');
+			$(this).addClass('active'); 
+			$('#type1').attr('value','x360');
+			config('x360');
+		});
+		$("#tab4").click(function() {
+			$('#tab1').removeClass('active');
+			$('#tab2').removeClass('active');
+			$('#tab3').removeClass('active');
+			$('#tab5').removeClass('active');
+			$(this).addClass('active');
+			$('#type1').attr('value','taobao');	
+			config('taobao');			
+		});
+		$("#tab5").click(function() {
+			$('#tab1').removeClass('active');
+			$('#tab2').removeClass('active');
+			$('#tab3').removeClass('active');
+			$('#tab4').removeClass('active');
+			$(this).addClass('active');
+			$('#type1').attr('value','baidu');	
+			config('baidu');				
+		});
+	});
+	function config(name){
+	/*
+        $.get("{:U('config_ajax')}",function(data){
+			var data=eval('('+data+')');
+               alert(data);
+			   $('#key').attr('value',data.APP_KEY);
+			   $('#secret').attr('value',data.APP_SECRET);
+        });
+		*/
+		 $.ajax({
+			url : "{:U('config_ajax')}",
+			type : "post",
+			async: false,
+			dataType : 'json',
+			data: {name:name},
+			success : function(sub){
+				//var sub=eval('('+sub+')');
+				$('#key').attr('value',sub.APP_KEY);
+				$('#secret').attr('value',sub.APP_SECRET);
+			}
+		})
+    };	
+</script>
+</body></html>

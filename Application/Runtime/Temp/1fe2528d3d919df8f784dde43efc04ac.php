@@ -1,0 +1,3 @@
+<?php
+//000000000600a:2:{i:0;a:14:{s:3:"cid";s:2:"45";s:5:"cname";s:6:"RIEDEL";s:4:"myat";s:4:"10.0";s:7:"myatjia";s:4:"0.00";s:3:"ask";s:4:"0.00";s:4:"high";s:4:"0.00";s:3:"low";s:4:"0.00";s:4:"open";s:4:"0.00";s:5:"close";s:4:"0.00";s:7:"eidtime";N;s:5:"title";s:6:"EURUSD";s:4:"unit";N;s:6:"status";s:1:"1";s:5:"count";s:1:"2";}i:1;a:13:{s:3:"cid";s:2:"46";s:5:"cname";s:11:"Glendiddich";s:4:"myat";s:4:"10.0";s:7:"myatjia";s:4:"0.00";s:3:"ask";s:4:"0.00";s:4:"high";s:4:"0.00";s:3:"low";s:4:"0.00";s:4:"open";s:4:"0.00";s:5:"close";s:4:"0.00";s:7:"eidtime";N;s:5:"title";s:6:"GBPUSD";s:4:"unit";N;s:6:"status";s:1:"1";}}
+?>

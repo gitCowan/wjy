@@ -1,0 +1,251 @@
+<include file="Public:header" />
+    <body class="forIE">
+        <div class="butterbar hide">
+            <span class="bar"></span>
+        </div>
+        <main class="main">
+            <include file="Public:menu" />
+        <div style="max-width: 1348px;" class="mainWrap">
+             <include file="Public:top" />
+<style>
+.shtc{width: 300px;position: absolute; opacity: 1; background: rgb(255, 255, 255);border-radius: 5px;display:none;z-index:3;right: 0;}
+.closesh{position: absolute;top: 10px;right: 10px;display: block;width: 40px;padding: 2px 0;text-align: center;background: #fff;border: 1px solid #85B6E2;color: #333;    border-radius: 5px;}
+.shtcu{padding: 10px 20px 20px 20px;margin: 0;}
+.shtcu li{list-style:none;line-height: 30px;font-size: 14px;}
+.shtcu li.lastli{text-align:right;}
+.shtcu li.sqs{margin-right: 5px;}
+.shtcu li label{display: inline;}
+.shtitle{width: 100%;height: 45px;background: #f7f7f7;border-radius: 5px;}
+.shtcu li.sqs input{margin: 0;margin-left: 5px;}
+#ajaxback td a{cursor:pointer;}
+.tpsearch{float:left;width:30%;}
+</style>
+<div style="display: block;" class="wrapper">
+
+<div class="panel" id="topheader">
+    <header>
+        <table>
+            <tbody>
+            <tr>
+				<th style="width:40%;"><h4 style="font-size:20px;color:#8fb300">充值提现管理</h4></th>
+				<th style="width:60%;" class="col-md-12">
+				
+				<!--<div class="col-md-12">-->
+					<!--<a href="{:U('User/recharge',array('bptype'=>1))}"><button type="button" class="btn btn-success" style="margin-left:15px;float:right">充值记录</button></a>-->
+					<!--<a href="{:U('User/recharge',array('bptype'=>2))}"><button type="button" class="btn btn-warning" style="float:right">提现记录</button></a>-->
+				<!--</div>-->
+				
+				</th>
+            </tr>
+            </tbody>
+        </table>
+    </header>
+</div>
+
+	<div class="row" style="margin:0;">
+		<div class="col-md-12">
+			<div class="panel">
+				<div class="col-md-12" style="padding-top:15px;box-shadow:0px 2px 4px #ccc;margin-bottom:20px;background-color:#fff;">
+					<form class="form-horizontal" role="form" action="{:U('User/recharge')}" method="get" >
+						<div class="col-sm-3">
+							<div class="form-group">
+								<label for="" class="col-sm-4 control-label">用户ID: </label>
+								<div class="col-sm-8">
+									<input type="text" class="form-control" placeholder="按用户ID" name="uid" id="uid" value='{$request_list.uid}'>
+								</div>
+							</div>
+						</div>
+						<div class="col-sm-3">
+							<div class="form-group">
+                                <label for="" class="col-sm-4 control-label">记录类型</label>
+                                <div class="col-sm-8">
+                                    <select class="form-control" name="bptype" id="bptype">
+                                        <option value="">默认不选</option>
+                                        <option
+										<if condition="$request_list['bptype'] eq '充值'"> selected=""</if>
+												value="1">充值</option>
+                                        <option
+										<if condition="$request_list['bptype'] eq '提现'"> selected=""</if>
+												value="2">提现</option>
+                                    </select>
+                                </div>
+                            </div>
+						</div>
+						<div class="col-sm-3" >
+							<div class="form-group">
+								<div class="col-sm-offset-2 col-sm-10">
+									<!--<a  href="javascript:void(0)"  id="search_begin" style="width:80%;" type="button" class="btn btn-success">-->
+										<!--<span class="glyphicon glyphicon-search"></span> 搜 索-->
+									<!--</a>-->
+									<input type="submit" class="btn btn-success" value="搜 索">
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<div class="panel">
+    
+    <div id="detailsTable" style="">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>编号</th>
+					<th>客户ID</th>
+                    <th>客户名称</th>
+                    <th>操作时间</th>
+                    <th>处理时间</th>
+                    <th>金额</th>
+                    <th>充值/提现</th>
+                    <th>账户余额</th>
+                    <th>总充值</th>
+                    <th>总提现</th>
+                    <th>状态</th>
+                </tr>
+            </thead>
+           <tbody>
+		   <volist name="rechargelist" id="relist">
+			<tr>
+			<td> {$relist.bpid}</td>
+			<td> {$relist.uid}</td>
+			<td><a href="{:U('User/updateuser',array('uid'=>$relist['uid']))}">{$relist.username}</a></td> 
+			<td>{$relist.bptime|date='Y-m-d H:i:s',###}</td> 
+			<td><if condition="$relist.cltime eq '' ">
+                        暂未处理
+                        <else/>
+                        {$relist.cltime|date='Y-m-d H:i:s',###}
+                        </if></td>  
+			<td><font color="#f00" size="4">{$relist.bpprice}</font>元</td>  
+			<td>{$relist.bptype}</td> 
+			<td><font color="#f00" size="4">{$relist['balance']}</font>元</td>
+                <td><font color="#f00" size="4">
+                    <php>
+                        if($relist['chongzhi'] ==""){
+                        echo 0;
+                        }else{
+                        echo $relist['chongzhi'];
+                        }
+                    </php>
+                    </font>元</td>
+                <td><font color="#f00" size="4">
+                    <php>
+                        if($relist['tixian'] ==""){
+                        echo 0;
+                        }else{
+                        echo $relist['tixian'];
+                        }
+                    </php>
+                </font>元</td>
+                <td>
+				<if condition="$relist.bptype eq '提现'">
+						<if condition="$relist.isverified eq 0">
+							<a class="elecl" id="elecl{$relist.bpid}" bpid="{$relist.bpid}">处理/拒绝</a>
+							<elseif condition="$relist.isverified eq 1"/>
+							已通过
+							<else/>
+							拒绝申请
+						</if>
+                    </td>
+                    <else/>
+					    {$relist.remarks}
+                    </if>
+			</td>
+			</tr>
+				<div class="shtc" id="elesh{$relist.bpid}">
+					<div class="shtitle"><a class="closesh" id="closesh{$relist.bpid}" href="javascript:void(0)" >关闭</a></div>
+					<ul class="shtcu">
+					    <input type="hidden" id="userid_{$relist.bpid}" value="{$relist['uid']}">
+						<li><label>申请用户：</label><a href="{:U('User/updateuser',array('uid'=>$relist['uid']))}">{$relist.username}</a></li>
+						<li><label>申请金额：</label>
+						<font color="#f00" size="4" class="rebpprce_{$relist.bpid}">{$relist.bpprice}</font>元</li>
+						<li class="sqs"><label>申请操作：</label><input type="radio" name="isverified" value="1" checked="checked">同意<input type="radio" name="isverified" value="0">拒绝</li>
+						<li><label>理由：</label><textarea id="remarks{$relist.bpid}"></textarea></li>
+						<li class="lastli"><a class="btn-flat success shtj" bpid="{$relist.bpid}">提交</a></li>
+					</ul>
+				</div>
+			</volist>
+			</tbody>
+        </table>
+       
+    </div>
+    <span style="" class="moreUpAndDown">{$page}</span>
+</div>
+</div>
+            
+        </div>
+        </main>
+        <footer class="clearfix">
+            <div id="menu-shadow"></div>
+            <a href="javascript:;" class="logo toIndex">APICloud</a>
+            <div class="contact">
+                <a id="toAbout" href="javascript:;">关于我们</a>
+            </div>
+        </footer>
+        <div id="loading">
+            <div class="loadInner">
+                <p>
+                    正在加载中...
+                </p>
+            </div>
+        </div>
+        <!-- service3rd start-->
+        <div class="mask"></div>
+
+<script>
+	$(".elecl").click(function(){
+		var bpid = $(this).attr("bpid");
+		$('#popupLayer').css('display','block');
+		$('#elesh'+bpid).animate({
+			right: '45%', top: 200 ,opacity: 'toggle'
+		},600);
+	})
+	$('.closesh').click(function(){
+		$('#popupLayer').css('display','none');
+		$('.shtc').css('display','none');
+	})
+	$(".shtj").click(function(){
+		var bpid = $(this).attr("bpid");
+		var rebpprce=$('.rebpprce_'+bpid).html();	
+		
+		var userid=$('#userid_'+bpid).val();
+		var isverified = $('#elesh'+bpid+' input[name="isverified"]:checked ').val();
+		var remarks = $("#remarks"+bpid).val();
+		$.ajax({  
+		    type: "post",  
+		    url: "{:U('User/upbalance')}",
+        	data:{"bpid":bpid,"isverified":isverified,"remarks":remarks,"rebpprce":rebpprce,"userid":userid},
+        	success: function(data) {
+        		if(data=="success"){
+        			$('#popupLayer').css('display','none');
+					$('.shtc').css('display','none');
+        			alert('处理成功！');
+        			window.location.reload();
+        		}else{
+        			alert('处理失败!');
+        		}
+        	},
+        	error: function(data) {  
+	            console.log(data);
+	        }
+      });
+	})
+</script>
+		<script type="text/javascript">
+
+//			$('#search_begin').click(function(){
+//				//获取文本框值
+//				var uid = $("#uid").val();
+//				if(uid){
+//					window.location.href="{:U(\'User/recharge\')}?uid="+uid+"&step=sxsearch";
+//				}else{
+//					window.location.href="{:U(\'User/recharge\')}";
+//				}
+//
+//			})
+
+
+		</script>
+</body></html>

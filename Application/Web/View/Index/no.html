@@ -1,0 +1,286 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="format-detection" content="telephone=no">
+  <title>扫码授权登陆失败</title>
+  <link rel="stylesheet" href="/Tpl/Web/Login/css/wap.css">
+  
+</head>
+<body>
+<style>
+body {
+	color:#ffffff;
+}
+.img-responsive {
+	display:block;
+	width:100%;
+	line-height:1;
+	height:auto
+}
+.container_01 {
+	width:50%;
+	margin:0 auto
+}
+.container_02 {
+	width:100%;
+	margin:0 auto;
+	
+}
+.container .logo-nubia {
+	margin:0 auto
+}
+.pwd-box {
+	border:1px solid #ddd
+}
+.id-icon {
+	background:url(/Tpl/Web/Login/images/id.png) no-repeat;
+	width:35px;
+	height:25px;
+	-webkit-background-size:60%;
+	-moz-background-size:60%;
+	background-size:60%;
+	display:inline-block;
+	vertical-align:middle
+}
+.pwd-icon {
+	background:url(/Tpl/Web/Login/images/pwd.png) no-repeat;
+	width:35px;
+	height:25px;
+	-webkit-background-size:60%;
+	-moz-background-size:60%;
+	background-size:60%;
+	display:inline-block;
+	vertical-align:middle
+}
+.input_box input {
+	border:none;
+	width:70%;
+	margin-top:-5px;
+}
+.fs2 {
+	color:#858585;
+	font-weight:bold;
+	line-height:2em
+}
+.mb20 {
+	margin-bottom:20px
+}
+.mt20 {
+	margin-top:20px
+}
+@media only screen and (max-width:300px) {
+	body {
+	font-size:8.33333px !important
+}
+.viewport {
+	max-width:300px
+}
+}@media only screen and (max-width:310px) and (min-width:300px) {
+	body {
+	font-size:8.33333px !important
+}
+.viewport {
+	max-width:300px
+}
+}@media only screen and (max-width:320px) and (min-width:310px) {
+	body {
+	font-size:8.88889px !important
+}
+.viewport {
+	max-width:320px
+}
+}@media only screen and (max-width:360px) and (min-width:320px) {
+	body {
+	font-size:8.88889px !important
+}
+.viewport {
+	max-width:360px
+}
+}@media only screen and (max-width:360px) and (min-width:350px) {
+	body {
+	font-size:10px !important
+}
+.viewport {
+	max-width:360px
+}
+}@media only screen and (max-width:480px) and (min-width:360px) {
+	body {
+	font-size:10px !important
+}
+.viewport {
+	max-width:480px
+}
+}@media only screen and (max-width:480px) and (min-width:470px) {
+	body {
+	font-size:13.33333px !important
+}
+.viewport {
+	max-width:480px
+}
+}@media only screen and (max-width:560px) and (min-width:480px) {
+	body {
+	font-size:13.33333px !important
+}
+.viewport {
+	max-width:560px
+}
+}@media only screen and (max-width:570px) and (min-width:560px) {
+	body {
+	font-size:15.83333px !important
+}
+.viewport {
+	max-width:570px
+}
+}@media only screen and (max-width:640px) and (min-width:570px) {
+	body {
+	font-size:15.83333px
+}
+.viewport {
+	max-width:640px
+}
+}@media only screen and (max-width:640px) and (min-width:630px) {
+	body {
+	font-size:17.77778px !important
+}
+.viewport {
+	max-width:640px
+}
+}@media only screen and (max-width:710px) and (min-width:640px) {
+	body {
+	font-size:17.77778px !important
+}
+.viewport {
+	max-width:710px
+}
+}.mb20 {
+	margin-bottom:20px
+}
+.input_box {
+	position:relative;
+	height:40px;
+	line-height:20px;
+	padding:10px;
+	width:100%;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-ms-box-sizing:border-box;
+	-o-box-sizing:border-box;
+	box-sizing:border-box;
+	display:block;
+	font-size:14px;
+	margin-bottom:12px;
+	border-radius:12px;
+	color:#313131;
+	border:1px solid #ddd;
+	background:#fff
+}
+.con_inputbox {
+	}.return_link,.reg_btn {
+	width:100%;
+	text-align:center;
+	cursor:pointer;
+	margin-bottom:16px;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-ms-box-sizing:border-box;
+	-o-box-sizing:border-box;
+	box-sizing:border-box;
+	display:block;
+	font-size:16px;
+	min-height:40px;
+	line-height:20px;
+	padding:10px;
+	border-radius:10px
+}
+.bg_linear {
+background-color:#ffffff;
+	
+	
+	
+}
+.pwd-icon,.id-icon {
+	position:relative;
+	left:7px;
+}
+.btn-reg {
+	text-align:center;
+	-webkit-appearance: none; 
+}
+.login_header{}
+.btn_back{
+font-size:14px;
+color:#40cb3e;
+width: 2.75em;
+height: 2.75em;
+position: absolute;
+padding-left: 10px;
+padding-top: 15px;
+}
+.dlsb{
+font-size:12pt;
+color:#f71628;
+text-align:center;
+}
+</style>
+<header class="login_header"> <a class="btn_back" href="javascript:history.back(-1)"></a></header>
+<div class="layout">
+<div class="container_01 mt20a" style="margin-top: 80px;margin-bottom:20px;width:150px">
+	<img src="__CSS__/cs.png" alt="" class="img-responsive">
+</div>
+<div class="dlsb">
+登陆确认已失效，请重新扫码登陆
+</div>
+<div class="container_02 mb20">
+	<form method="post" id="loginForm" action="">
+		
+	
+        <div style="margin-top:200px;margin-bottom:20px;width:150px">
+        </div>
+	
+		<div class="btn-reg">
+			<input type="hidden" name="back_url" value=''/>
+			<input id="bg_linear" class="bg_linear" value="请重新扫码登陆" type="button" style="text-align:center;-webkit-appearance:none;border:1px solid #f71628;width:35%;border-radius:3px;padding:5px;color:#f71628;">
+		</div>
+		
+	</form>
+
+</div>
+
+
+</div>
+
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+  wx.config({
+      debug: false,
+      appId: '{lanrain:$jssdk_info.appId}',
+      timestamp: '{lanrain:$jssdk_info.timestamp}',
+      nonceStr: '{lanrain:$jssdk_info.nonceStr}',
+      signature: '{lanrain:$jssdk_info.signature}',
+      jsApiList: [
+        'getLocation',
+		'scanQRCode'
+      ]
+  });
+</script>
+<script src="__CSS__/jsp/jquery-1.9.1.min.js"></script>
+<script>
+$(function(){
+	$('#bg_linear').click(function(){
+		wx.scanQRCode({
+			desc: 'scanQRCode desc',
+			needResult: 0, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+			scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+			success: function (res) {
+				var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
+			}
+		});
+	});
+})
+</script>
+</body>
+</html>

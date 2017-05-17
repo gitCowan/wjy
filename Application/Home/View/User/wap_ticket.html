@@ -1,0 +1,59 @@
+<extend name="Base/common"/>
+<block name="content">
+
+<div class="content">
+<img alt="二维码" style="position: absolute;width: 15%;height: 45%;margin:18% 10%;" src="https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=gQFh8DwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyMThMbXNIMUJjeTExSHNvbU5vMVMAAgTcC29YAwQAjScA"/>
+</div>
+<style>
+	body{margin:0;}
+	.main{min-height:640px;background:#202020;}
+
+</style>
+
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+  // 注意：所有的JS接口只能在公众号绑定的域名下调用，公众号开发者需要先登录微信公众平台进入“公众号设置”的“功能设置”里填写“JS接口安全域名”。
+  // 如果发现在 Android 不能分享自定义内容，请到官网下载最新的包覆盖安装，Android 自定义分享接口需升级至 6.0.2.58 版本及以上。
+  wx.config({
+      debug: false,
+		appId: '{$signPackage.appId}',
+		timestamp: {$signPackage.timestamp},
+		nonceStr: '{$signPackage.nonceStr}',
+		signature: '{$signPackage.signature}',
+      jsApiList: [
+        'checkJsApi',
+		'hideOptionMenu',
+        'onMenuShareTimeline',
+        'onMenuShareAppMessage',
+        'onMenuShareQQ',
+        'onMenuShareWeibo',
+		'onMenuShareQZone',
+		'hideMenuItems'
+      ]
+  });
+</script>
+
+<script>
+	wx.ready(function () {
+		var shareData = {
+			title: '我为微盘代言!',
+			desc: '共享经济！云领未来！',
+			link: "http://<?php echo $_SERVER['SERVER_NAME'];?>{lanrain::U('Home/User/wap_ticket',array('pid'=>$wechaId))}",
+			//imgUrl: "http://<?php echo $_SERVER['SERVER_NAME'];?>/Tpl/Apps/Index/images/fxt.png",
+			success: function () { 
+				
+			},
+		};
+		wx.onMenuShareAppMessage(shareData);
+		wx.onMenuShareTimeline(shareData);
+		wx.onMenuShareQQ(shareData);
+		wx.onMenuShareWeibo(shareData);
+		wx.onMenuShareQZone(shareData);
+		
+		
+	});
+	wx.error(function (res) {
+	});
+</script>
+
+</block>

@@ -1,0 +1,119 @@
+<extend name="Base/common"/>
+<block name="content">
+<link rel="stylesheet" href="__CSS__/weipan.css">
+<link rel="stylesheet" href="__CSS__/global.css">
+<link rel="stylesheet" href="__CSS__/index.css">
+<link rel="stylesheet" href="__CSS__/common.css"/>
+<link rel="stylesheet" href="__CSS__/ico_foot.css"/>
+<style>
+a { color:#fff !important; font-family:宋体;}
+.yinhe_weipan_head_1 ul li span em{
+	padding-right:15px;
+	font-size:16px;
+	font-weight:bold;
+}
+.tpg {height:40px;}
+.tpg li { width:33%; border-left:1px solid #dedede; text-align:center; float:left; margin-top:10px;}
+.tpg li span {display:block; height:20px;}
+.tpg li span em {padding-right:15px;}
+.tpg-red {background:#cf000; color:#dedede;}<!--  点击改变样色 -->
+.efc{margin-left:2%;}
+</style>
+
+<div class="weipan_box">
+	<div class="weipan_head" style="background:#fff;">
+		<div class="weipan_head_1 yinhe_weipan">
+			<div class="weipan_head_1_left yinhe_weipan_left">
+				<if condition="$user.portrait eq ''">
+					<img src="__IMG__/pic.gif"><else/><img src="{$user.portrait}">
+				</if>
+				体验券：{$sum}张
+			</div>
+			<div class="weipan_head_1_right yinhe_weipan_head">
+				<a href="{:U('User/memberinfo')}" style="color:#333 !important;">
+					账户余额：<?php if($user['balance']){echo $user['balance'];}else{echo '0.0';}?>元
+				</a>
+				<if condition="$isopen['zfopen'] eq 2">	
+					<a href="{:U('User/recharge')}"><span>充值</span></a>
+				<else/>
+					<a href="javascript:;" class="code_tan"><span>充值</span></a>
+				</if>	
+	
+			</div>
+		</div>
+		<div class="yinhe_weipan_head_1 weipan_head_2" style="background:none; border:none;">
+			<ul class="clearfix fix_1" style="height:60px;">
+				<volist name="catgood" id="v_class" >
+					<li class="hui width_c_{$v_class['cid']} <?php if($i == 1){echo 'sw_active';}?> width_c" data-type="{$v_class.title}" value="{$v_class.cid}" style=" width:15%;padding:0;" data-id="{$i}">
+						<span>{$v_class.cname}</span> 
+						<span ><em class="{$v_class['title']} pricess_{$v_class['cid']}" style="font-size:12px;"></em></span>
+					</li>
+				</volist>
+			</ul>
+		</div>
+	</div>
+	
+	<div class="yinhe_weipan_center yinhe" style="margin-top:2%;">
+		<div class="yinhe_weipan_come">
+			<p class="cones">选择交易品种</p>
+			<div id="lunbo"></div>
+		</div>
+	</div>
+	
+	<div class="yinhe_weipan_center">
+		<div class="yinhe_weipan_come ">
+			<p class="cones">行情走势</p>
+			<ul class="clearfix fix_1 tpg" style="height:60px;">
+				<volist name="catgood" id="v_class" >
+					<li class="hui width_c_{$v_class['cid']} <?php if($i == 1){echo 'sw_active';}?> width_c" data-type="{$v_class.title}" value="{$v_class.cid}" style=" width:15%;padding:0;">
+						<span>{$v_class.cname}</span> 
+						<span ><em class="{$v_class['title']}" style="font-size:12px;"></em></span>
+						<input type="hidden" value="{$v_class['title']}" class="proCode" />
+					</li>
+				</volist>
+			</ul>
+			<div class="yinhe_weipan_shu">
+				<p>
+					昨收：<span id="close"></span>&nbsp;&nbsp;
+					最高：<span id="high"></span>
+				</p>
+				<p>
+					今开：<span id="open"></span>&nbsp;&nbsp;
+					最低：<span id="low"></span>
+				</p>
+			</div>
+			
+			<div class="yinhe_weipan_KK trend-chart" style="height:170px;"></div>
+			<div class="yinhe_weipan_fs weipan_fs{$tpl}" style="margin-top:26%;">
+				<ul class="trend-nav{$tpl} clearfix TimeMenu">
+					<li class="yinhe_k k_fs"><a href="javascript:void(0)" data-interval='1' data-type="area" class="cur changed">分时线</a></li>
+					<li class="yinhe_k"><a href="javascript:void(0)" data-interval='10' data-type="candlestick">10分钟</a></li>
+					<li class="yinhe_k"><a href="javascript:void(0)" data-interval='30' data-type="candlestick">30分钟</a></li>
+					<li class="yinhe_k"><a href="javascript:void(0)" data-interval='60' data-type="candlestick">60分钟</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="yinhe_weipan_center">
+		<div class="yinhe_weipan_come">
+			<p class="cones">最新资讯</p>
+			<ul class="yinhe_weipan_new">
+				<volist name="notices" id="vo">
+					<a href="{:U('News/newsid')}?nid={$vo['nid']}"><li>{$vo['ntitle']}</li></a>
+				</volist>
+			</ul>
+		</div>
+	</div>
+	<div style="height:60px;"></div>
+</div>
+<script src="__JS__/jquery-1.9.1.min.js"></script>
+<script>
+	$('.yinhe_k').click(function(){
+        $('.yinhe_k').removeClass('yinhe_ks');  // 其他的就移除“on”的样式 
+        $(this).addClass('yinhe_ks')   // 点击的时候加上 “on”的样式 
+    })
+</script>
+
+<include file="Index/foot"/>
+<include file="Base/foot"/>
+</block>

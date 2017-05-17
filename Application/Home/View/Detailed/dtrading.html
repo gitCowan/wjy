@@ -1,0 +1,90 @@
+<extend name="Base/common"/>
+<block name="content">
+<link rel="stylesheet" href="__CSS__/global.css">
+<link rel="stylesheet" href="__CSS__/history.css">
+<link rel="stylesheet" href="__CSS__/weipan.css"/>
+<link rel="stylesheet" href="__CSS__/ico_foot.css"/>
+<script id="G--xyscore-load" type="text/javascript" charset="utf-8" async="" src="__JS__/xyscore_main.js"></script>
+
+<div class="wrap">
+  <div class="index new_inde{$tpl}" style="max-height:100%;">
+    <header class="list-head new_id{$tpl}">
+      <nav class="list-nav clearfix"> <a href="javascript:history.go(-1)" class="list-back"></a>
+        <h3 class="list-title">交易明细</h3>
+      </nav>
+    </header>
+    <div class="history-con">
+		<ul class="sum clearfix sum_is{$tpl}">
+			<li>
+				<if condition="$trading.money gt 0">
+					<em style="color:#66CC00">+{$trading.money|round=2}</em><i>总盈亏</i><else/>
+					<em style="color:#66CC00">{$trading.money|round=2}</em><i>总盈亏</i>
+				</if>
+			</li>
+			<li> <em>{$trading.count}</em> <i>总单数</i> </li>
+			<li> <em><if condition="$trading.onumber eq ''">0<else/>{$trading.onumber}</if></em> <i>总手数</i> </li>
+		</ul>
+	  
+    <div class="date-list clearfix ">
+		<a href="{:U('Detailed/dtrading',array('today'=>$trading['time'],'no'=>1))}" class="arrow left"></a>
+        <p class="date-time">{$trading.time}月</p>
+        <a href="{:U('Detailed/dtrading',array('today'=>$trading['time'],'no'=>2))}" class="arrow right"></a>
+	</div>
+	<ul class="detail newid_to{$tpl}" style="max-height:100%;">
+	    <li class="clearfix">
+			<div class="detail-l newid_top_le{$tpl}" style="width:20%">
+				<span style="font-size:1.1rem">日期</span>
+			</div>
+			<div class="detail-l newid_top_le{$tpl}" style="width:20%">
+				<span style="font-size:1.1rem;color:#ed0000">涨</span>/<span style="font-size:1.1rem;color:#02c32f">跌</span>
+			</div>
+			<div class="detail-l newid_top_le{$tpl}" style="width:20%">
+				<span style="font-size:1.1rem">手数</span>
+			</div>
+			<div class="detail-l newid_top_le{$tpl}" style="width:20%">
+				<span style="font-size:1.1rem">汇率浮动</span>
+			</div>
+			<div class="detail-l newid_top_le{$tpl}" style="width:20%">
+				<span style="font-size:1.1rem">违约金</span>
+			</div>
+		</li>
+    </ul>
+    <ul class="detail newid_to{$tpl}" style="max-height:100%;min-height:650px;">
+		<volist name="list" id="vo">
+			<li class="clearfix">
+				<div class="detail-l newid_top_le{$tpl}" style=" width: 20%;">
+					<span style="font-size:1.1rem">{$vo.selltime|date='d',###}</span>
+				</div>
+				<div class="detail-r clearfix newid_top_le{$tpl}">
+					<a href="{:U('Detailed/tradingid',array('oid'=>$vo['oid']))}">
+						<if condition="$vo.ostyle eq 1">
+							<p  style="font-size:1.1rem" class="num drop ostyle">跌</p>
+							<else/>
+							<p  style="font-size:1.1rem" class="num rise ostyle">涨</p>
+						</if>
+					 <p  style="font-size:1.1rem" class="goods-type">{$vo.ptitle}/{$vo.onumber}<span>手</span></p>
+					<if condition="$vo['ploss'] gt 0">
+						<p  style="font-size:1.1rem" class="num rise ploss">+{$vo['ploss']}</p>
+						<else/>
+						<p  style="font-size:1.1rem" class="num drop ploss">{$vo['ploss']}</p>
+					</if>
+						<p  style="font-size:1.1rem;color:#fff" class="num drop ploss">{$vo['fee']}</p>
+					</a>
+				</div>
+			</li>
+        </volist>
+    </ul>
+    <div class="newid_to{$tpl} pagelist ">{$page}</div>
+    </div>
+  </div>
+</div>
+<include file="Base/foot"/>
+<script src="__JS__/jquery-2.1.1.min.js"></script>
+
+<script type="text/javascript" charset="utf-8" src="__JS__/sea.js" async=""></script>
+<style type="text/css">
+  .pagelist{ text-align:center; background:#f1f1f1; padding:7px 0;}
+.pagelist a{ margin:0 5px; border:#6185a2 solid 1px; display:inline-block; padding:2px 6px 1px; line-height:16px; background:#fff; color:#6185a2;}
+.pagelist span{ margin:0 5px; border:#6185a2 solid 1px; display:inline-block; padding:2px 6px 1px; line-height:16px; color:#6185a2; color:#fff; background:#6185a2;}
+</style>
+</block>

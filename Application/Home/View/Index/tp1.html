@@ -1,0 +1,452 @@
+<extend name="Base/common"/>
+
+<block name="content">
+
+<link rel="stylesheet" href="__CSS__/global.css">
+
+<link rel="stylesheet" href="__CSS__/index.css">
+
+<link rel="stylesheet" href="__CSS__/common.css"/>
+
+<link rel="stylesheet" href="__CSS__/ico_foot.css"/>
+
+<link href="__PUBLIC__/jq/bootstrapTheme.css" rel="stylesheet">
+
+<link href="__PUBLIC__/jq/owl.carousel.css" rel="stylesheet">
+
+<link href="__PUBLIC__/jq/owl.theme.css" rel="stylesheet">
+
+
+
+<style>
+
+    .owl-carousel .item{
+
+        background: #f1f1f1;
+
+        margin: 10px;
+
+        color: #999;
+
+        -webkit-border-radius:8px 8px 0px 0px;
+
+        -moz-border-radius: 8px 8px 0px 0px;
+
+        border-radius: 8px 8px 0px 0px;
+
+        text-align: center;
+
+    }
+
+	.code_active{
+
+		display:block !important;
+
+	}
+
+	.co_active{
+
+		display:block !important;
+
+	}
+
+    .customNavigation{
+
+      text-align: center;
+
+    }
+
+    .customNavigation a{
+
+      -webkit-user-select: none;
+
+      -khtml-user-select: none;
+
+      -moz-user-select: none;
+
+      -ms-user-select: none;
+
+      user-select: none;
+
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+    }
+
+	body{
+
+    font-family: Muli,'Helvetica Neue','Hiragino Sans GB','WenQuanYi Micro Hei','Microsoft Yahei',sans-serif !important;
+
+    -webkit-font-smoothing:antialiased;
+
+    font-size: 12px;}
+
+	
+
+		a:link { 
+
+		color: #fff; 
+
+		text-decoration: none; 
+
+		} 
+
+		a:visited {  
+
+		color: #fff; 
+
+		text-decoration: none; 
+
+		} 
+
+		a:hover { 
+
+		color: #fff; 
+
+		text-decoration: none; 
+
+	} 
+
+	.text_a{
+
+	height:80px;
+
+	width:100%;
+
+	
+
+	border-radius:8px 8px 0px 0px;
+
+	-webkit-border-radius:8px 8px 0px 0px;
+
+    -moz-border-radius:8px 8px 0px 0px;
+
+	}
+
+	.text_b{
+
+	height:36px;
+
+	width:100%;
+
+	border-radius:8px;
+
+	-webkit-border-radius:8px;
+
+    -moz-border-radius:8px;
+
+	}
+
+	.text_c_1{
+
+	width:100%;
+
+	color:#d9524e;
+
+	font-size:2.3rem;
+
+	padding-top:15px;
+
+	}
+
+	.text_c_1_1{
+
+		font-size:1rem;
+
+		color:#999;
+
+	}
+
+	.text_c_2{
+
+	padding-top:5px;
+
+	width:100%;
+
+	font-size:.8rem;
+
+	}
+
+	.text_c_3{
+
+	width:100%;
+
+	font-size:.8rem;
+
+	color:#ccc;
+
+	}
+
+	.button_a{
+
+	border-radius:0px 0px 0px 8px;
+
+	-webkit-border-radius:0px 0px 0px 8px;
+
+    -moz-border-radius:0px 0px 0px 8px;
+
+	background-color:#d9524e;
+
+	font-size:1rem;
+
+	color:#fff;
+
+	width:49.6%;
+
+	float:left;
+
+	height:36px;
+
+	line-height:36px;
+
+	text-decoration:none;
+
+	}
+
+	.button_b{
+
+	border-radius:0px 0px 8px 0px;
+
+	-webkit-border-radius:0px 0px 8px 0px;
+
+    -moz-border-radius:0px 0px 8px 0px;
+
+	background-color:#5cb95c;
+
+	font-size:1rem;
+
+	color:#fff;
+
+	width:49.6%;
+
+	float:right;
+
+	height:36px;
+
+	line-height:36px;
+
+	text-decoration:none;
+
+	}
+
+	.text_img_a{
+
+		width:80px;
+
+		height:80px;
+
+		position:relative;
+
+		top:0;
+
+	}
+
+	.trend-nav li a.changed {background:#5DDC9C;}
+
+</style>
+
+<div class="wrap" style="overflow:scroll;overflow-x:hidden;">
+
+  <div class="index" >
+
+  
+
+    <!-- 账户有建仓订单时显示所有没有平仓的订单 -->
+
+    
+
+    <!------头部------>	
+
+    <div class="account-info clearfix" style="max-width:640px;width:100%;z-index:4" >
+
+		<div class="info-detail left"  <if condition="$user.portrait eq ''"><else/> style="background:url({$user.portrait})no-repeat;background-size: 40px 40px;"</if> > 
+
+			<a href="{:U('User/memberinfo')}" onclick="bbs()"> <span class="a-u" onclick="onon()">个人账户(元)</span> <em class="a-d "><if condition="$user.balance neq 0" ><span id="usprice" >{$user.balance}</span><else/><span id="usprice">0.0</span></if></em>
+
+			</a> 
+
+		</div>
+
+		<if condition="$isopen['zfopen'] eq 2">
+
+			<a href="{:U('User/recharge')}" type="button" class="recharge">充 值</a>
+
+		<else/>
+
+			<a href="javascript:;" type="button" class="recharge code_tan">充 值</a>
+
+		</if>
+
+    </div>
+
+	<!------头部------>	
+
+	
+
+	<!-------切换隐藏------->
+
+	<div class="switch-product">
+
+		<ul class="clearfix fix_1">
+
+			<volist name="catgood" id="v_class" >
+
+				<li class="width_c_{$v_class.cid} <?php if($i == 1){echo 'sw_active';}?> width_c" data-type="{$v_class.title}" value="{$v_class.cid}" data-id="{$i}"><a>{$v_class.cname}</a> </li>
+
+			</volist>
+
+		</ul>
+
+	</div>
+
+	
+
+	<div class="product-box">
+
+    	<!--***油***-->
+
+		<div class="trade-box">
+
+			<div class="price-info clearfix">
+
+				<h3 class="price-current"> <!-- <span style="font-size: 1rem;"></span> -->
+
+					<if condition="$isopen['isopen'] eq 0">
+
+					<em>休市</em>
+
+					<else/>
+
+					<em class="ajax_price"></em>
+
+					</if>
+
+					<span><font class="diff"></font>&nbsp;&nbsp;<font class="diffrate"></font></span>
+
+				</h3>
+
+				<ul class="price-trend clearfix">
+
+					<li>昨收:<em id="close"></em></li>
+
+					<li>最高:<em id="high"></em></li>
+
+					<li>今开:<em id="open"></em></li>
+
+					<li>最低:<em id="low"></em></li>
+
+				</ul>
+
+			</div>
+
+		</div>
+
+    </div>
+
+	
+
+	<div style="background-color:#fff;z-index:3;position:relative;">
+
+		<div style="width:100%;overflow:hidden;background-color:#fff;margin-top:15px;">
+
+			<div class="owl-carousel">
+
+				<volist name="goods" id="v">
+
+					<div class="item code_{$v.cid}">
+
+						<div class="text_a">
+
+							<div class="text_c_1">{$v.uprice}<span class="text_c_1_1"> 元/手</span></div>
+
+							<div class="text_c_2">{$v.ptitle}</div>
+
+						</div>
+
+						<div class="text_b" <if condition="$isopen['isopen'] eq 0"><else/>id="may"</if> >
+
+							<a href="javascript:" type="button" class="button_a mai" onclick="mai('1','{$v.pid}','{$v.code}')" >买涨</a>
+
+							<a href="javascript:" type="button" class="button_b mai" onclick="mai('2','{$v.pid}','{$v.code}')" >买跌</a>
+
+						</div>
+
+					</div>
+
+				</volist> 
+
+			</div>
+
+		</div>
+
+	</div>
+
+	
+
+	<div>
+
+		<ul class="trend-nav clearfix TimeMenu" >
+
+            <li><a href="javascript:void(0)" data-interval='1' data-type="area" class="cur changed dra_fs" >分时线</a></li>
+
+            <li><a href="javascript:void(0)" data-interval='10' data-type="candlestick" class="dra_fs">10分钟</a></li>
+
+            <li><a href="javascript:void(0)" data-interval='30' data-type="candlestick" class="dra_fs">30分钟</a></li>
+
+            <li><a href="javascript:void(0)" data-interval='60' data-type="candlestick" class="dra_fs">60分钟</a></li>
+
+        </ul>
+
+	</div>
+
+	<div class="trend-chart" style="max-width:640px;with:100%;margin-bottom: 69px;line-height:320px;cursor: default;position:relative;height:170px;"></div> 
+
+  </div>
+
+</div>
+
+
+
+<include file="Base/foot"/>
+
+
+
+<script src="__JS__/jquery-1.9.1.min.js"></script>
+
+<!-- <script type="text/javascript" src="__JS__/echarts-plain.js"></script> -->
+
+<!-- 滑动jquery start-->
+
+<script src="__PUBLIC__/jq/owl.carousel.js"></script>
+
+<script>
+
+	$(document).ready(function(){
+
+		var owl = $(".owl-carousel");
+
+		owl.owlCarousel({
+
+			//items : 5, //10 items above 1000px browser width
+
+			itemsDesktop : [1000,5], //5 items between 1000px and 901px
+
+			itemsDesktopSmall : [900,3], // 3 items betweem 900px and 601px
+
+			itemsTablet: [400,2], //2 items between 600 and 0;
+
+			itemsMobile : false // itemsMobile disabled - inherit from itemsTablet option
+
+		});
+
+    });
+
+</script>
+
+<!-- 滑动jquery end-->
+
+<include file="Index/foot"/> 
+
+
+
+</block>
+

@@ -1,0 +1,269 @@
+<include file="Public:header" />
+
+    <body class="forIE">
+        <div class="butterbar hide">
+            <span class="bar"></span>
+        </div>
+        <main class="main">
+             <include file="Public:menu" />
+        <div style="max-width: 1348px;" class="mainWrap">
+            <include file="Public:top" />
+<div style="display: block;" class="wrapper">
+
+<div class="panel" id="topheader">
+    <header>
+        <table>
+            <tbody>
+            <tr>
+                <th style="width:30%;"><h4 style="font-size:20px;color:#8fb300">支付设置</h4></th>
+				<!-- <th style="width:70%;" class="col-md-12">
+				<div class="col-md-8">
+				
+					<div class="form-group" style="margin-bottom:0;text-align:right;">
+						<div class="input-group">
+						  <input class="form-control" type="text" placeholder="请输入商品名称">
+						  <div class="input-group-addon">搜索</div>
+						</div>
+					</div>
+				
+				</div>
+				<div class="col-md-4">
+					<button type="button" class="btn btn-success">添加商品</button>
+					<button type="button" class="btn btn-warning">商品分类</button>
+				</div>
+				
+				</th> -->
+            </tr>
+            </tbody>
+        </table>
+    </header>
+</div>
+<style>
+#myTab th{width:11%;}
+</style>
+<div class="panel">
+        <div class="panel-header" >
+            <table style="width:100%;">
+                <tbody>
+			<tr id="myTab">
+				<!-- <th class="active" id="Wxpay" onclick="on('Wxpay','微信支付')"><div class="topselect" ></div><a style="text-decoration:none" href="javascript:void(0)">微信支付</a></th>
+				<th id="alipay"  onclick="on('alipay','支付宝')" ><div class="topselect"></div><a style="text-decoration:none"  href="javascript:void(0)" >支付宝</a></th>
+				<th  id="tenpay"  onclick="on('tenpay','财付通')"><div class="topselect"></div><a style="text-decoration:none"  href="javascript:void(0)">财付通</a></th>
+				 <th  id="palpay"  onclick="on('palpay','贝宝')"><div class="topselect"></div><a style="text-decoration:none"  href="javascript:void(0)">贝宝</a></th>
+				<th  id="yeepay"  onclick="on('yeepay','易付宝')"><div class="topselect"></div><a style="text-decoration:none"  href="javascript:void(0)">易付宝</a></th>
+				<th  id="kuaiqian"  onclick="on('kuaiqian','快钱')"><div class="topselect"></div><a style="text-decoration:none"  href="javascript:void(0)">快钱</a></th>
+				<th id="unionpay"  onclick="on('unionpay','银联')"><div class="topselect"></div><a style="text-decoration:none"  href="javascript:void(0)" >银联</a></th>-->
+				<th  id="Wxpay"  class="active" onclick="on('Wxpay','微信支付')"><div class="topselect"></div><a style="text-decoration:none"  href="javascript:void(0)">微信支付</a></th> 
+				<th id="wanjio" onclick="on('wanjio','万嘉')"><div class="topselect"></div><a style="text-decoration:none"  href="javascript:void(0)">万嘉</a></th>
+				<th  id="beecloud"  onclick="on('beecloud','beecloud')"><div class="topselect"></div><a style="text-decoration:none"  href="javascript:void(0)">beecloud</a></th> 
+				
+				
+			</tr>
+				</tbody>
+			</table>
+        </div>
+		<form class="form-horizontal" style="padding-top:20px;" action="" method="post">
+			<div class="form-group">
+				<label for="" class="col-sm-3 control-label" style="margin-right:10px;">商户号</label>
+				<div class="col-sm-4">
+				<input type="text" class="form-control" id="pid" placeholder="" name="pid" value="{$data.pid}">
+				</div>
+				<hr>
+			</div>
+			
+			<div class="form-group" id="show3" style="display:none;">
+				<label for="" class="col-sm-3 control-label" style="margin-right:10px;">partner</label>
+				<div class="col-sm-4">
+				<input type="tel" class="form-control" id="partner" placeholder="" name="partner" value="{$data.partner}">
+				</div>
+				<hr>
+			</div>
+			
+			<div class="form-group">
+				<label for="" class="col-sm-3 control-label" style="margin-right:10px;">Key</label>
+				<div class="col-sm-4">
+				<input type="text" class="form-control" id="key" placeholder="" name="key" value="{$data.key}">
+				</div>
+				<hr>
+			</div>
+			<div class="form-group"id="show1">
+				<label for="" class="col-sm-3 control-label" style="margin-right:10px;">AppID</label>
+				<div class="col-sm-4">
+				<input type="text" class="form-control" id="appid" placeholder="" name="appid" value="{$data.appid}">
+				</div>
+				<hr>
+			</div>
+			<div class="form-group"id="show2" >
+				<label for="" class="col-sm-3 control-label" style="margin-right:10px;">AppSecret</label>
+				<div class="col-sm-4">
+				<input type="text" class="form-control" id="appsecret" placeholder="" name="appsecret" value="{$data.appsecret}">
+				</div>
+				<hr>
+			</div>
+			<div class="form-group">
+				<label for="" class="col-sm-3 control-label" style="margin-right:10px;">是否选中为默认支付</label>
+				<div class="col-sm-4" id="radio">
+					<input name="status" <if condition="$data['status'] eq 1">checked="checked"</if> type="radio" value="1" />是
+					<input name="status" <if condition="$data['status'] eq 0">checked="checked"</if> type="radio" value="0" />否
+				</div>
+				<hr>
+			</div>
+			
+			
+		<div class="form-group" id="show4">
+			<label for="" class="col-sm-3 control-label" style="padding-right:20px;">独立支付(扫码支付)</label>
+			<div class="col-sm-4">
+				<label class="checkbox-inline">
+				  <input type="radio" name="zfopen" id="zfopen" value="1" <if condition="$data.zfopen eq '1'"> checked</if>> 开启
+				</label>
+				<label class="checkbox-inline">
+				  <input type="radio" name="zfopen" id="zfopen" value="2" <if condition="$data.zfopen eq '2'"> checked</if>> 关闭
+				</label>
+			</div>
+			<hr>
+		</div>
+		
+			<!-- <input type="hidden" name="name" id="name" value="微信支付"> -->
+			<input type="hidden" name="type" id="type" value="{$data.type}"> 
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-3">
+				<button type="submit" class="btn btn-success">提 交</button>
+				</div>
+			</div>
+		</form>
+</div>   
+</main>
+<script type="text/javascript"> 
+	function on(pay,name){
+		//alert(pay);
+		$('.active').removeClass('active');
+		$('#'+pay).addClass('active');
+		$('#type').attr('value',pay);
+		$('#name').attr('value',name);
+		//alert(name);
+		config(pay);
+	}
+	/*
+	$(function(){
+		$("#tab2").click(function() {
+			$('#tab1').removeClass('active');
+			$('#tab3').removeClass('active');
+			$('#tab4').removeClass('active');
+			$('#tab5').removeClass('active');
+			$(this).addClass('active');
+			$('#type1').attr('value','wechat');
+			config('wechat');
+		});
+		$("#tab1").click(function() {
+			$('#tab2').removeClass('active');
+			$('#tab3').removeClass('active');
+			$('#tab4').removeClass('active');
+			$('#tab5').removeClass('active');
+			$(this).addClass('active');
+			$('#type1').attr('value','alipay');
+			config('alipay');
+		});
+		$("#tab3").click(function() {
+			$('#tab1').removeClass('active');
+			$('#tab2').removeClass('active');
+			$('#tab4').removeClass('active');
+			$('#tab5').removeClass('active');
+			$(this).addClass('active'); 
+			$('#type1').attr('value','pay');
+			config('pay');
+		});
+		$("#tab4").click(function() {
+			$('#tab1').removeClass('active');
+			$('#tab2').removeClass('active');
+			$('#tab3').removeClass('active');
+			$('#tab5').removeClass('active');
+			$(this).addClass('active');
+			$('#type1').attr('value','taobao');	
+			config('taobao');			
+		});
+		$("#tab5").click(function() {
+			$('#tab1').removeClass('active');
+			$('#tab2').removeClass('active');
+			$('#tab3').removeClass('active');
+			$('#tab4').removeClass('active');
+			$(this).addClass('active');
+			$('#type1').attr('value','baidu');	
+			config('baidu');				
+		});
+		$("#tab6").click(function() {
+			$('#tab1').removeClass('active');
+			$('#tab2').removeClass('active');
+			$('#tab3').removeClass('active');
+			$('#tab4').removeClass('active');
+			$(this).addClass('active');
+			$('#type1').attr('value','baidu');	
+			config('baidu');				
+		});
+		$("#tab7").click(function() {
+			$('#tab1').removeClass('active');
+			$('#tab2').removeClass('active');
+			$('#tab3').removeClass('active');
+			$('#tab4').removeClass('active');
+			$(this).addClass('active');
+			$('#type1').attr('value','baidu');	
+			config('baidu');				
+		});
+		$("#tab8").click(function() {
+			$('#tab1').removeClass('active');
+			$('#tab2').removeClass('active');
+			$('#tab3').removeClass('active');
+			$('#tab4').removeClass('active');
+			$(this).addClass('active');
+			$('#type1').attr('value','baidu');	
+			config('baidu');				
+		});
+	});
+	*/
+	function config(name){
+	/*
+        $.get("{:U('config_ajax')}",function(data){
+			var data=eval('('+data+')');
+               alert(data);
+			   $('#key').attr('value',data.APP_KEY);
+			   $('#secret').attr('value',data.APP_SECRET);
+        });
+		*/
+		 $.ajax({
+			url : "{:U('config_ajax')}",
+			type : "post",
+			async: false,
+			dataType : 'json',
+			data: {name:name},
+			success : function(sub){
+				$('#pid').attr('value',sub.pid);
+				$('#key').attr('value',sub.key);
+				$('#appid').attr('value',sub.appid);
+				$('#appsecret').attr('value',sub.appsecret);
+				$('#partner').attr('value',sub.partner);
+				if(sub['type'] == 'Wxpay'){
+					$('#show1').show();
+					$('#show2').show();
+					$('#show3').hide();
+				}else{
+					$('#show1').hide();
+					$('#show2').hide();
+					$('#show3').show();
+				}
+				var str = '<div class="col-sm-4" id="radio">';
+				if(sub['status'] == 0){
+					str += "<input name='status' type='radio' value='1' />是";
+					str += '<input name="status" checked="checked" type="radio" value="0" />否';
+					str += '</div>';
+					$('#radio').html(str);
+				}else{
+					str += '<input name="status"  checked="checked" type="radio" value="1" />是';
+					str += '<input name="status" type="radio" value="0" />否';
+					str += '</div>';
+					$('#radio').html(str);
+				}
+				
+			}
+		})
+    };	
+</script>
+</body></html> 

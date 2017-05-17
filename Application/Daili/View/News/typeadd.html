@@ -1,0 +1,78 @@
+<include file="Public:header" />
+    <body class="forIE">
+        <div class="butterbar hide">
+            <span class="bar"></span>
+        </div>
+        <main class="main">
+             <include file="Public:menu" />
+        <div style="max-width: 1348px;" class="mainWrap">
+             <include file="Public:top" />
+<div style="display: block;" class="wrapper">
+<link href="__PUBLIC__/css/bootstrap-datetimepicker.css" rel="stylesheet" media="screen">
+
+<div class="panel" id="topheader">
+    <header>
+        <table>
+            <tbody>
+            <tr>
+                <th style="width:30%;"><h4 style="font-size:20px;color:#8fb300">添加栏目</h4></th>
+				
+            </tr>
+            </tbody>
+        </table>
+    </header>
+</div>
+<div class="panel">
+	<form class="form-horizontal" role="form" style="padding-top:20px;" action="{:U('News/typeadd')}" method="post">
+		<div class="form-group">
+			<label for="" class="col-sm-3 control-label">栏目名称</label>
+			<div class="col-sm-6">
+			<input type="text" class="form-control" id="" placeholder="" name="fclass" value="{$editnew.fclass}">
+			</div>
+		</div>
+		<hr>
+		<!-- <div class="form-group">
+			<label for="" class="col-sm-3 control-label">文章栏目</label>
+			<div class="col-sm-6">
+				<select style="width: 100%;" name="ncategory">
+									<volist name="nclist" id="nl">
+									<option value="{$nl['fid']}" <if condition="$nl['fid'] eq $editnew['fid']"> selected=""</if>>{$nl['fclass']}</option>
+									</volist>
+							</select>
+			</div>
+		  </div>
+		<hr>
+		<div class="form-group">
+			<label for="" class="col-sm-3 control-label">缩略图</label>
+			<div class="col-sm-9">
+				<div class="col-sm-6" style="padding-left:0">
+				<input class="form-control" type="text" name="ncover" value="{$editnew.ncover}" />
+				</div>
+				<div class="col-sm-6">
+				<a href="javascript:;" class="pic-upload">
+				<input class="form-control" style="border:0" name="input-file" type="file" value="" />
+				</a>
+				</div>
+			</div>
+		</div>
+		<hr>
+		
+		<div class="form-group">
+			<label for="" class="col-sm-3 control-label">文章内容</label>
+			<div class="col-sm-6">
+				<textarea id="wysi" class="form-control" rows="20" name="ncontent">{$editnew.ncontent}</textarea>
+			</div>
+		</div> -->
+		 
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+			<button type="submit" class="btn btn-success">提 交</button>
+			</div>
+		</div>
+	</form>
+  
+	<span style="" class="moreUpAndDown"></span>
+</div>
+</main>
+
+</body></html>

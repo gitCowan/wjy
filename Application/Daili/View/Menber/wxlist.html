@@ -1,0 +1,83 @@
+<include file="Public:header" />
+    <body class="forIE">
+        <div class="butterbar hide">
+            <span class="bar"></span>
+        </div>
+        <main class="main">
+             <include file="Public:menu" />
+        <div style="max-width: 1348px;" class="mainWrap">
+             <include file="Public:top" />
+<div style="display: block;" class="wrapper">
+
+<div class="panel" id="topheader">
+    <header>
+        <table>
+            <tbody>
+            <tr>
+                <th style="width:30%;"><h4 style="font-size:20px;color:#8fb300">微信关注用户列表</h4></th>
+				<th style="width:70%;" class="col-md-12">
+				<div class="col-md-8">
+				
+					<!-- <div class="form-group" style="margin-bottom:0;text-align:right;">
+						<div class="input-group">
+						  <input class="form-control" type="text" placeholder="请输入商品名称">
+						  <div class="input-group-addon">搜索</div>
+						</div>
+					</div> -->
+				
+				</div>
+				<div class="col-md-4">
+					<a href="{:U('Menber/instruser')}" type="button" style="float:right;margin-left
+					:15px;"  class="btn btn-success">更新微信用户</a>
+					<!-- <a href="{:U('Goods/gtypeadd')}" type="button" style="float:right" class="btn btn-warning">添加分类</a> -->
+				</div>
+				
+				</th>
+            </tr>
+            </tbody>
+        </table>
+    </header>
+</div>
+<div class="panel">
+    
+    <div id="detailsTable" style="">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>客户名</th>
+                    <th>地区</th>
+                    <th>微信头像</th>
+                    <th>关注时间</th>
+                    <th>状态</th>
+                </tr>
+            </thead>
+           <tbody>
+		    <volist name="ulist" id="ult" key='k'>
+			<tr>
+			
+			<td>{$ult['uid']}</td> 
+			<td>{$ult['nickname']}</td> 
+			<td>{$ult['address']}</td>  
+			<td><if condition="$ult['portrait'] eq ''">
+                                    <img src="__IMG__/screenshot.png" width="32" height="32">
+                                <else/>
+                                    <img src="{$ult['portrait']}" width="32" height="32">
+                                </if></td>  
+			<td>{$ult['utime']|date='Y-m-d',###}</td> 
+			<td><if condition="$ult['wxtype'] eq '0'">
+                                    已注册
+                                <else/>
+                                    未注册
+                                </if></td> 
+			
+			</tr>
+			</volist>
+			</tbody>
+        </table>
+       
+    </div>
+    <span style="" class="moreUpAndDown">上一页</span>
+</div>
+</main>
+</body></html>

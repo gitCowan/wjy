@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+	<meta content="telephone=no" name="format-detection" />
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Home/css/login1.css" media="all" /> 
+<link rel="stylesheet" href="__CSS__/ico_foot.css"/>
+	<title><?php echo C('WebName');?></title>
+</head>
+<body>  
+   <!--  <header>
+        <a id="gobackElm" class="btn-return" href="javascript:;"></a>        
+        
+    <span>微盘系统</span>
+
+    </header> -->
+<div id="div1"><img src="__PUBLIC__/images/bj.png" /></div> 
+<div class="login-wrap">
+    
+    <form id="singin" method="post" action="{:U('User/login')}">
+		<div class="m-login-ttlogo">
+			<div class="yiche-logo" style="color:#fff">用户登录
+			</div>
+		</div>
+		
+		<div class="input-box">
+			<div class="input-item">
+				<span style="color:#fff">账号</span><input style="background-color:transparent" id="c-pwd" name="username" type="text" placeholder="手机/用户名"
+					class="two-character" value="">
+			</div>
+			<div class="input-item">
+				<span style="color:#fff">密码</span><input style="background-color:transparent" id="n-pwd" name="password" type="password" placeholder="请输入您的密码"
+					class="two-character">
+			</div>
+       
+		</div>
+		<div id="divMsg" class="input-alert-bottom">
+		</div>
+		<button id="btn_Login"  type="submit" class="btn-blue">登 录</button>
+		<div class="bottom-info"> 
+			<a target="_top" href="{:U('reg')}" class="fr"><span style="color:#fff;">新用户注册</span></a>
+		</div>
+		<!--<div class="m-3login-other">
+			<span>使用第三方登录</span>
+			<ul>
+				<li class="login-qq">
+					<a href="{:U('login_type?type=qq')}" style="text-decoration:none">
+						<img style="" src="__PUBLIC__/images/qq.png" width="42px" height="38px">
+					</a>
+				</li>
+				<li class="login-qq">
+					<a href="{:U('login_type?type=sina')}" style="text-decoration:none">
+							<img src="__PUBLIC__/images/weibo.png" width="40px" height="36px">
+						</a>
+				</li>
+				<li class="login-qq">
+					<a href="{:U('login_type?type=x360')}" style="text-decoration:none">
+							<img src="__PUBLIC__/images/360.png" width="38px" height="38px">
+						</a>
+				</li>
+				<li class="login-qq">
+					<a href="{:U('login_type?type=taobao')}" style="text-decoration:none">
+							<img src="__PUBLIC__/images/taobao.png" width="35px" height="35px">
+						</a>
+				</li>
+				<li class="login-qq">
+					<a href="{:U('login_type?type=baidu')}" style="text-decoration:none">
+							<img src="__PUBLIC__/images/baidu.png" width="36px" height="36px">
+						</a>
+				</li>
+			</ul>
+		</div>-->
+    </form>
+
+</div>
+
+   <!-- <center><div style="font-size:10px">Copyright&copy; 微易科技 版权所有</center> -->
+    
+    
+</body>
+</html>

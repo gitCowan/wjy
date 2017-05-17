@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="email=no">
+<title><?php echo C('WebName');?></title>
+<link rel="stylesheet" href="__CSS__/global.css">
+<link rel="stylesheet" href="__CSS__/index.css">
+<link rel="stylesheet" href="__CSS__/ico_foot.css"/>
+<!-- <link rel="stylesheet" href="__CSS__/weipan.css"/> -->
+<script id="G--xyscore-load" type="text/javascript" charset="utf-8" async="" src="__JS__/xyscore_main.js"></script>
+</head>
+<style>
+.fdakg {width:96%; margin:5px auto; border:none; line-height:27px; font-size:14px; color:#777;}
+.fdakg a {color:#777;}
+.fdakg h1 {margin-bottom:10px; font-size:19px;}
+.wrap .new_inde1{background:#fff;}
+.wrap .new_inde2{background:#202020; color:#dedede;}
+.wrap .new_inde3{background:#fff;}
+.wrap .new_inde4{background:#fff;}
+.new_id1{background:#5DDC9C;}
+.new_id2{background:#111;}
+.new_id3{background:#cf0000;}
+.new_id4{background:#FFCC33;}
+</style>
+<body>
+<div class="wrap">
+  <div class="index new_inde{$tpl}" style="min-height: 1782px; height: auto;">
+    <header class="list-head new_id{$tpl}">
+      <nav class="list-nav clearfix"> <a href="javascript:history.go(-1)" class="list-back"></a>
+        <h3 class="list-title">{$newsid['ntitle']}</h3>
+      </nav>
+    </header>
+    <div class="news-list clearfix fdakg" style="text-indent:3px;">      
+		<php>echo stripcslashes(htmlspecialchars_decode($newsid['ncontent']));</php>
+	</div>
+</div>
+<include file="Base/foot"/>
+<script src="__JS__/jquery-2.1.1.min.js"></script>
+<script src="__JS__/script.js"></script>
+<script type="text/javascript" charset="utf-8" src="__JS__/sea.js" async=""></script>
+</body>
+</html>

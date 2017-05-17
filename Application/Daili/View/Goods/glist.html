@@ -1,0 +1,133 @@
+<include file="Public:header" />
+    <body class="forIE">
+        <div class="butterbar hide">
+            <span class="bar"></span>
+        </div>
+        <main class="main">
+             <include file="Public:menu" />
+        <div style="max-width: 1348px;" class="mainWrap">
+             <include file="Public:top" />
+<div style="display: block;" class="wrapper">
+
+<div class="panel" id="topheader">
+    <header>
+        <table>
+            <tbody>
+            <tr>
+                <th style="width:30%;"><h4 style="font-size:20px;color:#8fb300">产品列表</h4></th>
+				<th style="width:70%;" class="col-md-12">
+				<div class="col-md-8">
+				<form method="post" action="{:U('Goods/glist')}">
+					<div class="form-group" style="margin-bottom:0;text-align:right;">
+						<div class="input-group">
+						  <input class="form-control" type="text" name="keyword" placeholder="请输入商品名称">
+						  <div class="input-group-addon">
+						  <button type="submit" style="border:0;background-color:#eee;">
+						  <span class="glyphicon glyphicon-search"></span> 搜索
+						  </button>
+						  
+						  
+						  </div>
+						</div>
+					</div>
+				</form>
+				</div>
+				
+				</th>
+            </tr>
+            </tbody>
+        </table>
+    </header>
+</div>
+<div class="panel">
+    
+    <div id="detailsTable" style="">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>商品名称</th>
+                    <th>价格</th>
+                    <th>浮动盈亏</th>
+                    <th>手续费</th>
+                    <th>外盘价</th>
+                    <th>分类</th>
+					<th style="text-align:center">操作</th>
+                </tr>
+            </thead>
+           <tbody>
+		   <volist name="goodlist" id="gl">
+			<tr>
+			
+			<td><a href="{:U('Goods/gedit',array('pid'=>$gl['pid']))}" >{$gl['ptitle']}</a></td> 
+			<td> <font color="#f00" size="2">{$gl['uprice']}元</font></td> 
+			<td>{$gl['wave']}</td>  
+			<td>{$gl['feeprice']}</td>  
+			<td >{$gl['price']}<em class="drop glyphicon glyphicon-arrow-up yss"></em>
+			</td> 
+			<td>{$gl['cname']}</td> 		
+			<td style="text-align:center"><li style="border:0;float:left;margin-right:3px;"><a href="{:U('Goods/gedit',array('pid'=>$gl['pid']))}" type="button" class="btn btn-primary btn-sm">查看</a></li>
+			</td>
+			</tr>
+			</volist>
+			</tbody>
+        </table>
+       
+    </div>
+    <span class="moreUpAndDown" >{$page}</span>
+</div>
+</main>
+<script type="text/javascript">  
+	butt();
+	setInterval('butt()', 2000);
+	function butt(){  
+		//获取油的价格到页面
+		var yprice = $('#yprice').val();
+		var byprice = $('#byprice').val();
+		var toprice = $('#toprice').val();
+		$.ajax({  
+			type: "post",  
+			url: "{:U('Goods/price')}",         
+			success: function(data) { 
+				//最新油价
+				$('.you').html(data[0]);
+				$('#yprice').val(data[0]);
+				if(data[0]<yprice){
+					$('.you').attr("class","you drop glyphicon glyphicon-arrow-up yss");
+				}else if(data[0]==yprice){}else{
+					$('.you').attr("class","you drop glyphicon glyphicon-arrow-down ys");
+				}              
+			},  
+		}); 
+		//获取白银的价格到页面  
+		$.ajax({  
+			type: "post",  
+			url: "{:U('Goods/byprice')}",         
+			success: function(data) {
+				//最新白银价
+				$('.baiyin').text(data[0]); 
+				$('#byprice').val(data[0]);
+				if(data[0]<byprice){
+					$('.baiyin').attr("class","baiyin drop glyphicon glyphicon-arrow-up yss");
+				}else if(data[0]==byprice){}else{
+					$('.baiyin').attr("class","baiyin rise glyphicon glyphicon-arrow-down ys");
+				}                
+			},  
+		});
+		//获取铜的价格到页面  
+		$.ajax({  
+			type: "post",  
+			url: "{:U('Goods/toprice')}",         
+			success: function(data) {
+				//最新白银价
+				$('.tong').text(data[0]);
+				$('#toprice').val(data[0]);
+				if(data[0]<toprice){
+					$('.tong').attr("class","tong drop glyphicon glyphicon-arrow-up yss");
+				}else if(data[0]==toprice){}else{
+					$('.tong').attr("class","tong rise glyphicon glyphicon-arrow-down ys");
+				}   
+			},  
+		});
+	}
+</script>
+</body></html>

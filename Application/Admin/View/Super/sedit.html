@@ -1,0 +1,80 @@
+<include file="Public:header" />
+    <body class="forIE">
+        <div class="butterbar hide">
+            <span class="bar"></span>
+        </div>
+        <main class="main">
+             <include file="Public:menu" />
+        <div style="max-width: 1348px;" class="mainWrap">
+             <include file="Public:top" />
+<div style="display: block;" class="wrapper">
+
+
+<div class="panel" id="topheader">
+    <header>
+        <table>
+            <tbody>
+            <tr>
+                <th style="width:30%;"><h4 style="font-size:20px;color:#8fb300">修改管理员</h4></th>
+				<!-- <th style="width:70%;" class="col-md-12">
+				<div class="col-md-8">
+				
+					<div class="form-group" style="margin-bottom:0;text-align:right;">
+						<div class="input-group">
+						  <input class="form-control" type="text" placeholder="请输入商品名称">
+						  <div class="input-group-addon">搜索</div>
+						</div>
+					</div>
+				
+				</div>
+				<div class="col-md-4">
+					<button type="button" class="btn btn-success">添加商品</button>
+					<button type="button" class="btn btn-warning">商品分类</button>
+				</div>
+				
+				</th> -->
+            </tr>
+            </tbody>
+        </table>
+    </header>
+</div>
+<div class="panel">
+	<form class="form-horizontal" role="form" style="padding-top:20px;" action="{:U('Super/sedit')}" method="post">
+					<input type="hidden" name="uid" value="{$ult['uid']}"/>
+                	<input type="hidden" name="otype" value="{$ult['otype']}"/>
+                	<input type="hidden" name="ustatus" value="{$ult['ustatus']}"/>
+                	<input type="hidden" name="oid" value="{$ult['oid']}"/>
+                	<input type="hidden" name="utime" value="{$ult['utime']}" />
+		<div class="form-group">
+			<label for="" class="col-sm-3 control-label" style="padding-right:20px;">用户名</label>
+			<div class="col-sm-6">
+			<input type="text" class="form-control" id="" placeholder="" disabled="username" name value="{$ult['username']}">
+			</div>
+		</div>
+		<hr>
+		<div class="form-group">
+			<label for="inputPassword3" class="col-sm-3 control-label" style="padding-right:20px;">密码</label>
+			<div class="col-sm-6">
+			<input type="text" class="form-control" id="" placeholder="" name="upwd" >
+			</div>
+		</div>
+		<hr>
+		<div class="form-group">
+			<label for="inputPassword3" class="col-sm-3 control-label" style="padding-right:20px;">手机号</label>
+			<div class="col-sm-6">
+			<input type="tel" class="form-control" id="" placeholder="" name="utel" value="{$ult['utel']}">
+			</div>
+		</div>
+		<hr>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+			<button type="submit" class="btn btn-success">提 交</button>
+			</div>
+		</div>
+	</form>
+  
+	<span style="" class="moreUpAndDown"></span>
+</div>
+</main>
+
+</body></html>

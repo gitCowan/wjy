@@ -1,0 +1,100 @@
+<include file="Public:header" />
+
+    <body class="forIE">
+        <div class="butterbar hide">
+            <span class="bar"></span>
+        </div>
+        <main class="main">
+             <include file="Public:menu" />
+        <div style="max-width: 1348px;" class="mainWrap">
+            <include file="Public:top" />
+<div style="display: block;" class="wrapper">
+
+<div class="panel" id="topheader">
+    <header>
+        <table>
+            <tbody>
+            <tr>
+               <th style="width:30%;"><h4 style="font-size:20px;color:#8fb300">版本升级</h4></th>
+				
+            </tr>
+            </tbody>
+        </table>
+    </header>
+</div>
+<div class="panel">
+	<div class="form-horizontal" style="padding-top:20px;" >
+		<div class="form-group" style="margin-left:4px;">
+			<label class="col-sm-1 control-label" style="margin-right:10px;">
+				<img src="__IMG__/version.png" style="width:80px">
+			</label>
+			<div class="col-sm-4">
+				<h4 style="padding-top:10px" class="relative">
+					<strong>{$info.No_id}(<if condition="$status eq 1"><font color="red">有更新</font><else/>暂无更新</if>)</strong>
+				</h4>
+				<p class="relative" style="padding-top:5px">您所用版本为{$nowversion}版</p>
+			</div>
+		</div>
+		<hr>
+		<div class="form-group ">
+			<label class="col-sm-1 control-label" ><h5><strong>版本升级</strong></h5></label>
+			<div class="col-sm-10">
+				<p class="col-sm-10" style="line-height:50px;margin-left:4%;">官方最新版本:{$info.No_id}({$info.date|date='Y-m-d',###})
+				<if condition="$isinstall['id'] neq ''">
+				<else/>
+					
+					<a  href="javascript:void()" id="update" class="absoluter btn btn-default isub" style="margin-left:50%;"><font color="red">一键升级</font></a>
+				</if>
+				</p>
+			</div>
+		</div>
+		<hr>
+		<div class="form-group ">
+			<label class="col-sm-10" style="line-height:50px;margin-left:38px;"><h5><strong>更新记录</strong></h5></label>
+			<div class="col-sm-4" style="margin-left:80px;">
+				<volist name="up_record" id="up_record">
+				<p class="form-control-static relative">版本号:{$up_record.No_id}-升级时间:({$up_record.date|date='Y-m-d H:i:s',###})-适用版本:<if condition="$up_record['free'] eq 1">涨跌版</if><if condition="$up_record['enterprise'] eq 1">买点版</if><if condition="$up_record['advanced'] eq 1">时间版</if>
+				</p>
+				<p>升级内容:{$up_record.remark}</P>
+				</volist>
+				
+			</div>
+		</div>
+		<hr>	  
+	</div>	
+</div>   
+</main>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#update").click(function(){
+		$.ajax({
+				type: "post", 
+				url:'{:U("Appstore/query")}',
+				dataType:'json',
+				data:'query=1',
+				success:function(json){
+					var status = json.status;
+					if(status==6){
+						alert('升级版本成功');
+						window.location.reload();
+					}else if(status==3){
+						alert('下载失败');
+					}else if(status==5){
+						alert('解压失败');
+					}else if(status==2){
+						alert('您已经是最高的版本了');						
+					}else if(status==7){
+						alert('版权归属：微易科技,请联系官方授权。');													
+					}else{
+						alert('升级失败可能是目录没有权限');
+					}
+				}
+			});
+	  });
+});
+</script>
+</body>
+</html>
+
+
+

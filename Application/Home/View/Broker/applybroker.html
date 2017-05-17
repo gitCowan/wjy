@@ -1,0 +1,140 @@
+<extend name="Base/common"/>
+<block name="content">
+<link rel="stylesheet" href="__CSS__/global.css">
+<link rel="stylesheet" href="__CSS__/index.css">
+<link rel="stylesheet" href="__CSS__/pwd.css">
+<link rel="stylesheet" href="__CSS__/weipan.css"/>
+<link rel="stylesheet" href="__CSS__/ico_foot.css"/>
+<script src="__JS__/jquery-1.9.1.min.js"></script>
+<style>
+
+.xieyi {
+	width:100%;
+	height:40px;
+	margin-top:7%;
+	text-align:center;
+}
+.xieyi input {
+	border:1px solid #1fb3b6;
+	width:20px;
+	height:20px;
+	float:left;
+	margin-left:8%;
+	margin-top:3px;
+}
+.xieyi p {
+	float:left;
+	margin-left:1%;
+	font-size:12px;
+}
+.xieyi a:link{
+	color:#1fb3b6;
+}
+
+</style>
+<div class="wrap">
+  <div class="index new_inde{$tpl}" style="min-height: 891px;">
+    <header class="list-head new_id{$tpl}">
+      <nav class="list-nav clearfix"> <a href="javascript:history.go(-1)" class="list-back"></a>
+        <h3 class="list-title">申请代理商</h3>
+      </nav>
+    </header>
+    <form id="reviseForm" class="i-form" method="post" enctype="multipart/form-data" action="{:U('Broker/applybroker')}">
+		<ul class="form-box">
+			<li class="f-line clearfix">
+				<label class="f-label">姓名</label>
+				<input id="c-pwd" class="f-input" type="text" maxlength="10" placeholder="请输入姓名" name="username"/>
+			</li>
+			<li class="f-line clearfix">
+				<label class="f-label">手机号</label>
+				<input id="utel" class="f-input" type="text" maxlength="18" placeholder="请输入手机号" name="utel"/>
+			</li>
+			<div style="overflow: hidden;margin-top:1%;">
+				<label class="f-label ">验证码</label>
+				<div style="float:left; width:65%;">
+					<input type="text" value="" placeholder="请输入验证码" maxlength="10" name="yzm" class="f-input" id="yzm"/>
+				
+				<div class="price">
+					<span class="msgs" style="width:60px; margin-top:3px;">获取</span>
+				</div></div>
+			</div>
+		</ul>
+		<div id='btnAgree'>
+			<div class="xieyi">
+				<input type="checkbox" name="up_xieyi" id="up_xieyi"/>
+				<p>我已阅读并同意<span style="color:#1fb3b6;">《服务协议及隐私条款》</span></p>
+			</div>  
+		</div>
+		<input type="hidden" value="" id="code" />
+      <input type="button" value="确认申请" onclick="baocun()" class="f-sub"/>
+    </form>
+  </div>
+</div>
+
+<script type="text/javascript">
+$(function  () {
+	//获取短信验证码
+	var validCode=true;
+	$(".msgs").click (function  () {
+		var phone = $("#utel").val();
+		var tel = /^1([38]\d|4[57]|5[0-35-9]|7[06-8]|8[89])\d{8}$/;
+		if(!tel.test($("#utel").val())){
+			alert("手机号输入有误");
+			return false;
+		}
+		$.ajax({
+			type: "post",  
+			url:"{:U('Index/wap_reset_msg')}",
+			dataType:'json',
+			data:'phone='+phone,
+			success:function(json){
+				if(json['status'] == '1'){
+				    alert(json['codes']);
+					$('#code').attr('value',json['code']);
+				}else{
+					alert(json['code']);
+				}
+			}
+		});
+		var time=100;
+		var code=$(this);
+		if (validCode) {
+			validCode=false;
+			code.addClass("msgs1");
+			var t = setInterval(function  () {
+				time--;
+				code.html(time+"秒");
+				if (time==0) {
+					clearInterval(t);
+				code.html("重新获取");
+					validCode=true;
+				code.removeClass("msgs1");
+
+				}
+			},1000)
+		}
+	})
+});
+function baocun(){
+	var code   = $("#code").val();
+	var yzm    = $("#yzm").val();
+	if(code !=''){
+		if(code!==yzm){
+			alert('验证码错误!'); 
+			return false; 
+		}
+	}else{
+		alert('请输入验证码!');
+		return false; 			
+	}
+	var phone = $("#utel").val();
+	var tel = /^1([38]\d|4[57]|5[0-35-9]|7[06-8]|8[89])\d{8}$/;
+	if(!tel.test($("#utel").val())){
+		alert("手机号输入有误");
+		return false;
+	}
+	$("#reviseForm").submit();
+}
+</script>
+
+</block>

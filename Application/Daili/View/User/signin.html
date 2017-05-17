@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<!-- saved from url=(0054)http://z.faximall.com/index.php/Admin/login/index.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>微盘登陆系统</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="stylesheet" href="__PUBLIC__/css/bootstrap.min.css">
+	
+	<style>
+		body{font-family: "Microsoft YaHei";}
+		.wmfl-admin-login{position:absolute; width:100%; top:150px; z-index:999;}
+		.wmfl-login-wrap .input-group{margin-bottom:10px;}
+		.wmfl-login-wrap h3{font-family: "Microsoft YaHei";}
+		.wmfl-login-wrap form{margin:0 20px;}
+		.wmfl-login-lay{overflow:hidden; position:absolute; left:0; top:0; z-index:-1;}
+		#auth{width:140px;}
+		#submit{margin-right:5px;}
+	</style>
+	<STYLE TYPE="text/css">
+
+BODY {background-image: URL(__PUBLIC__/images/wmlogin_bg1.jpg);
+background-position: center;
+background-repeat: no-repeat;
+background-attachment: fixed;}
+
+</STYLE>
+</head>
+<body>
+	<section class="wmfl-admin-login">
+		<div class="container">
+			<div class="col-lg-6">
+				<div class="wmfl-logo">
+					<img src="__PUBLIC__/images/wmfl_logo.png">
+				</div>
+				<div class="wmfl-intro"></div>
+			</div>
+			
+			<div class="col-lg-5">
+				<div class="wmfl-login-wrap panel panel-primary">
+					<div class="panel-heading">
+						<h3>微盘代理商后台管理系统</h3>
+					</div>
+					<div style="background:transparent;background-color:rgba(255,255,255,0.7);filter:alpha(opacity=70);">
+						<form action="" method="post" role="form" class="panel-body" id="form">
+							
+							<div class="input-group">
+							  <span class="input-group-addon">帐　号</span>
+							  <input type="text" class="form-control input-lg" name="username" id="username" placeholder="输入登录帐号">
+							</div>
+							
+							<div class="input-group">
+							  <span class="input-group-addon">密　码</span>
+							  <input type="password" class="form-control input-lg" name="password" id="password" placeholder="输入登录密码">
+							</div>
+							
+							<div class="input-group">
+							  <span class="input-group-addon">验证码</span>
+							  <input type="text" class="form-control input-lg" name="verify" id="auth">
+							  <img class="auth-img" src="{:U('verify')}" title="点击更换验证码" style="cursor:pointer;">
+							</div> 
+							
+							<div class="input-group col-md-12" style="margin-top:25px;" >
+							  <div class="col-md-4" style="padding-left:0;">
+								<button type="submit" style="width:110%;" class="btn btn-primary btn-lg" id="submit">登  录</button>
+							  </div>
+							  <div  class="col-md-8">
+								<span id="message" style="color:red;position:absolute;height:3.5rem;line-height:3.5rem;"></span>
+							  </div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</section>
+	<!-- <div id="wmfl-login-lay" class="wmfl-login-lay" style="width: 1325px; height: 579px;">
+		<img src="__PUBLIC__/images/wmlogin_bg1.jpg" width="1325" style="display: inline;">
+	</div> -->
+	<script src="__PUBLIC__/js/jquery.min.js"></script>
+	<script src="__PUBLIC__/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+	
+		//防止iframe嵌套
+		$(function(){
+			if(window != top){top.location.href = location.href;}	
+		});
+	
+		$(function(){
+			var oLay = $("#wmfl-login-lay"),
+				w = $(window).width(),
+				h = $(window).height(),
+				img = [
+					"__PUBLIC__/images/wmlogin_bg1.jpg",
+		       	];
+			oLay.css({width: w + "px", height: h + "px"});
+			
+			var random = Math.floor(Math.random()*img.length);
+			var oImg = new Image();
+			oImg.src = img[random];
+			oImg.onload = function(){
+				//控制宽高
+				var _thisW = this.width;
+				var _thisH = this.height;
+				(w/h) > (_thisW/_thisH) ? (this.width = w) : (this.height = h);
+
+				$(this).fadeIn(1000);
+				$(this).appendTo(oLay);	
+			};
+			
+			$(".auth-img").click(function(){
+				this.src = "{:U('verify')}";
+			});
+		});
+		
+		$(window).resize(function(){
+			var	oLay = $("#wmfl-login-lay"),
+				w = $(window).width(),
+				h = $(window).height(),
+				oImg = new Image(),
+				img = oLay.children("img");
+			oImg.src = img.attr("src");
+			var _thisW = oImg.width,
+				_thisH = oImg.height,
+				imgScale = _thisW/_thisH;
+				documentScale = w/h;
+			
+			oLay.css({width: w+"px", height: h+"px"});
+			if(documentScale < imgScale){
+				img.css({width: h*imgScale + "px", height: h + "px"});
+			}else{
+				img.css({width: w + "px", height: w/imgScale + "px"});
+			}
+			img.css({top:(img.outerHeight() - h + "px")});
+		});
+		
+		//表单提交
+		document.onkeydown = function(ev)
+		{
+			var oEvent = ev || window.event;
+			if(oEvent.keyCode == 13){
+				return submitForm();
+			};
+		}
+		
+		$("#submit").click(function(){
+			return submitForm();
+		});
+		
+		
+		function submitForm()
+		{
+			var msg = $("#message"),
+				username = $("#username").val(),
+				passVal = $("#password").val(),
+				authVal = $("#auth").val();
+			
+			if ( username == "" ) {
+				msg.html("登录帐号不能为空");
+				$("#username").focus();
+			} else if ( passVal == "" ){
+				msg.html("登录密码不能为空");
+				$("#password").focus();
+			} else if ( authVal == "" ) {
+				msg.html("验证码不能为空");
+				$("#auth").focus();
+			} else {
+				$("#submit").html("登录中……").attr("disabled", "true");
+				msg.html("");
+				
+				$.post("{:U('signin')}",$("#form").serialize(),function(data){
+				
+					if(data == 0)
+					{
+						setTimeout(function(){
+							location.href = "{:U('Daili/Index/index')}";
+						},1000)
+					}else if(data == 1){
+						msg.html("登录失败,帐号或密码错误!");
+						
+					}else{
+						msg.html("验证码错误");
+					}
+					$("#submit").html("登录").removeAttr("disabled");
+					$(".auth-img").attr("src", "{:U('verify')}");
+					msg.html(data.message);
+				},'json');
+			}
+			return false;
+		};
+		
+		
+		//对支持本地存储的浏览器储存填入的email，可以存储多至5M的数据。这一定可以为用户带来更好的用户体验。
+		if(window.FileReader){
+			var username = document.getElementById("username");
+			if( localStorage.getItem("username") ){
+				username.value = localStorage.getItem("username");
+			}
+			function storageEmail(){
+				localStorage.setItem("username", this.value);
+			}
+			username.addEventListener("keyup", storageEmail, false);
+		}
+		
+	</script>
+  <!--<script src="/Public/Static/js/snow.js" type="text/javascript" charset="utf-8"></script>-->
+
+</body></html>

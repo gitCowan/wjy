@@ -1,0 +1,40 @@
+<menu id="menu">
+	<div class="logoWrap">
+		<a class="logo toIndex" href=""></a>
+	</div>
+	<div class="innerWrap">
+	 
+		<dl>
+			
+			<dt>订单管理</dt>
+			<dd>
+				<ul>
+					<li class="" id="olist"><a class="mcmbase" title="订单列表" href="{:U('Daili/Order/olist')}"><span class="glyphicon glyphicon-bookmark"></span>订单列表</a></li>
+					<li class="" id="tlist"><a class="mcmdata" title="交易流水" href="{:U('Daili/Order/tlist')}"><span class="glyphicon glyphicon-list-alt"></span>交易流水</a></li>
+				</ul>
+			</dd>
+		
+			<dt>客户管理</dt>
+			<dd>
+				<ul>
+					<li id="mlist"><a class="version" href="{:U('Menber/mlist')}" title="客户列表"><span class="glyphicon glyphicon-user"></span>客户列表</a></li>
+					<li class="" id="recharge"><a class="restore" href="{:U('Daili/User/recharge')}"  title="充值和提现"><span class="glyphicon glyphicon-briefcase"></span>充值和提现</a></li>
+				</ul>
+			</dd>
+
+			<dt>代理商</dt>
+			<dd>
+				<ul>
+					<li class="" id="ulist"><a class="push" href="{:U('User/ulist')}" title="代理商"><span class="glyphicon glyphicon-credit-card"></span>代理商列表</a></li>
+					<li class="" id="agentlist"><a class="push" href="{:U('User/agentlist')}" title="代理商申请"><span class="glyphicon glyphicon-credit-card"></span>代理商申请</a></li>
+				</ul>
+			</dd>
+		</dl>
+	</div>
+	
+	<script>
+		var a="{$Think.ACTION_NAME}";
+		$('#'+a).addClass('active');
+		$('#'+a+' a').css('color','#8fb300');
+   </script>
+</menu>

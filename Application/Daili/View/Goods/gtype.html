@@ -1,0 +1,62 @@
+<include file="Public:header" />
+    <body class="forIE">
+        <div class="butterbar hide">
+            <span class="bar"></span>
+        </div>
+        <main class="main">
+             <include file="Public:menu" />
+        <div style="max-width: 1348px;" class="mainWrap">
+             <include file="Public:top" />
+<div style="display: block;" class="wrapper">
+
+<div class="panel" id="topheader">
+    <header>
+        <table>
+            <tbody>
+            <tr>
+                <th style="width:40%;"><h4 style="font-size:20px;color:#8fb300">产品分类</h4></th>
+				<th style="width:60%;" class="col-md-12">
+				
+				
+				
+				</th>
+            </tr>
+            </tbody>
+        </table>
+    </header>
+</div>
+<div class="panel">
+    
+    <div id="detailsTable" style="">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>分类名称</th>
+					<th>标识</th>
+                    <th>状态</th>
+					<th style="text-align:center">操作</th>
+                </tr>
+            </thead>
+           <tbody>
+		   <volist name="typelist" id="gl">
+			<tr>
+			<td>{$gl['cid']}</td>
+			<td>{$gl['cname']}</td> 
+			<td>{$gl['title']}</td> 
+			<td><if condition="$gl.status eq 0">已关闭<else/>已开启</if></td> 			
+			<td style="text-align:center;"><li style="border:0;float:left;margin-right:3px;"><a href="{:U('Goods/api_list',array('cid'=>$gl['cid']))}" type="button" class="btn btn-primary btn-sm">时实数据</a></li>
+			</td>
+			</tr>
+			</volist>
+			</tbody>
+        </table>
+       
+    </div>
+    <span style="" class="moreUpAndDown"></span>
+</div>
+</div>
+            
+        </div>
+        </main> 
+</body></html>

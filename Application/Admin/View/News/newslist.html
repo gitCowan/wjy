@@ -1,0 +1,164 @@
+<include file="Public:header" />
+    <body class="forIE">
+        <div class="butterbar hide">
+            <span class="bar"></span>
+        </div>
+        <main class="main">
+             <include file="Public:menu" />
+        <div style="max-width: 1348px;" class="mainWrap">
+             <include file="Public:top" />
+<div style="display: block;" class="wrapper">
+
+
+<div class="panel" id="topheader">
+    <header>
+        <table>
+            <tbody>
+            <tr>
+                <th style="width:30%;"><h4 style="font-size:20px;color:#8fb300">文章列表</h4></th>
+				<th style="width:70%;" class="col-md-12">
+					<div class="col-md-8">
+					<form method="post" action="{:U('Goods/glist')}">
+						<div class="form-group" style="margin-bottom:0;text-align:right;">
+							<div class="input-group">
+							  <input class="form-control" type="text" id="top_search" placeholder="请输入新闻名称查找...">
+							  <div class="input-group-addon">
+							  <button type="submit" style="border:0;background-color:#eee;">
+							  <span class="glyphicon glyphicon-search"></span> 搜索
+							  </button>
+							  
+							  
+							  </div>
+							</div>
+						</div>
+					</form>
+					</div>
+					<div class="col-md-4">
+						<a href="{:U('News/newsadd')}" type="button" style="float:right;margin-left
+						:15px;"  class="btn btn-success">添加文章</a>
+						<!-- <a href="{:U('Goods/gtypeadd')}" type="button" style="float:right" class="btn btn-warning">添加分类</a> -->
+					</div>
+					
+				
+				</th>
+            </tr>
+            </tbody>
+        </table>
+    </header>
+</div>
+<div class="panel">
+    
+    <div id="detailsTable" style="">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>文章标题</th>
+                    <th>更新时间</th>
+                    <th>所属栏目</th>
+					<th>操作</th>
+                </tr>
+            </thead>
+           <tbody>
+		   <volist name="newlist" id="nl">
+			<tr>
+			
+			<td>{$nl['nid']}</td> 
+			<td><a href="{:U('News/newsedit',array('nid'=>$nl['nid']))}" class="name">{$nl['ntitle']}</a></td>  
+			<td>{$nl['ntime']|date='Y-m-d',###}</td>  
+			<td><a href="{:U('News/tedit',array('pid'=>$nl['fid']))}">{$nl['fclass']}</a></td> 		
+			<td >
+			<li style="border:0;float:left;margin-right:3px;">
+			<a href="{:U('News/newsedit',array('nid'=>$nl['nid']))}" type="button" class="btn btn-primary btn-sm">编辑</a></li>
+								<li class="last"><a href="{:U('News/newsdel',array('nid'=>$nl['nid']))}" onclick="if(confirm('确定要删除吗?')){return true;}else{return false;}" type="button" class="btn btn-danger btn-sm">删除</a></td>
+			</tr>
+			</volist>
+			</tbody>
+        </table>
+       
+    </div>
+    <span class="moreUpAndDown" >{$page}</span>
+</div>
+</main>
+<script type="text/javascript">
+$(document).ready(function(){
+	var eqli = $("#dashboard-menu").children().eq(1);
+	eqli.attr('class','active');
+	$("#dashboard-menu .active .submenu").css("display","block");
+	
+	
+	$("#checkall").click(function(){
+        $("input[name='nid[]']").each(function(){
+            this.checked = true;
+        });
+    });
+     
+    $("#checkallno").click(function(){
+        $("input[name='nid[]']").each(function(){
+            this.checked = false;
+        })
+    });
+     
+    $("#check_revsern").click(function(){
+        $("input[name='nid[]']").each(function(){
+            if (this.checked) {
+                this.checked = false;
+            }
+            else {
+                this.checked = true;
+            }
+        });
+    });
+    
+    $("input[type='checkbox']").click(function(){
+    	$("#sbtn").attr("onclick","if(confirm('确定要删除吗?请谨慎操作')){return true;}else{return false;}");
+    })
+});
+function valid(){
+	  var check = "";
+      $("input:checkbox[name='nid[]']:checked").each(function() {
+			check += $(this).val();
+	  });
+      if(check==''){
+      	alert('请选择要删除的文章');
+      	return false;
+      	}else{ 
+      	return true;
+      }	
+};
+//搜索结果，ajax返回搜索框搜索结果
+$('#top_search').keyup(function(){
+	keywords = $(this).val();
+	$.ajax({  
+	    type: "post",  
+	    url: "{:U('News/newslist?step=search')}",    
+	    data:{"keywords":keywords},
+	    success: function(data) {
+	    	if(data=="null"){
+            	//$("#loading").hide();
+            	$("#ajaxback").html('<tr class="first"><td colspan="13">没有找到结果，请重新输入！</tr></td>');
+            }else{
+		    	$nlist = "";
+	            $.each(data,function(no,items){
+	            	$nlist += '<tr class="first">';
+	            	$nlist += '<td>'+items.nid+'</td>';
+	            	$nlist += '<td><input type="checkbox" name="nid[]" value="'+items.nid+'"></td>';
+	            	$nlist += '<td><a href="{:U(\'News/newsedit\')}?pid='+items.nid+'" class="name">'+items.ntitle+'</a></td>';
+	            	$nlist += '<td>'+items.ntime+'</td>';
+	            	$nlist += '<td><a href="{:U(\'News/tedit\')}?fid='+items.fid+'">'+items.fclass+'</a></td><td>';
+	            	$nlist += '<ul class="actions">';
+	            	$nlist += '<li><a href="{:U(\'News/newsedit\')}?nid='+items.nid+'"><i class="table-edit"></i></a></li>';
+					$nlist += '<li><i class="table-settings"></i></li>';
+					$nlist += '<li class="last"><a href="{:U(\'News/newsdel\')}?nid='+items.nid+'" onclick="if(confirm(\'确定要删除吗?\')){return true;}else{return false;}"><i class="table-delete"></i></a></li>';
+	            	$nlist += '</ul></td></tr>';
+	            })
+	            $("#ajaxback").html($nlist);
+            }
+	    },
+	    error: function(data) {  
+            console.log(data);
+        }
+	  })
+})
+</script>
+</body></html>

@@ -1,0 +1,568 @@
+<include file="Public:header" />
+    <body class="forIE">
+        <div class="butterbar hide">
+            <span class="bar"></span>
+        </div>
+        <main class="main">
+            <include file="Public:menu" />
+        <div style="max-width: 1348px;" class="mainWrap">
+              <include file="Public:top" />
+<div style="display: block;" class="wrapper">
+
+
+
+<div class="panel" id="topheader">
+    <header>
+        <table>
+            <tbody>
+            <tr>
+				<th style="width:30%;"><h4 style="font-size:20px;color:#8fb300">客户列表</h4></th>
+				<th style="width:60%;" class="col-md-12">
+				
+				<div class="col-md-12">
+					<!-- <button type="button" class="btn btn-success" style="margin-left:15px;float:right">添加客户</button> -->
+					<!-- <button type="button" class="btn btn-warning" style="float:right">提现记录</button> -->
+				</div>
+				
+				</th>
+            </tr>
+            </tbody>
+        </table>
+    </header>
+</div>
+
+    <div class="row" style="margin:0;">
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="col-md-12" style="padding-top:15px;box-shadow:0px 2px 4px #ccc;margin-bottom:20px;background-color:#fff;">
+                    <form class="form-horizontal" id="myForm" role="form" action="{:U('Menber/mlist')}" method="get">
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="" class="col-sm-4 control-label">手机号码： </label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" placeholder="按手机号码" name="utel" id="utel" value="{$param.utel}">
+                            </div>
+                        </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-4 control-label">代理ID： </label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" placeholder="代理ID" name="vid" id="vid" value="{$param.vid}">
+                                </div>
+                            </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="" class="col-sm-4 control-label">用户名称： </label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" placeholder="按用户名称" name="username" id="username" value="{$param.username}">
+                            </div>
+                        </div>
+                    </div>
+
+                        <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="" class="col-sm-4 control-label">排序条件：</label>
+                            <div class="col-sm-8">
+                                <select class="form-control" name="con">
+                                    <option value="">默认不选</option>
+                                    <option value="2" <if condition="$param['con'] eq 2"> selected=""</if>>按余额倒叙</option>
+                                    <option value="1" <if condition="$param['con'] eq 1"> selected=""</if>>按余额正序</option>
+                                    <option value="4" <if condition="$param['con'] eq 4"> selected=""</if>>按时间倒叙</option>
+                                    <option value="3" <if condition="$param['con'] eq 3"> selected=""</if>>按时间正序</option>
+                                </select>
+                            </div>
+                        </div>
+                        </div>
+                    <div class="col-sm-3" >
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <input type="submit" class="btn btn-success" value=" 搜 索">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="" class="col-sm-4 control-label">平台总余额：</label>
+                            <div class="col-sm-7">
+                                <span style="font-size: 2em;color: red;">　￥{$yue}</span>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="panel">
+    
+    <div id="detailsTable" style="">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>客户名</th>
+                    <th>手机号码</th>
+                    
+                    <th>微信头像</th>
+                    <th>创建日期</th>
+					<th>上级</th>
+					<th>订单数量</th>
+					<th>账户余额</th>
+                    <th>总盈亏</th>
+					<th>会员类别</th>
+					<th>交易流水</th>
+					<th>操作</th>
+                </tr>
+            </thead>
+           <tbody>
+		    <volist name="ulist" id="ult">
+			<tr>
+				<td>{$ult['uid']}</td>
+				<td>
+					<a href="{:U('Menber/mupdate',array('uid'=>$ult['uid']))}">{$ult['username']}</a>
+				</td>
+				<td>{$ult['utel']}</td>
+				<td><img src="{$ult['portrait']}" width="30px" height="30px" /></td>
+			
+				<td>{$ult['utime']}</td>
+				<td>{$ult.managername}</td>
+				<td>
+					<if condition="$ult['ocount'] eq 0">
+						0
+					<else/>
+						<a href="">{$ult['ocount']}</a>	
+					</if>
+				</td>
+				<td><font color="#f00" size="3">￥{$ult['balance']}<font></td>
+                <td>
+                    <if condition='$ult.yingkui egt 0'>
+                        <font color="#ed0000" size="3">{$ult.yingkui}</font>
+                        <else/>
+                        <font color="#2fb44e" size="3">{$ult.yingkui}</font>
+                    </if>
+                </td>
+				<td>
+					<if condition='$ult["otype"] eq 0'>
+						客户
+					</if>
+					<if condition='$ult["otype"] eq 1'>
+						代理商
+					</if>
+					<if condition='$ult["otype"] eq 2'>
+						会员单位
+					</if>
+					<if condition='$ult["otype"] eq 3'>
+						超级管理员
+					</if>
+				</td>
+				<td><a href="{:U('Menber/muplook',array('uid'=>$ult['uid']))}"><i class="table-edit"></i>查看</a></td>
+				<td>
+					<ul class="actions">
+						<li><a href="{:U('Menber/mupdate',array('uid'=>$ult['uid']))}"><i class="table-edit"></i>编辑</a></li>
+                        <if condition="$_SESSION['username'] eq 'admin' ">
+						<li class="last"><a href="{:U('User/userdel',array('uid'=>$ult['uid']))}" onclick="if(confirm('确定要删除吗?客户账户请谨慎操作！')){return true;}else{return false;}">删除</a></li>
+                            </if>
+					</ul>
+				</td>
+			</tr>
+			</volist>
+			</tbody>
+        </table>
+       
+    </div>
+    <span style="" class="moreUpAndDown">{$page}</span>
+</div>
+<script type="text/javascript">
+    function getDataByTemplate() {  return {"totalUsersCount":0,"activeUsersCountRatioBySeven":0,"activeUsersCountBySeven":0,"activeUsersCountRatioByThirty":0,"activeUsersCountByThirty":0,"avgOnceUseTim6eBySeven":0,"avgOnceUseTimeByDay":0,"avgOnceUseTimeBySeven":0,"xdate":["10-16","10-17","10-18","10-19","10-20","10-21","10-22"],"newUser":[0,0,0,0,0,0,0],"activeUser":[0,0,0,0,0,0,0],"activeUserRatio":[0,0,0,0,0,0,0],"startupCount":[0,0,0,0,0,0,0],"avgUseTime":[0,0,0,0,0,0,0],"totalUser":[0,0,0,0,0,0,0],"details":[{"date":"10-22","newUserCount":0,"totalUserCount":0,"activeUserCount":0,"activeUserCountRatio":"0%","startupCount":0,"userTime":"00:00:00"},{"date":"10-21","newUserCount":0,"totalUserCount":0,"activeUserCount":0,"activeUserCountRatio":"0%","startupCount":0,"userTime":"00:00:00"},{"date":"10-20","newUserCount":0,"totalUserCount":0,"activeUserCount":0,"activeUserCountRatio":"0%","startupCount":0,"userTime":"00:00:00"},{"date":"10-19","newUserCount":0,"totalUserCount":0,"activeUserCount":0,"activeUserCountRatio":"0%","startupCount":0,"userTime":"00:00:00"},{"date":"10-18","newUserCount":0,"totalUserCount":0,"activeUserCount":0,"activeUserCountRatio":"0%","startupCount":0,"userTime":"00:00:00"},{"date":"10-17","newUserCount":0,"totalUserCount":0,"activeUserCount":0,"activeUserCountRatio":"0%","startupCount":0,"userTime":"00:00:00"},{"date":"10-16","newUserCount":0,"totalUserCount":0,"activeUserCount":0,"activeUserCountRatio":"0%","startupCount":0,"userTime":"00:00:00"}],"pagetotal":1}};
+</script>
+</div>
+            
+        </div>
+        </main>
+        <footer class="clearfix">
+            <div id="menu-shadow"></div>
+            <a href="http://www.apicloud.com/" class="logo toIndex">APICloud</a>
+            <div class="contact">
+                <!-- <a href="" data-i18n="contact.help"></a><a href="" data-i18n="contact.about"></a><a href="" data-i18n="contact.team"></a><a href="" data-i18n="contact.contact"></a> -->
+                <a id="toAbout" href="http://www.apicloud.com/about">关于我们</a>
+                <!-- <a href="javascript:void(0)">联系</a> -->
+                <!-- <a href="/newsReports">Blog</a> -->
+               <!--  <select name="" id="langSelect">
+                    <option value="zh-CN">中文简体</option>
+                    <option value="en-US">English</option>
+                </select> -->
+                        
+            </div>
+        </footer>
+        <div id="loading">
+            <div class="loadInner">
+                <p>
+                    正在加载中...
+                </p>
+            </div>
+        </div>
+        <!-- service3rd start-->
+        <div class="mask"></div>
+        <div class="service-pop">
+            <div class="title">
+                <span id="version"></span>
+                <span>使用第三方的服务</span>
+                <a id="closeBtn" class="closeBtn" href="javascript:;"></a>
+            </div>
+            <div class="list-service">
+                <table border="0" cellpadding="0" cellspacing="0">
+                    <tbody>
+                        <!-- <tr><td class="no-info">未使用任何第三方服务</td></tr> -->
+                    <!-- <tr>
+                        <td width="130px;">
+                            <span class="three-party testin"></span>
+                        </td>
+                        <td width="20px"><span class="line"></span></td>
+                        <td id="testIn">
+                        <span style="margin-right:20px;">测试机型：196</span>
+                        <span>通过率：91.33%</span>
+                        </td>
+                        <td class="t-right">
+                            <a class="detail" href="" target="_blank">查看详情</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="130px;">
+                            <span class="three-party bangcle"></span>
+                        </td>
+                        <td width="20px"><span class="line"></span></td>
+                        <td>加固中...</td>
+                        <td class="t-right">
+                        </td>
+                    </tr> -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="modal fade" id="upgradEentedPOp">
+            <div class="modal-dialog">
+                <div class="modal-content border-r">
+                    <div class="modal-body">
+                        <span type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></span>
+                        <h3 class="title"></h3>
+                        <div class="modal-cont">
+                            <div class="pic"></div>
+                            <p class="price-box">￥<span class="price">99</span>
+                            <span class="on-trail">（试用）</span></p>
+                            <ul class="type-box">
+                                <li class="active" data-price="99" data-type="1"><span>1</span>个月</li>
+                                <li data-price="1800" data-type="2"><span>6</span>个月</li>
+                                <li data-price="2400" data-type="3"><span>12</span>个月</li>
+                            </ul>
+                            <button type="button" class="btn btn-warning">立即升级</button>
+                            <p class="info-box"><a href="http://www.apicloud.com/vipservice/enterpEdition">查看详情</a> <span>或</span> <a href="http://wpa.b.qq.com/cgi/wpa.php?ln=1&amp;key=XzgwMDE0ODc4M18zNzQyNDdfODAwMTQ4NzgzXzJf" target="_blank">咨询客服</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade pay-pop" id="entedPayPOp">
+            <div class="modal-dialog">
+                <div class="modal-content border-r">
+                    <div class="modal-body">
+                        <span type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></span>
+                        <div class="pay-cont">
+                            <div class="left">
+                                <h3>企业版</h3>
+                                <div class="pay-type">
+                                    <span class="time-limit"><span class="num">6</span>个月</span>
+                                    <div class="type-info">
+                                        <span class="now">￥<span class="price">10000</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="right">
+                                <div class="pay-box qrcode-pay">
+                                    <div class="col-md-6">
+                                        <span class="weixin"></span>
+                                        <p><b>微信</b>扫描购买</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <span class="taobao"></span>
+                                        <p><b>支付宝</b>扫描购买</p>
+                                    </div>
+                                </div>
+                                <div class="success-way pay-success">
+                                        <div class="pic">
+                                            <img src="images/success.png">
+                                        </div>
+                                        <p>支付成功<br>
+                                            <span>客服会尽快与您联系</span>
+                                        </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="authentication_modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header clearfix">
+                        <h4 class="pull-left">APICloud实名认证</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="authentication_form">
+                            <div class="form-group clearfix">
+                                <div class="col-md-3">
+                                    <label class="label">真实姓名：</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input id="auth_idcard_name" name="auth_idcard_name" class="form-control" placeholder="您的身份证姓名" type="text">
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div>
+                            <div class="form-group clearfix">
+                                <div class="col-md-3">
+                                    <label class="label">身份证号：</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input id="auth_idcard_num" name="auth_idcard_num" class="form-control" placeholder="您的中国大陆18位有效身份证号" type="text">
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div>
+                            <div class="form-group clearfix">
+                                <div class="col-md-3">
+                                    <label class="label">银行卡号：</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input id="auth_bankcard" name="auth_bankcard" class="form-control" placeholder="您名下任意一张银行卡卡号" type="text">
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div>
+                            <div class="form-group clearfix btn-row">
+                                <input class="btn btn-blue" value="提交" type="submit">
+                                <input class="btn btn-cancel" value="取消" data-dismiss="modal" aria-label="Close" type="button">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="stage_confirm_modal" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <h4 class="modal-title">阶段确认</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                            
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary btn-confirm">阶段性确认</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="new_stage_confirm_modal" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <h4 class="modal-title">阶段确认</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                该阶段还有未完成任务，阶段确认操作将会自动确认所有未完成任务
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary btn-confirm">阶段性确认</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="stage_code_modal" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                        <h4 class="modal-title">阶段确认</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="stage_code_form" class="container-fluid">
+                            <div class="row clearfix">
+                                <div class="col-md-8">
+                                    <input id="stage_code_ccap" name="stage_code_ccap" class="form-control" placeholder="请输入右侧答案" type="text">
+                                </div>
+                                <div class="col-md-4">
+                                    <img class="ccap-img" src="" alt="">
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <div class="col-md-8">
+                                    <input id="stage_code_code" name="stage_code_code" class="form-control" placeholder="请输入手机验证码" type="text">
+                                </div>
+                                <div class="col-md-4">
+                                    <span class="code-phone-btn btn-blue btn">
+                                        <span class="code_phone_count"></span>
+                                        <span class="codeText">获取验证码</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row clearfix">
+                                <button type="submit" class="btn btn-primary btn-confirm">确认本阶段完成</button>
+                                <button type="button" class="btn btn-default btn-cancel" data-dismiss="modal">取消</button>
+                            </div>
+                            <div class="row clearfix">
+                                <a href="http://www.apicloud.com/profile" target="_blank" class="pull-right modal-go-link">更换预留手机号</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="image-browser" id="fake_image_browser">
+            <div class="btn-close" title="关闭"></div>
+            <div class="info-box">
+                <h5 class="image-name">
+                </h5>
+                <p class="image-info">
+                </p>
+                <div class="btn-container">
+                    <div class="btn-box">
+                        <a href="javascript:void(0)" target="_blank" class="btn-download">
+                            <i class="cus-icon-download"></i>
+                            下载 
+                        </a>
+                    </div>
+                    <div class="btn-box">
+                        <span class="btn-delete">
+                            <i class="cus-icon-delete"></i>
+                            删除                            
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="image-container">
+                
+            </div>
+        </div>
+        <!-- service3rd end-->
+        <!--[if lt IE 10]>
+        <link rel="stylesheet" href="/css/ie.css">
+        <![endif]-->
+        <!--[if lt IE 8]>
+        <link rel="stylesheet" href="/fonts/font-awesome/css/font-awesome-ie7.min.css">
+        <link rel="stylesheet" href="/css/glyphicons-ie7.css">
+        <link rel="stylesheet" href="/css/ie7.css">
+        <![endif]-->
+        
+        <script src="js/sea.js"></script>
+        <script>
+            function getJsName(){
+                return "";
+            }
+        </script>
+        
+    
+<div id="mobileForm_modal" class="modal fade">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal">
+<span aria-hidden="true">×</span>
+<span class="sr-only">Close</span>
+</button>
+<p class="modal-title">为了加强您的账户安全，请绑定手机后再创建！</p>
+</div>
+<div class="modal-body">
+<form novalidate="novalidate" action="" id="mobileForm" class="clearfix">
+<div class="form-group forCodePhone">
+<span class="region-btn">
+<i class="btn-flag china"></i>
+<ul style="display: none;" id="region-list">
+<li data-region="china" data-code="86" class="region-item china">中国</li>
+<li data-region="usa" data-code="1" class="region-item usa">美国</li>
+<li data-region="hongkong" data-code="852" class="region-item hongkong">香港</li>
+<li data-region="taiwan" data-code="886" class="region-item taiwan">台湾</li>
+<li data-region="japan" data-code="81" class="region-item japan">日本</li>
+<li data-region="australia" data-code="61" class="region-item australia">澳大利亚</li>
+<li data-region="singapore" data-code="65" class="region-item singapore">新加坡</li>
+<li data-region="s-korea" data-code="82" class="region-item s-korea">韩国</li>
+<li data-region="malaysia" data-code="60" class="region-item malaysia">马来西亚</li>
+<li data-region="canada" data-code="1" class="region-item canada">加拿大</li>
+</ul>
+</span>
+<span class="region-add">+</span>
+<input class="region-code" name="region-code" value="86" placeholder="国家码" readonly="readonly" maxlength="4" autocomplete="off" type="text">
+<input class="form-control" id="codePhoneNum" name="codePhoneNum" placeholder="请输入手机号码" type="text">
+</div>
+<div class="form-group clearfix">
+<div class="form-left">
+<input class="form-control" id="ccap-text" name="ccap" placeholder="验证码" type="text">
+</div>
+<div class="form-right"><img class="ccap"></div>
+<div class="err-popover-out">
+<div class="err-popover">
+<div class="tri-right"></div>
+<div class="tri-right-in"></div>
+<div class="err-popover-content"></div>
+</div>
+</div>
+</div>
+<div class="form-group clearfix code-phone" style="margin-bottom: 30px;">
+<div class="form-left">
+<div class="form-group code-text">
+<input class="form-control" id="codePhoneText" name="codePhoneText" placeholder="请输入手机验证码" type="text">
+</div>
+</div>
+<div class="form-right">
+<button class="code-phone-btn btn-blue btn">
+<span id="code_phone_count">40</span>
+<span id="codeText" class="codeText">获取验证码</span>
+</button>
+</div>
+</div>
+<button type="submit" class="btn btn-blue ensure">绑定并创建</button>
+</form>
+</div>
+</div>
+</div>
+</div>
+
+    <div style="width: 1583px; height: 910px;" class="box" id="box">
+      <ul style="position: absolute; left: 541.5px; top: 337.5px;" class="con">
+        <li class="titlel">
+             <span>详细信息</span>
+             <span class="closel">X</span>
+        </li>
+        <li class="gai"></li>
+     </ul>
+    </div>
+        <script type="text/javascript">
+
+            $('#search_begin').click(function(){
+                //获取文本框值
+                var utel = $("#utel").val(),
+                username = $("#username").val();
+                var vid = $("#vid").val();
+                window.location.href="mlist?utel="+utel+"&username="+username+"&vid="+vid;
+            })
+
+
+        </script>
+</body></html>

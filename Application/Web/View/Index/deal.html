@@ -1,0 +1,69 @@
+
+<head>
+    <title>微易微盘 </title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" type="text/css" href="__CSS__/base.css">
+	<link rel="stylesheet" href="__CSS__/stock.css" type="text/css">
+	<link rel="stylesheet" href="__CSS__/americaon.css" type="text/css">
+	<link rel="stylesheet" href="__CSS__/bankList.css" type="text/css">
+	<link rel="stylesheet" href="__CSS__/ticket.css" type="text/css">
+	<link rel="stylesheet" href="__CSS__/usatrans.css" type="text/css">
+	<link rel="stylesheet" href="__CSS__/login2.css" >	
+	<script src="__CSS__/jsp/jquery-1.9.1.min.js"></script>
+	<script src="__CSS__/jsp/highstock.src.js?v=<?php echo time();?>"></script>
+	<script src="__CSS__/jsp/highstock.theme.js"></script>
+	<script src="__CSS__/jsp/socket.io.js"></script>
+	<script src="__CSS__/jsp/moment.js"></script>
+	<script src="__CSS__/jsp/time-range.js"></script>
+	<script src="__CSS__/jsp/script.js"></script>	
+	<script type="text/javascript" src="__CSS__/jsp/init.js?v=<?php echo time();?>"></script>	
+</head>
+<style>
+body{background:#fff; overflow:hidden;}
+</style>
+<div class="optional-details optional-industry-details" style="min-height:600px; max-height:640px;">
+		<div style="background:#fff; width:650px;    position: relative; z-index: 2; float:left;">
+		
+			<div class="comment">
+				<h1 class="comment-new" style="margin:0;">交易列表</h1>        
+				<div class="comment-list topic-comment-list slide-list">				
+					<table>
+						<tr>
+							<td style="width:8%">订单ID</td>
+							<td style="width:8%">产品</td>
+							<td style="width:10%">看涨看跌</td>
+							<td style="width:12%">下单时间</td>
+							<td style="width:12%">到期时间</td>
+							<td style="width:12%">平仓价格</td>
+							<td style="width:12%">投资金额</td>
+							<td style="width:12%">实际收益</td>
+						</tr>
+					</table>
+				</div>
+				<div class="comment-list topic-comment-list slide-list">
+					<table>
+						<tr>
+							<td style="width:8%">1</td>
+							<td style="width:8%">白银</td>
+							<td style="width:8%">看涨</td>
+							<td style="width:12%">2016-03-02 16:22:31</td>
+							<td style="width:12%">2016-03-02 16:32:21</td>
+							<td style="width:12%">132654</td>
+							<td style="width:12%">￥250</td>
+							<td style="width:12%">￥50.00</td>
+						</tr>
+					</table>
+				</div>
+				<div class="page">           
+					<a href="javascript:void%20(0);" class="prev"><i>&lt;</i>上一页</a>    
+					<a href="javascript:;" class="curr">1</a>                                    
+					<a href="javascript:gotoPage('2')">2</a>
+					<a href="javascript:gotoPage('3')">3</a>
+					<span class="ellipsis">···</span>                 
+					<a href="javascript:gotoPage('9')">9</a>
+					<a href="javascript:gotoPage('2');" class="next">下一页<i>&gt;</i></a>
+					<span class="total">共90 条记录，共9页</span>
+				</div>
+			</div> 
+		</div>
+	</div>

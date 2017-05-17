@@ -1,0 +1,38 @@
+<extend name="Base/common"/>
+<block name="content">
+<link rel="stylesheet" href="__CSS__/global.css">
+<link rel="stylesheet" href="__CSS__/index.css">
+<link rel="stylesheet" href="__CSS__/ico_foot.css"/>
+<script id="G--xyscore-load" type="text/javascript" charset="utf-8" async="" src="__JS__/xyscore_main.js"></script>
+<style>
+.wrap .new_inde2{background:#202020; color:#dedede;min-height:800px;}
+.new_id1{background:#5DDC9C;}
+.new_id2{background:#111;}
+.new_id3{background:#cf0000;}
+.bf2 p {border-bottom:1px solid #111;}
+.bf2 .l_l3 {border-right:1px solid #111;}
+</style>
+<div class="wrap">
+	<div class="index new_inde{$tpl}" style="min-height: 1782px; height: 1752px;">
+		<header class="list-head new_id{$tpl}">
+		  <nav class="list-nav clearfix"> <a href="javascript:history.go(-1)" class="list-back"></a>
+			<h3 class="list-title">订单详情</h3>
+		  </nav>
+		</header>
+		<div class="news-list2 clearfix bf{$tpl}">
+		  <p><span class="l_l3">流水号：</span><span class="l_l">{$order.jno}</span></p>
+		  <p><span class="l_l3">类型：</span><span class="l_l">{$order.jtype}</span></p>
+		  <p><span class="l_l3">时间：</span><span class="l_l">{$order.jtime|date='Y-m-d H:i:s',###}</span></p>
+		  <p><span class="l_l3">收支：</span>
+			<if condition="$order.jtype eq '建仓'"><span class="l_l2">-{$order.jincome}</span>
+			<else/><span style="color: #ff7c80;">+{$order.jincome}</span></if>
+		  </p>
+		  <p><span class="l_l3">余额：</span><span class="l_l">{$order.balance}</span></p>
+		  <p><span class="l_l3">备注：</span><span class="l_l">{$order.remarks}</span></p>
+		</div>
+	</div>
+</div>
+<script src="__JS__/jquery-2.1.1.min.js"></script>
+<script src="__JS__/script.js"></script>
+<script type="text/javascript" charset="utf-8" src="__JS__/sea.js" async=""></script>
+</block>

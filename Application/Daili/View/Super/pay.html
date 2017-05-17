@@ -1,0 +1,199 @@
+<include file="Public:header" />
+
+    <body class="forIE">
+        <div class="butterbar hide">
+            <span class="bar"></span>
+        </div>
+        <main class="main">
+             <include file="Public:menu" />
+        <div style="max-width: 1348px;" class="mainWrap">
+            <include file="Public:top" />
+<div style="display: block;" class="wrapper">
+
+<div class="panel" id="topheader">
+    <header>
+        <table>
+            <tbody>
+            <tr>
+                <th style="width:30%;"><h4 style="font-size:20px;color:#8fb300">支付设置</h4></th>
+				<!-- <th style="width:70%;" class="col-md-12">
+				<div class="col-md-8">
+				
+					<div class="form-group" style="margin-bottom:0;text-align:right;">
+						<div class="input-group">
+						  <input class="form-control" type="text" placeholder="请输入商品名称">
+						  <div class="input-group-addon">搜索</div>
+						</div>
+					</div>
+				
+				</div>
+				<div class="col-md-4">
+					<button type="button" class="btn btn-success">添加商品</button>
+					<button type="button" class="btn btn-warning">商品分类</button>
+				</div>
+				
+				</th> -->
+            </tr>
+            </tbody>
+        </table>
+    </header>
+</div>
+<div class="panel">
+        <div class="panel-header" >
+            <table style="width:96%;">
+                <tbody>
+			<tr id="myTab">
+				<th class="active" id="Wxpay" onclick="on('Wxpay','微信支付')" style="width:12%;"><div class="topselect" ></div><a style="text-decoration:none" href="javascript:void(0)">微信支付</a></th>
+				<th id="alipay" style="width:12%;" onclick="on('alipay','支付宝')" ><div class="topselect"></div><a style="text-decoration:none"  href="javascript:void(0)" >支付宝</a></th>
+				<th  id="tenpay" style="width:12%;" onclick="on('tenpay','财付通')"><div class="topselect"></div><a style="text-decoration:none"  href="javascript:void(0)">财付通</a></th>
+				 <th  id="palpay" style="width:12%;" onclick="on('palpay','贝宝')"><div class="topselect"></div><a style="text-decoration:none"  href="javascript:void(0)">贝宝</a></th>
+				<th  id="yeepay" style="width:12%;" onclick="on('yeepay','易付宝')"><div class="topselect"></div><a style="text-decoration:none"  href="javascript:void(0)">易付宝</a></th>
+				<th  id="kuaiqian" style="width:12%;" onclick="on('kuaiqian','快钱')"><div class="topselect"></div><a style="text-decoration:none"  href="javascript:void(0)">快钱</a></th>
+				<th id="unionpay" style="width:12%;" onclick="on('unionpay','银联')"><div class="topselect"></div><a style="text-decoration:none"  href="javascript:void(0)" >银联</a></th>
+				<th  id="aliwappay" style="width:12%;" onclick="on('aliwappay','支付宝手机')"><div class="topselect"></div><a style="text-decoration:none"  href="javascript:void(0)">支付宝手机</a></th>
+			</tr>
+				</tbody>
+			</table>
+        </div>
+		<form class="form-horizontal" style="padding-top:20px;" action="" method="post">
+			<div class="form-group">
+				<label for="" class="col-sm-3 control-label" style="margin-right:10px;">email</label>
+				<div class="col-sm-4">
+				<input type="text" class="form-control" id="email" placeholder="" name="email" value="{$data.email}">
+				</div>
+			</div>
+			<hr>
+			<div class="form-group">
+				<label for="" class="col-sm-3 control-label" style="margin-right:10px;">key</label>
+				<div class="col-sm-4">
+				<input type="text" class="form-control" id="key" placeholder="" name="key" value="{$data.key}">
+				</div>
+			</div>
+			<hr>
+			<div class="form-group">
+				<label for="" class="col-sm-3 control-label" style="margin-right:10px;">partner</label>
+				<div class="col-sm-4">
+				<input type="tel" class="form-control" id="partner" placeholder="" name="partner" value="{$data.partner}">
+				</div>
+			</div>
+			<hr>
+			<input type="hidden" name="name" id="name" value="微信支付">
+			<input type="hidden" name="type" id="type" value="Wxpay">
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-3">
+				<button type="submit" class="btn btn-success">提 交</button>
+				</div>
+			</div>
+		</form>
+</div>   
+</main>
+<script> 
+	function on(pay,name){
+		//alert(pay);
+		$('.active').removeClass('active');
+		$('#'+pay).addClass('active');
+		$('#type').attr('value',pay);
+		$('#name').attr('value',name);
+		//alert(name);
+		config(pay);
+	}
+	/*
+	$(function(){
+		$("#tab2").click(function() {
+			$('#tab1').removeClass('active');
+			$('#tab3').removeClass('active');
+			$('#tab4').removeClass('active');
+			$('#tab5').removeClass('active');
+			$(this).addClass('active');
+			$('#type1').attr('value','wechat');
+			config('wechat');
+		});
+		$("#tab1").click(function() {
+			$('#tab2').removeClass('active');
+			$('#tab3').removeClass('active');
+			$('#tab4').removeClass('active');
+			$('#tab5').removeClass('active');
+			$(this).addClass('active');
+			$('#type1').attr('value','alipay');
+			config('alipay');
+		});
+		$("#tab3").click(function() {
+			$('#tab1').removeClass('active');
+			$('#tab2').removeClass('active');
+			$('#tab4').removeClass('active');
+			$('#tab5').removeClass('active');
+			$(this).addClass('active'); 
+			$('#type1').attr('value','pay');
+			config('pay');
+		});
+		$("#tab4").click(function() {
+			$('#tab1').removeClass('active');
+			$('#tab2').removeClass('active');
+			$('#tab3').removeClass('active');
+			$('#tab5').removeClass('active');
+			$(this).addClass('active');
+			$('#type1').attr('value','taobao');	
+			config('taobao');			
+		});
+		$("#tab5").click(function() {
+			$('#tab1').removeClass('active');
+			$('#tab2').removeClass('active');
+			$('#tab3').removeClass('active');
+			$('#tab4').removeClass('active');
+			$(this).addClass('active');
+			$('#type1').attr('value','baidu');	
+			config('baidu');				
+		});
+		$("#tab6").click(function() {
+			$('#tab1').removeClass('active');
+			$('#tab2').removeClass('active');
+			$('#tab3').removeClass('active');
+			$('#tab4').removeClass('active');
+			$(this).addClass('active');
+			$('#type1').attr('value','baidu');	
+			config('baidu');				
+		});
+		$("#tab7").click(function() {
+			$('#tab1').removeClass('active');
+			$('#tab2').removeClass('active');
+			$('#tab3').removeClass('active');
+			$('#tab4').removeClass('active');
+			$(this).addClass('active');
+			$('#type1').attr('value','baidu');	
+			config('baidu');				
+		});
+		$("#tab8").click(function() {
+			$('#tab1').removeClass('active');
+			$('#tab2').removeClass('active');
+			$('#tab3').removeClass('active');
+			$('#tab4').removeClass('active');
+			$(this).addClass('active');
+			$('#type1').attr('value','baidu');	
+			config('baidu');				
+		});
+	});
+	*/
+	function config(name){
+	/*
+        $.get("{:U('config_ajax')}",function(data){
+			var data=eval('('+data+')');
+               alert(data);
+			   $('#key').attr('value',data.APP_KEY);
+			   $('#secret').attr('value',data.APP_SECRET);
+        });
+		*/
+		 $.ajax({
+			url : "{:U('config_ajax')}",
+			type : "post",
+			async: false,
+			dataType : 'json',
+			data: {name:name},
+			success : function(sub){
+				$('#email').attr('value',sub.email);
+				$('#key').attr('value',sub.key);
+				$('#partner').attr('value',sub.partner);
+			}
+		})
+    };	
+</script>
+</body></html>

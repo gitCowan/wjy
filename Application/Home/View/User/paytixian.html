@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<title>提现</title>
+
+<link rel="stylesheet" href="__CSS__/pay.css"/>
+<link rel="stylesheet" href="__CSS__/global.css"/>
+</head>
+
+<body style="background:#f5f5f5;">
+<div class="paylogin_box">
+	<div class="paytix_top">
+		<?php if($userinfo['portrait']){ ?>
+		<img src="{$userinfo.portrait}"/>
+		<?php }else{ ?>
+		<img src="__IMG__/account.png"/>
+		<?php } ?>
+		<div class="paytix_top_1">
+			<p>{$userinfo.username}</p>
+			<p>{$userinfo.utel}</p>
+		</div>
+	</div>
+	<div class="paytixin">账户余额：<span><?php if($userinfo['balance']){echo $userinfo['balance'];}else{echo '0';}?>元</span></div>
+	<div class="paytixin">
+		<input id="n-money" type="text" name="bpprice" placeholder="输入提现金额"/>
+	</div>
+	<div class="paytixin"><img src="__IMG__/pay.png"/></div>
+	<p class="paylinsge">查看《微信提现细则》</p>
+	<div class="paylogin">确认提现</div>
+</div>
+<div class="xiaoxi"><div id="msg" class="msg"></div></div>
+<script type="text/javascript" src="__JS__/jquery.min.js"></script>
+<script>
+	$(".paylogin").click(function(){
+		var bpprice = parseInt($("#n-money").val());
+		var yue     = "{$userinfo['balance']}";
+		if(bpprice<100){
+			msg('亲，提现金额不能少于100元！');
+			return false;
+		}
+		
+		if(bpprice > yue){
+			msg('亲，提现金额不能大于余额！');
+			return false;
+		}
+		$.ajax({
+			type: 'POST',
+			url: '{:U("User/paytixian")}',
+			data: {'bpprice':bpprice},
+			dataType: 'json',
+			timeout:200000,
+			
+			success: function (data) {
+				if(data==1){
+					msg('操作成功！正在审核中....');
+					window.setTimeout(function(){ location.href = "{:U('User/memberinfo')}"; },2000);
+				}
+				else if(data==0){
+					msg('提现失败!');
+				}
+			},
+		});
+	})
+	//消息的提示
+	function msg(content){
+		$("#msg").show();
+		$(".msg").html(content);
+		setTimeout('$("#msg").fadeOut()',2000);
+	}
+</script>
+</body>
+</html>

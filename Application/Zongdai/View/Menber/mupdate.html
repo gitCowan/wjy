@@ -1,0 +1,104 @@
+<include file="Public:header" />
+    <body class="forIE">
+        <div class="butterbar hide">
+            <span class="bar"></span>
+        </div>
+        <main class="main">
+             <include file="Public:menu" />
+        <div style="max-width: 1348px;" class="mainWrap">
+           <include file="Public:top" />
+<div style="display: block;" class="wrapper">
+
+
+<div class="panel" id="topheader">
+    <header>
+        <table>
+            <tbody>
+            <tr>
+                <th style="width:30%;"><h4 style="font-size:20px;color:#8fb300">客户列表&nbsp;>&nbsp子客户</h4></th>
+				
+            </tr>
+            </tbody>
+        </table>
+    </header>
+</div>
+<div class="panel">
+	<form class="form-horizontal" role="form" style="padding-top:20px;" >
+		<input class="span4" type="hidden" name="otype" value="{$us.otype}"/>
+		<input class="span4" type="hidden" name="uid" value="{$us.uid}"/>
+		<input class="span4" type="hidden" name="utime" value="{$us.utime}"/>
+		<div class="form-group">
+			<label for="" class="col-sm-3 control-label">姓名：</label>
+			<div class="col-sm-6">
+			<input type="text" class="form-control" id="" placeholder="" name="username" value="{$us.username}" readonly="true">
+			</div>
+		</div>
+		<hr>
+		<div class="form-group">
+			<label for="inputPassword3" class="col-sm-3 control-label">电话：</label>
+			<div class="col-sm-6">
+			<input type="text" class="form-control" id="" placeholder="" name="utel" value="{$us['utel']}">
+			</div>
+		</div>
+		<hr>
+		<div class="form-group">
+			<label for="inputPassword3" class="col-sm-3 control-label">办公地址：</label>
+			<div class="col-sm-6">
+			<input type="text" class="form-control" id="" placeholder="" name="address" value="{$us['address']}">
+			</div>
+		</div>
+		<hr>
+		<div class="form-group">
+			<label for="inputPassword3" class="col-sm-3 control-label">身份证号码：</label>
+			<div class="col-sm-6">
+			<input type="text" class="form-control" id="" placeholder="" name="brokerid" value="{$mg['brokerid']}">
+			</div>
+		</div>
+		<hr>
+		<div class="form-group">
+			<label for="inputPassword3" class="col-sm-3 control-label">公司名称：</label>
+			<div class="col-sm-6">
+			<input type="text" class="form-control" id="" placeholder="" name="comname" value="{$us['comname']}">
+			</div>
+		</div>
+		<hr>
+		<div class="form-group">
+			<label for="inputPassword3" class="col-sm-3 control-label">公司资质：</label>
+			<div class="col-sm-6">
+			<input type="text" class="form-control" id="" placeholder="" name="comqua" value="{$us.comqua}">
+			</div>
+		</div>
+		<hr>
+		
+		<div class="form-group">
+			<label for="inputPassword3" class="col-sm-3 control-label">新密码：</label>
+			<div class="col-sm-6">
+				<input type="password" class="form-control" id="" placeholder="" name="upwd">
+			</div>
+		</div>
+		<hr>
+		<div class="form-group">
+			<label for="inputPassword3" class="col-sm-3 control-label">确认密码：</label>
+			<div class="col-sm-6">
+			<input type="password" class="form-control" id="" placeholder="" name="rpwd">
+			</div>
+		</div>
+		<hr>
+		
+	</form>
+  
+	<span style="" class="moreUpAndDown"></span>
+</div>
+</main>
+ <script type="text/javascript">
+		function subform(){
+		if($('input[name=upwd]').val()!=$('input[name=rpwd]').val()){
+				$('input[name=rpwd]').focus();
+				$('input[name=rpwd]').attr('data-original-title','两次密码输入不同');
+				return false;
+			}
+		}
+		
+	</script>
+
+</body></html>
